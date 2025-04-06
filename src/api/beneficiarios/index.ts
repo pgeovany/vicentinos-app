@@ -13,7 +13,7 @@ import {
   ListarBeneficiariosResponse,
 } from './types';
 
-export const beneficiariosApi = {
+export const beneficiarioApi = {
   criar: async (body: CriarBeneficiarioSchema) => {
     const { data } = await api.post<ApiResponse<BeneficiarioResponse>>(
       '/beneficiario',
