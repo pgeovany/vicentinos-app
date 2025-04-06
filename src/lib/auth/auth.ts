@@ -3,9 +3,9 @@ import Cookies from 'js-cookie';
 const AUTH_TOKEN_KEY = 'auth_token';
 
 export const auth = {
-  setToken(token: string) {
+  setToken(token: string, expiresIn?: number) {
     Cookies.set(AUTH_TOKEN_KEY, token, {
-      expires: 60,
+      expires: expiresIn ?? 7,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
     });
