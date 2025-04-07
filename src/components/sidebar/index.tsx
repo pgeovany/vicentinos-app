@@ -98,7 +98,7 @@ export function AppSidebar() {
       label: 'Doações',
       Icon: HeartHandshake,
       subItems: [
-        { label: 'Listar', Icon: List, path: '/doacoes/listar' },
+        { label: 'Lista', Icon: List, path: '/doacoes/listar' },
         {
           label: 'Estatísticas',
           Icon: BarChart3,
