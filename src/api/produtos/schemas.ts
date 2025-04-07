@@ -1,7 +1,5 @@
-// src/api/produtos/schemas.ts
 import { z } from 'zod';
-import { ENUM_STATUS_PRODUTO } from './types'; // Make sure to import your enum
-
+import { ENUM_STATUS_PRODUTO } from './types';
 export const CriarProdutoSchema = z.object({
   nome: z.string().min(1, 'Nome é obrigatório'),
 });
