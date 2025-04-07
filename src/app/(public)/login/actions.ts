@@ -1,36 +1,34 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { LoginDto } from '@/api/login/schemas';
+import { loginApi } from '@/api/login';
+import { jwtVerify } from 'jose';
 
-export async function handleLogin(credentials: {
-  email: string;
-  senha: string;
-}) {
+export async function handleLogin(credentials: LoginDto) {
   try {
-    const response = await fetch(`${process.env.API_URL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
+    const { data } = await loginApi.login(credentials);
 
-    if (!response.ok) {
-      throw new Error('Erro ao realizar login');
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const { exp } = (await jwtVerify(data.token, secret)).payload;
+
+    if (!exp) {
+      throw new Error('Token inválido: sem data de expiração');
     }
 
-    const data = await response.json();
+    const now = Math.floor(Date.now() / 1000);
+    const maxAge = exp - now;
 
-    // Set the cookie server-side with HttpOnly flag
     (await cookies()).set('auth_token', data.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60, // 7 days
+      maxAge,
     });
 
     return { success: true };
-  } catch {
+  } catch (error) {
+    console.error('Login error:', error);
     return { success: false, error: 'Erro ao realizar login' };
   }
 }
