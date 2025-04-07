@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { LoginDto } from '@/api/login/schemas';
 import { loginApi } from '@/api/login';
 import { jwtVerify } from 'jose';
+import { ApiError } from '@/api/types';
 
 export async function handleLogin(credentials: LoginDto) {
   try {
@@ -28,6 +29,10 @@ export async function handleLogin(credentials: LoginDto) {
 
     return { success: true };
   } catch (error) {
+    if (error instanceof ApiError) {
+      return { success: false, error: error.message };
+    }
+
     console.error('Login error:', error);
     return { success: false, error: 'Erro ao realizar login' };
   }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { auth } from '@/lib/auth/auth';
+import { ApiError } from './types';
 
 export const api = axios.create({
   baseURL: process.env.API_URL,
@@ -22,11 +23,13 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
+      console.log('Tomei um 401 no interceptor');
       auth.removeToken();
-      window.location.href = '/login';
     }
-    return Promise.reject(
-      error instanceof Error ? error : new Error(error.message)
-    );
+
+    const message = error.response?.data?.message || error.message;
+    const statusCode = error.response?.status || 500;
+
+    return Promise.reject(new ApiError(message, statusCode));
   }
 );
