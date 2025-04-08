@@ -23,7 +23,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.log('Tomei um 401 no interceptor');
       auth.removeToken();
     }
 

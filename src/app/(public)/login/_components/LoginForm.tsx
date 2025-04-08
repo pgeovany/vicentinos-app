@@ -1,9 +1,8 @@
 'use client';
 
-import { LoginSchema } from '@/api/login/schemas';
+import { LoginDto, LoginSchema } from '@/api/login/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { handleLogin } from '../actions';
 import { Button } from '@/components/ui/button';
@@ -20,7 +19,7 @@ import { toast } from 'sonner';
 
 export function LoginForm() {
   const router = useRouter();
-  const form = useForm<z.infer<typeof LoginSchema>>({
+  const form = useForm<LoginDto>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: '',
@@ -28,7 +27,7 @@ export function LoginForm() {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof LoginSchema>) {
+  async function onSubmit(data: LoginDto) {
     try {
       const result = await handleLogin(data);
 
