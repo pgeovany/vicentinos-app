@@ -1,11 +1,11 @@
 import { api } from '../axios-instance';
 import { ApiResponse } from '../types';
 import {
-  AdicionarDependentesSchema,
-  AtualizarEnderecoSchema,
-  AtualizarTipoCestaSchema,
-  CriarBeneficiarioSchema,
-  ListarBeneficiariosSchema,
+  AdicionarDependentesDto,
+  AtualizarEnderecoDto,
+  AtualizarTipoCestaDto,
+  CriarBeneficiarioDto,
+  ListarBeneficiariosDto,
 } from './schemas';
 import {
   BeneficiarioComHistoricoResponse,
@@ -14,7 +14,7 @@ import {
 } from './types';
 
 export const beneficiarioApi = {
-  criar: async (body: CriarBeneficiarioSchema) => {
+  criar: async (body: CriarBeneficiarioDto) => {
     const { data } = await api.post<ApiResponse<BeneficiarioResponse>>(
       '/beneficiario',
       body
@@ -25,7 +25,7 @@ export const beneficiarioApi = {
 
   adicionarDependentes: async (params: {
     beneficiarioId: string;
-    body: AdicionarDependentesSchema;
+    body: AdicionarDependentesDto;
   }) => {
     const { beneficiarioId, body } = params;
 
@@ -52,7 +52,7 @@ export const beneficiarioApi = {
 
   atualizarEndereco: async (params: {
     beneficiarioId: string;
-    body: AtualizarEnderecoSchema;
+    body: AtualizarEnderecoDto;
   }) => {
     const { beneficiarioId, body } = params;
 
@@ -66,7 +66,7 @@ export const beneficiarioApi = {
 
   atualizarTipoCesta: async (params: {
     beneficiarioId: string;
-    body: AtualizarTipoCestaSchema;
+    body: AtualizarTipoCestaDto;
   }) => {
     const { beneficiarioId, body } = params;
 
@@ -86,7 +86,7 @@ export const beneficiarioApi = {
     return data;
   },
 
-  listar: async (query: ListarBeneficiariosSchema) => {
+  listar: async (query: ListarBeneficiariosDto) => {
     const { data } = await api.get<ApiResponse<ListarBeneficiariosResponse>>(
       '/beneficiario',
       { params: query }

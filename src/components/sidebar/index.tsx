@@ -62,7 +62,6 @@ export function AppSidebar() {
       subItems: [
         { label: 'Lista', Icon: List, path: '/beneficiarios/lista' },
         { label: 'Cadastro', Icon: UserPlus, path: '/beneficiarios/cadastro' },
-        { label: 'Histórico', Icon: History, path: '/beneficiarios/historico' },
       ],
     },
     {

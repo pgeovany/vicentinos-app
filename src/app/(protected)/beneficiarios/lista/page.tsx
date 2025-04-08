@@ -1,7 +1,9 @@
+import { BeneficiariosLista } from './_components/BeneficiariosLista';
+
 export default function ListaBeneficiarios() {
   return (
     <div>
-      <h1>Listagem de Beneficiários</h1>
+      <BeneficiariosLista />
     </div>
   );
 }

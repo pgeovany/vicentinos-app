@@ -22,16 +22,18 @@ interface HistoricoRecebimentosBeneficiario {
   id: string;
   tipoCestaId: string;
   nomeCesta: string;
-  criadoEm: string;
+  criadoEm: Date;
 }
 
 export interface BeneficiarioResponse {
   id: string;
   nome: string;
   cpf: string;
-  dataNascimento: string;
+  status: string;
+  dataNascimento: Date;
   telefone: string;
   email: string;
+  criadoEm: Date;
   endereco: EnderecoBeneficiario;
   tipoCesta: TipoCestaBeneficiario;
   dependentes: DependenteBeneficiario[];
