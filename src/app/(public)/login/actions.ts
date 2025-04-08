@@ -1,10 +1,10 @@
 'use server';
 
-import { cookies } from 'next/headers';
 import { LoginDto } from '@/api/login/schemas';
 import { loginApi } from '@/api/login';
 import { jwtVerify } from 'jose';
 import { ApiError } from '@/api/types';
+import { auth } from '@/lib/auth/auth';
 
 export async function handleLogin(credentials: LoginDto) {
   try {
@@ -20,12 +20,7 @@ export async function handleLogin(credentials: LoginDto) {
     const now = Math.floor(Date.now() / 1000);
     const maxAge = exp - now;
 
-    (await cookies()).set('auth_token', data.token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge,
-    });
+    await auth.setToken(data.token, maxAge);
 
     return { success: true };
   } catch (error) {

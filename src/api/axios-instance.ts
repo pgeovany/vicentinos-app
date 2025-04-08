@@ -11,19 +11,21 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use((config) => {
-  const token = auth.getToken();
+api.interceptors.request.use(async (config) => {
+  const token = await auth.getToken();
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response?.status === 401) {
-      auth.removeToken();
+      await auth.removeToken();
     }
 
     const message = error.response?.data?.message || error.message;

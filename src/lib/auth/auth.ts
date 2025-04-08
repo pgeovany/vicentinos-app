@@ -1,25 +1,29 @@
-import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
 
 const AUTH_TOKEN_KEY = 'auth_token';
 
 export const auth = {
-  setToken(token: string, expiresIn?: number) {
-    Cookies.set(AUTH_TOKEN_KEY, token, {
-      expires: expiresIn ?? 7,
+  async setToken(token: string, expiresIn?: number) {
+    const cookieStore = await cookies();
+    cookieStore.set(AUTH_TOKEN_KEY, token, {
+      maxAge: (expiresIn ?? 7) * 24 * 60 * 60,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
     });
   },
 
-  getToken() {
-    return Cookies.get(AUTH_TOKEN_KEY);
+  async getToken() {
+    const cookieStore = await cookies();
+    return cookieStore.get(AUTH_TOKEN_KEY)?.value;
   },
 
-  removeToken() {
-    Cookies.remove(AUTH_TOKEN_KEY);
+  async removeToken() {
+    const cookieStore = await cookies();
+    cookieStore.delete(AUTH_TOKEN_KEY);
   },
 
-  isAuthenticated() {
-    return !!this.getToken();
+  async isAuthenticated() {
+    const token = await this.getToken();
+    return !!token;
   },
 };
