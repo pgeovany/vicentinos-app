@@ -46,15 +46,13 @@ export const listarBeneficiariosSchema = z.object({
   quantidade: z.number().int().positive().optional(),
 });
 
-export type CriarBeneficiarioSchema = z.infer<typeof criarBeneficiarioSchema>;
-export type DependenteBeneficiarioSchema = z.infer<
+export type CriarBeneficiarioDto = z.infer<typeof criarBeneficiarioSchema>;
+export type DependenteBeneficiarioDto = z.infer<
   typeof dependenteBeneficiarioSchema
 >;
-export type AdicionarDependentesSchema = z.infer<
+export type AdicionarDependentesDto = z.infer<
   typeof adicionarDependentesSchema
 >;
-export type AtualizarEnderecoSchema = z.infer<typeof atualizarEnderecoSchema>;
-export type AtualizarTipoCestaSchema = z.infer<typeof atualizarTipoCestaSchema>;
-export type ListarBeneficiariosSchema = z.infer<
-  typeof listarBeneficiariosSchema
->;
+export type AtualizarEnderecoDto = z.infer<typeof atualizarEnderecoSchema>;
+export type AtualizarTipoCestaDto = z.infer<typeof atualizarTipoCestaSchema>;
+export type ListarBeneficiariosDto = z.infer<typeof listarBeneficiariosSchema>;
