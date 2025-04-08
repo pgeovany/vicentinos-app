@@ -11,6 +11,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import {
   LayoutDashboard,
@@ -32,11 +33,14 @@ import {
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { AppSideBarMenuItem } from './types';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function AppSidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const isMobile = useIsMobile();
+  const { setOpenMobile } = useSidebar();
 
   const toggleMenu = (menuId: string) => {
     setOpenMenu((prev) => (prev === menuId ? null : menuId));
@@ -44,6 +48,9 @@ export function AppSidebar() {
 
   const handleNavigation = (path: string) => {
     router.push(path);
+    if (isMobile) {
+      setOpenMobile(false);
+    }
   };
 
   const isActive = (path: string) => pathname === path;
