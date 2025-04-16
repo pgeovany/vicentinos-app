@@ -1,15 +1,21 @@
 export const authConfig = {
-  publicPaths: ['/login', '/transparencia'],
+  publicPaths: ["/login", "/transparencia"],
   protectedPaths: [
-    '/beneficiarios',
-    '/produtos',
-    '/doacoes',
-    '/cestas',
-    '/sos',
-    '/painel',
+    "/beneficiarios",
+    "/produtos",
+    "/doacoes",
+    "/cestas",
+    "/sos",
+    "/painel",
   ],
-  defaultProtectedPath: '/painel',
+  defaultProtectedPath: "/painel",
   get matcher() {
-    return [...this.protectedPaths.map((path) => `${path}/:path*`), '/login'];
+    return [...this.protectedPaths.map((path) => `${path}/:path*`), "/login"];
   },
 };
+
+export function isProtectedRoute(pathname: string): boolean {
+  return authConfig.protectedPaths.some((protectedPath) =>
+    pathname.startsWith(protectedPath)
+  );
+}
