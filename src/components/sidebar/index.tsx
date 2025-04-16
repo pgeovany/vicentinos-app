@@ -124,9 +124,7 @@ export function AppSidebar() {
   ];
 
   useEffect(() => {
-    const activeMenu = menuConfig.find((menu) =>
-      menu.subItems.some((sub) => isActive(sub.path))
-    );
+    const activeMenu = menuConfig.find((menu) => menu.subItems.some((sub) => isActive(sub.path)));
     if (activeMenu) {
       setOpenMenu(activeMenu.id);
     } else {
@@ -142,10 +140,7 @@ export function AppSidebar() {
           {menuConfig.map((menu) => (
             <SidebarMenuItem key={menu.id}>
               <SidebarMenuSub className="border-l-0">
-                <SidebarMenuButton
-                  onClick={() => toggleMenu(menu.id)}
-                  className="cursor-pointer"
-                >
+                <SidebarMenuButton onClick={() => toggleMenu(menu.id)} className="cursor-pointer">
                   <menu.Icon className="w-5 h-5" />
                   <span>{menu.label}</span>
                   <ChevronDown
@@ -160,9 +155,7 @@ export function AppSidebar() {
                       <SidebarMenuSubItem key={sub.path}>
                         <SidebarMenuSubButton
                           onClick={() => handleNavigation(sub.path)}
-                          className={`cursor-pointer ${
-                            isActive(sub.path) ? 'bg-accent' : ''
-                          }`}
+                          className={`cursor-pointer ${isActive(sub.path) ? 'bg-accent' : ''}`}
                         >
                           <sub.Icon className="w-4 h-4" />
                           <span>{sub.label}</span>
