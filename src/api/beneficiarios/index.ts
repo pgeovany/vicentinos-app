@@ -15,10 +15,7 @@ import {
 
 export const beneficiarioApi = {
   criar: async (body: CriarBeneficiarioDto) => {
-    const { data } = await api.post<ApiResponse<BeneficiarioResponse>>(
-      '/beneficiario',
-      body
-    );
+    const { data } = await api.post<ApiResponse<BeneficiarioResponse>>('/beneficiario', body);
 
     return data;
   },
@@ -31,66 +28,56 @@ export const beneficiarioApi = {
 
     const { data } = await api.post<ApiResponse<BeneficiarioResponse>>(
       `/beneficiario/${beneficiarioId}/dependentes`,
-      body
+      body,
     );
 
     return data;
   },
 
-  removerDependente: async (params: {
-    beneficiarioId: string;
-    dependenteId: string;
-  }) => {
+  removerDependente: async (params: { beneficiarioId: string; dependenteId: string }) => {
     const { beneficiarioId, dependenteId } = params;
 
     const { data } = await api.delete<ApiResponse<void>>(
-      `/beneficiario/${beneficiarioId}/dependentes/${dependenteId}`
+      `/beneficiario/${beneficiarioId}/dependentes/${dependenteId}`,
     );
 
     return data;
   },
 
-  atualizarEndereco: async (params: {
-    beneficiarioId: string;
-    body: AtualizarEnderecoDto;
-  }) => {
+  atualizarEndereco: async (params: { beneficiarioId: string; body: AtualizarEnderecoDto }) => {
     const { beneficiarioId, body } = params;
 
     const { data } = await api.put<ApiResponse<BeneficiarioResponse>>(
       `/beneficiario/${beneficiarioId}/endereco`,
-      body
+      body,
     );
 
     return data;
   },
 
-  atualizarTipoCesta: async (params: {
-    beneficiarioId: string;
-    body: AtualizarTipoCestaDto;
-  }) => {
+  atualizarTipoCesta: async (params: { beneficiarioId: string; body: AtualizarTipoCestaDto }) => {
     const { beneficiarioId, body } = params;
 
     const { data } = await api.put<ApiResponse<BeneficiarioResponse>>(
       `/beneficiario/${beneficiarioId}/tipo-cesta`,
-      body
+      body,
     );
 
     return data;
   },
 
   buscar: async (beneficiarioId: string) => {
-    const { data } = await api.get<
-      ApiResponse<BeneficiarioComHistoricoResponse>
-    >(`/beneficiario/${beneficiarioId}`);
+    const { data } = await api.get<ApiResponse<BeneficiarioComHistoricoResponse>>(
+      `/beneficiario/${beneficiarioId}`,
+    );
 
     return data;
   },
 
   listar: async (query: ListarBeneficiariosDto) => {
-    const { data } = await api.get<ApiResponse<ListarBeneficiariosResponse>>(
-      '/beneficiario',
-      { params: query }
-    );
+    const { data } = await api.get<ApiResponse<ListarBeneficiariosResponse>>('/beneficiario', {
+      params: query,
+    });
 
     return data;
   },

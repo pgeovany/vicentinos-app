@@ -1,20 +1,13 @@
 import { api } from '../axios-instance';
 import { ApiResponse } from '../types';
-import {
-  ListarMovimentacoesEstoqueDto,
-  ListarEntradasESaidasDto,
-} from './schemas';
-import {
-  ListarMovimentacoesEstoque,
-  ListarMovimentacaoTotais,
-  AnalisarEstoque,
-} from './types';
+import { ListarMovimentacoesEstoqueDto, ListarEntradasESaidasDto } from './schemas';
+import { ListarMovimentacoesEstoque, ListarMovimentacaoTotais, AnalisarEstoque } from './types';
 
 export const estoqueApi = {
   listarMovimentacoes: async (query: ListarMovimentacoesEstoqueDto) => {
     const { data } = await api.get<ApiResponse<ListarMovimentacoesEstoque>>(
       '/estoque/movimentacoes',
-      { params: query }
+      { params: query },
     );
 
     return data;
@@ -23,16 +16,14 @@ export const estoqueApi = {
   listarEntradasESaidas: async (query: ListarEntradasESaidasDto) => {
     const { data } = await api.get<ApiResponse<ListarMovimentacaoTotais>>(
       '/estoque/entradas-saidas',
-      { params: query }
+      { params: query },
     );
 
     return data;
   },
 
   analisarEstoque: async () => {
-    const { data } = await api.get<ApiResponse<AnalisarEstoque>>(
-      '/estoque/analise-estoque'
-    );
+    const { data } = await api.get<ApiResponse<AnalisarEstoque>>('/estoque/analise-estoque');
 
     return data;
   },

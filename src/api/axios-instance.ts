@@ -32,5 +32,5 @@ api.interceptors.response.use(
     const statusCode = error.response?.status || 500;
 
     return Promise.reject(new ApiError(message, statusCode));
-  }
+  },
 );

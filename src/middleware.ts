@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isPublicPath = authConfig.publicPaths.some(
-    (path) => pathname === path || pathname.startsWith(path)
+    (path) => pathname === path || pathname.startsWith(path),
   );
 
   const token = request.cookies.get('auth_token')?.value;
@@ -31,9 +31,7 @@ export async function middleware(request: NextRequest) {
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
       await jwtVerify(token, secret);
-      return NextResponse.redirect(
-        new URL(authConfig.defaultProtectedPath, request.url)
-      );
+      return NextResponse.redirect(new URL(authConfig.defaultProtectedPath, request.url));
     } catch {}
   }
 

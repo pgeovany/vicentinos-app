@@ -5,9 +5,7 @@ export default function CestasHistoricoLayout({
 }>) {
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">
-        Histórico de distribuição de cestas
-      </h1>
+      <h1 className="text-2xl font-bold">Histórico de distribuição de cestas</h1>
       {children}
     </div>
   );

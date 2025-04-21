@@ -29,13 +29,7 @@ export const ListarHistoricoDistribuicoesSchema = z.object({
   quantidade: z.string().optional().default('15'),
 });
 
-export type AdicionarProdutosCestaDto = z.infer<
-  typeof AdicionarProdutosCestaSchema
->;
+export type AdicionarProdutosCestaDto = z.infer<typeof AdicionarProdutosCestaSchema>;
 export type CriarCestaDto = z.infer<typeof CriarCestaSchema>;
-export type ListarDistribuicoesPendentesDto = z.infer<
-  typeof ListarDistribuicoesPendentesSchema
->;
-export type ListarHistoricoDistribuicoesDto = z.infer<
-  typeof ListarHistoricoDistribuicoesSchema
->;
+export type ListarDistribuicoesPendentesDto = z.infer<typeof ListarDistribuicoesPendentesSchema>;
+export type ListarHistoricoDistribuicoesDto = z.infer<typeof ListarHistoricoDistribuicoesSchema>;

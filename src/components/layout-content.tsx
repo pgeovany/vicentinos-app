@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import { AppSidebar } from "@/components/sidebar";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { isProtectedRoute } from "@/config/auth";
+import { usePathname } from 'next/navigation';
+import { AppSidebar } from '@/components/sidebar';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { isProtectedRoute } from '@/config/auth';
 
 export function LayoutContent({
   children,
@@ -26,7 +26,5 @@ export function LayoutContent({
     );
   }
 
-  return (
-    <main className="flex flex-1 flex-col overflow-y-auto p-4">{children}</main>
-  );
+  return <main className="flex flex-1 flex-col overflow-y-auto p-4">{children}</main>;
 }

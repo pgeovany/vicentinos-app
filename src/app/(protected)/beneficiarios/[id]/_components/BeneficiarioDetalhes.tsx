@@ -7,10 +7,7 @@ import { detalharBeneficiario } from '../../lista/actions';
 import { formatDate } from '@/lib/format-date';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import {
-  renderOptionalField,
-  renderOptionalDate,
-} from '@/lib/render-optional-fields';
+import { renderOptionalField, renderOptionalDate } from '@/lib/render-optional-fields';
 import { addCpfMask } from '@/lib/add-cpf-mask';
 import { addPhoneMask } from '@/lib/add-phone-mask';
 
@@ -19,8 +16,7 @@ export function BeneficiarioDetalhes({
 }: Readonly<{
   beneficiarioId: string;
 }>) {
-  const [beneficiario, setBeneficiario] =
-    useState<BeneficiarioComHistoricoResponse | null>(null);
+  const [beneficiario, setBeneficiario] = useState<BeneficiarioComHistoricoResponse | null>(null);
 
   useEffect(() => {
     const fetchBeneficiario = async () => {
@@ -50,15 +46,9 @@ export function BeneficiarioDetalhes({
           <div className="grid grid-cols-2 gap-4">
             {renderOptionalField(beneficiario.nome, 'Nome')}
             {renderOptionalField(addCpfMask(beneficiario.cpf ?? ''), 'CPF')}
-            {renderOptionalDate(
-              beneficiario.dataNascimento,
-              'Data de Nascimento'
-            )}
+            {renderOptionalDate(beneficiario.dataNascimento, 'Data de Nascimento')}
             {renderOptionalField(beneficiario.status?.toLowerCase(), 'Status')}
-            {renderOptionalField(
-              addPhoneMask(beneficiario.telefone ?? ''),
-              'Telefone'
-            )}
+            {renderOptionalField(addPhoneMask(beneficiario.telefone ?? ''), 'Telefone')}
             {renderOptionalField(beneficiario.email, 'Email')}
             {renderOptionalDate(beneficiario.criadoEm, 'Cadastrado em')}
           </div>
@@ -74,8 +64,7 @@ export function BeneficiarioDetalhes({
             {beneficiario.endereco?.rua && beneficiario.endereco?.numero ? (
               <p>
                 {beneficiario.endereco.rua}, {beneficiario.endereco.numero}
-                {beneficiario.endereco.complemento &&
-                  ` - ${beneficiario.endereco.complemento}`}
+                {beneficiario.endereco.complemento && ` - ${beneficiario.endereco.complemento}`}
               </p>
             ) : (
               <p>Endereço não informado</p>
@@ -85,9 +74,7 @@ export function BeneficiarioDetalhes({
                 {beneficiario.endereco.bairro} - {beneficiario.endereco.cidade}
               </p>
             ) : null}
-            {beneficiario.endereco?.cep && (
-              <p>CEP: {beneficiario.endereco.cep}</p>
-            )}
+            {beneficiario.endereco?.cep && <p>CEP: {beneficiario.endereco.cep}</p>}
           </div>
         </CardContent>
       </Card>
@@ -112,9 +99,7 @@ export function BeneficiarioDetalhes({
               ))}
             </div>
           ) : (
-            <p className="text-muted-foreground">
-              Nenhum dependente cadastrado
-            </p>
+            <p className="text-muted-foreground">Nenhum dependente cadastrado</p>
           )}
         </CardContent>
       </Card>
@@ -128,9 +113,7 @@ export function BeneficiarioDetalhes({
             <div className="space-y-4">
               {beneficiario.historicoRecebimentos.map((historico) => (
                 <div key={historico.id} className="space-y-2">
-                  <p className="font-medium">
-                    Cesta recebida: {historico.nomeCesta}
-                  </p>
+                  <p className="font-medium">Cesta recebida: {historico.nomeCesta}</p>
                   <p className="text-sm text-muted-foreground">
                     Data: {formatDate(historico.criadoEm)}
                   </p>

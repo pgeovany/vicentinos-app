@@ -5,10 +5,7 @@ import { LoginResponse } from './types';
 
 export const loginApi = {
   login: async (body: LoginDto) => {
-    const { data } = await api.post<ApiResponse<LoginResponse>>(
-      '/auth/login',
-      body
-    );
+    const { data } = await api.post<ApiResponse<LoginResponse>>('/auth/login', body);
 
     return data;
   },

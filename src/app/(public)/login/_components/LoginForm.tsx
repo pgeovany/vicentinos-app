@@ -81,16 +81,10 @@ export function LoginForm() {
         />
 
         {form.formState.errors.root && (
-          <div className="text-sm text-destructive">
-            {form.formState.errors.root.message}
-          </div>
+          <div className="text-sm text-destructive">{form.formState.errors.root.message}</div>
         )}
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={form.formState.isSubmitting}
-        >
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? 'Entrando...' : 'Entrar'}
         </Button>
       </form>

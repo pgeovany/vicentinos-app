@@ -21,23 +21,15 @@ export const cestaApi = {
   },
 
   listarTiposCestas: async () => {
-    const { data } = await api.get<ApiResponse<ListarTiposCestas>>(
-      '/cesta/tipos-cesta'
-    );
+    const { data } = await api.get<ApiResponse<ListarTiposCestas>>('/cesta/tipos-cesta');
 
     return data;
   },
 
-  adicionarProdutos: async (params: {
-    cestaId: string;
-    body: AdicionarProdutosCestaDto;
-  }) => {
+  adicionarProdutos: async (params: { cestaId: string; body: AdicionarProdutosCestaDto }) => {
     const { cestaId, body } = params;
 
-    const { data } = await api.put<ApiResponse<Cesta>>(
-      `/cesta/${cestaId}/produtos`,
-      body
-    );
+    const { data } = await api.put<ApiResponse<Cesta>>(`/cesta/${cestaId}/produtos`, body);
 
     return data;
   },
@@ -45,38 +37,30 @@ export const cestaApi = {
   removerProduto: async (params: { cestaId: string; produtoId: string }) => {
     const { cestaId, produtoId } = params;
 
-    const { data } = await api.delete<ApiResponse<Cesta>>(
-      `/cesta/${cestaId}/produto/${produtoId}`
-    );
+    const { data } = await api.delete<ApiResponse<Cesta>>(`/cesta/${cestaId}/produto/${produtoId}`);
 
     return data;
   },
 
-  listarDistribuicoesPendentes: async (
-    query: ListarDistribuicoesPendentesDto
-  ) => {
+  listarDistribuicoesPendentes: async (query: ListarDistribuicoesPendentesDto) => {
     const { data } = await api.get<ApiResponse<ListarDistribuicoesPendentes>>(
       '/cesta/distribuicoes-pendentes',
-      { params: query }
+      { params: query },
     );
 
     return data;
   },
 
   entregar: async (beneficiarioId: string) => {
-    const { data } = await api.post<ApiResponse<void>>(
-      `/cesta/entregar/${beneficiarioId}`
-    );
+    const { data } = await api.post<ApiResponse<void>>(`/cesta/entregar/${beneficiarioId}`);
 
     return data;
   },
 
-  listarHistoricoDistribuicoes: async (
-    query: ListarHistoricoDistribuicoesDto
-  ) => {
+  listarHistoricoDistribuicoes: async (query: ListarHistoricoDistribuicoesDto) => {
     const { data } = await api.get<ApiResponse<ListarHistoricoDistribuicoes>>(
       '/cesta/historico-distribuicoes',
-      { params: query }
+      { params: query },
     );
 
     return data;

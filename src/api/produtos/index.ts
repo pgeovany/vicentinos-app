@@ -10,10 +10,7 @@ import { ProdutoComEstoque, ListarProdutos } from './types';
 
 export const produtoApi = {
   criar: async (body: CriarProdutoDto) => {
-    const { data } = await api.post<ApiResponse<ProdutoComEstoque>>(
-      '/produto',
-      body
-    );
+    const { data } = await api.post<ApiResponse<ProdutoComEstoque>>('/produto', body);
 
     return data;
   },
@@ -29,23 +26,17 @@ export const produtoApi = {
   editar: async (params: { produtoId: string; body: EditarProdutoDto }) => {
     const { produtoId, body } = params;
 
-    const { data } = await api.put<ApiResponse<ProdutoComEstoque>>(
-      `/produto/${produtoId}`,
-      body
-    );
+    const { data } = await api.put<ApiResponse<ProdutoComEstoque>>(`/produto/${produtoId}`, body);
 
     return data;
   },
 
-  alterarStatus: async (params: {
-    produtoId: string;
-    body: AlterarStatusProdutoDto;
-  }) => {
+  alterarStatus: async (params: { produtoId: string; body: AlterarStatusProdutoDto }) => {
     const { produtoId, body } = params;
 
     const { data } = await api.put<ApiResponse<ProdutoComEstoque>>(
       `/produto/${produtoId}/alterar-status`,
-      body
+      body,
     );
 
     return data;

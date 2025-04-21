@@ -4,17 +4,13 @@ import { DadosTransparencia, ListarProdutosMaisNecessitados } from './types';
 
 export const transparenciaApi = {
   obterDados: async () => {
-    const { data } = await api.get<ApiResponse<DadosTransparencia>>(
-      '/transparencia/obter-dados'
-    );
+    const { data } = await api.get<ApiResponse<DadosTransparencia>>('/transparencia/obter-dados');
 
     return data;
   },
 
   listarProdutosMaisNecessitados: async () => {
-    const { data } = await api.get<ApiResponse<ListarProdutosMaisNecessitados>>(
-      '/public/estoque'
-    );
+    const { data } = await api.get<ApiResponse<ListarProdutosMaisNecessitados>>('/public/estoque');
 
     return data;
   },

@@ -16,9 +16,7 @@ import { formatDate } from '@/lib/format-date';
 import { useRouter } from 'next/navigation';
 
 export function BeneficiariosLista() {
-  const [beneficiarios, setBeneficiarios] = useState<BeneficiarioResponse[]>(
-    []
-  );
+  const [beneficiarios, setBeneficiarios] = useState<BeneficiarioResponse[]>([]);
 
   useEffect(() => {
     const fetchBeneficiarios = async () => {
