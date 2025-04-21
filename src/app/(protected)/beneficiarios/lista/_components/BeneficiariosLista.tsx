@@ -14,27 +14,65 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { formatDate } from '@/lib/format-date';
 import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Search } from 'lucide-react';
 
 export function BeneficiariosLista() {
   const [beneficiarios, setBeneficiarios] = useState<BeneficiarioResponse[]>([]);
+  const [filterValue, setFilterValue] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBeneficiarios = async () => {
-      const response = await listarBeneficiarios({});
+      setIsLoading(true);
+      const response = await listarBeneficiarios({ quantidade: 100, pagina: 1 });
 
       if (response.success) {
         setBeneficiarios(response.data?.resultado ?? []);
       } else {
         toast.error(response.error);
       }
+      setIsLoading(false);
     };
 
     fetchBeneficiarios();
   }, []);
 
+  const filteredBeneficiarios = beneficiarios.filter((beneficiario) =>
+    beneficiario.nome.toLowerCase().includes(filterValue.toLowerCase()),
+  );
+
   return (
-    <div className="border rounded-md p-2">
-      <BeneficiarioTable beneficiarios={beneficiarios} />
+    <div className="space-y-4">
+      <div className="relative">
+        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Filtrar por nome..."
+          value={filterValue}
+          onChange={(e) => setFilterValue(e.target.value)}
+          className="pl-8"
+        />
+      </div>
+
+      <div className="border rounded-md p-2">
+        {isLoading ? (
+          <div className="py-8 text-center text-muted-foreground">Carregando beneficiários...</div>
+        ) : (
+          <>
+            {filteredBeneficiarios.length === 0 ? (
+              <div className="py-8 text-center text-muted-foreground">
+                Nenhum beneficiário encontrado
+              </div>
+            ) : (
+              <BeneficiarioTable beneficiarios={filteredBeneficiarios} />
+            )}
+          </>
+        )}
+      </div>
+
+      <div className="text-sm text-muted-foreground text-right">
+        {filteredBeneficiarios.length} beneficiário(s) encontrado(s)
+      </div>
     </div>
   );
 }
