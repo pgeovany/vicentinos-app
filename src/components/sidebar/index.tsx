@@ -60,7 +60,7 @@ export function AppSidebar() {
       id: 'painel',
       label: 'Painel',
       Icon: LayoutDashboard,
-      subItems: [{ label: 'Dashboard', Icon: BarChart3, path: '/painel' }],
+      subItems: [{ label: 'Este mês', Icon: BarChart3, path: '/painel/dashboard' }],
     },
     {
       id: 'beneficiarios',
