@@ -5,8 +5,6 @@ import { toast } from 'sonner';
 import { BeneficiarioComHistoricoResponse } from '@/api/beneficiarios/types';
 import { criarBeneficiario, alterarStatusBeneficiario } from '../../actions';
 import { renderOptionalField, renderOptionalDate } from '@/lib/render-optional-fields';
-import { addCpfMask } from '@/lib/add-cpf-mask';
-import { addPhoneMask } from '@/lib/add-phone-mask';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -100,7 +98,7 @@ export function PersonalInfoSection({
       {!editing ? (
         <div className="grid grid-cols-2 gap-4">
           {renderOptionalField(beneficiario.nome, 'Nome')}
-          {renderOptionalField(addCpfMask(beneficiario.cpf ?? ''), 'CPF')}
+          {renderOptionalField(maskCPF(beneficiario.cpf ?? ''), 'CPF')}
           {renderOptionalField(maskRG(beneficiario.rg ?? ''), 'RG')}
           {renderOptionalDate(beneficiario.dataNascimento, 'Data de Nascimento')}
           <div className="flex flex-col space-y-1">
@@ -114,7 +112,7 @@ export function PersonalInfoSection({
               <Label>{beneficiario.status?.toLowerCase()}</Label>
             </div>
           </div>
-          {renderOptionalField(addPhoneMask(beneficiario.telefone ?? ''), 'Telefone')}
+          {renderOptionalField(maskPhone(beneficiario.telefone ?? ''), 'Telefone')}
           {renderOptionalField(beneficiario.email, 'Email')}
           {renderOptionalDate(beneficiario.criadoEm, 'Cadastrado em')}
         </div>
