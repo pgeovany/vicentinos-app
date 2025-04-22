@@ -33,6 +33,7 @@ export const atualizarEnderecoSchema = z.object({
   bairro: z.string().optional(),
   cidade: z.string().optional(),
   cep: z.string().regex(cepRegex, 'CEP inválido').optional(),
+  complemento: z.string().optional(),
 });
 
 export const atualizarTipoCestaSchema = z.object({

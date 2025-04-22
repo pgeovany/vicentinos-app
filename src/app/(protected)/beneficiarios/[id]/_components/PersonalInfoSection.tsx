@@ -12,7 +12,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { CustomDatePicker } from '@/components/ui/custom-date-picker';
 import { ensureCorrectDate, toLocalIsoMidnight } from '@/lib/fix-date';
-import { maskCPF, maskPhone, stripMask } from '@/lib/masks';
+import { maskCPF, maskPhone, maskRG, stripMask } from '@/lib/masks';
 import { EditCard } from './EditCard';
 
 interface PersonalInfoSectionProps {
@@ -30,6 +30,7 @@ export function PersonalInfoSection({
   const [formData, setFormData] = useState({
     nome: beneficiario.nome || '',
     cpf: beneficiario.cpf || '',
+    rg: beneficiario.rg || '',
     telefone: beneficiario.telefone || '',
     email: beneficiario.email || '',
     dataNascimento: ensureCorrectDate(beneficiario.dataNascimento),
@@ -44,6 +45,7 @@ export function PersonalInfoSection({
     setFormData({
       nome: beneficiario.nome || '',
       cpf: beneficiario.cpf || '',
+      rg: beneficiario.rg || '',
       telefone: beneficiario.telefone || '',
       email: beneficiario.email || '',
       dataNascimento: ensureCorrectDate(beneficiario.dataNascimento),
@@ -55,6 +57,7 @@ export function PersonalInfoSection({
       beneficiarioId: beneficiarioId,
       nome: formData.nome,
       cpf: stripMask(formData.cpf) || undefined,
+      rg: stripMask(formData.rg) || undefined,
       dataNascimento: formData.dataNascimento
         ? toLocalIsoMidnight(formData.dataNascimento)
         : undefined,
@@ -98,6 +101,7 @@ export function PersonalInfoSection({
         <div className="grid grid-cols-2 gap-4">
           {renderOptionalField(beneficiario.nome, 'Nome')}
           {renderOptionalField(addCpfMask(beneficiario.cpf ?? ''), 'CPF')}
+          {renderOptionalField(maskRG(beneficiario.rg ?? ''), 'RG')}
           {renderOptionalDate(beneficiario.dataNascimento, 'Data de Nascimento')}
           <div className="flex flex-col space-y-1">
             <span className="text-sm font-medium">Status</span>
@@ -132,6 +136,15 @@ export function PersonalInfoSection({
                 value={formData.cpf}
                 onChange={(e) => setFormData({ ...formData, cpf: maskCPF(e.target.value) })}
                 maxLength={14}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="rg">RG</Label>
+              <Input
+                id="rg"
+                value={formData.rg}
+                onChange={(e) => setFormData({ ...formData, rg: maskRG(e.target.value) })}
+                maxLength={12}
               />
             </div>
             <div className="space-y-2">

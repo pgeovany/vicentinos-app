@@ -30,6 +30,7 @@ export interface BeneficiarioResponse {
   id: string;
   nome: string;
   cpf: string;
+  rg: string;
   status: string;
   dataNascimento: Date;
   telefone: string;
