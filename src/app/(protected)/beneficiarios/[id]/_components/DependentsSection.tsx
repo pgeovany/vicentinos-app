@@ -19,14 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-const PARENTESCO_OPTIONS = [
-  { value: 'Pai/Mãe', label: 'Pai/Mãe' },
-  { value: 'Avô/Avó', label: 'Avô/Avó' },
-  { value: 'Cônjuge', label: 'Cônjuge' },
-  { value: 'Filho(a)', label: 'Filho(a)' },
-  { value: 'Outro', label: 'Outro' },
-];
+import { PARENTESCO_OPTIONS } from '@/lib/parentesco-options';
 
 interface DependentFormData {
   id?: string;

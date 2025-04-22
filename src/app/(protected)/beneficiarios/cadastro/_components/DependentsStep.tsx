@@ -122,7 +122,7 @@ export function DependentsStep({ dependentes, updateDependentes }: DependentsSte
               value={newDependent.parentesco}
               onValueChange={(value) => setNewDependent((prev) => ({ ...prev, parentesco: value }))}
             >
-              <SelectTrigger id="new-dep-parentesco">
+              <SelectTrigger id="new-dep-parentesco" className="cursor-pointer">
                 <SelectValue placeholder="Selecione o parentesco" />
               </SelectTrigger>
               <SelectContent>
