@@ -28,8 +28,8 @@ api.interceptors.response.use(
       await auth.removeToken();
     }
 
-    const message = error.response?.data?.message || error.message;
-    const statusCode = error.response?.status || 500;
+    const message = error.response?.data?.message ?? error.message;
+    const statusCode = error.response?.status ?? 500;
 
     return Promise.reject(new ApiError(message, statusCode));
   },
