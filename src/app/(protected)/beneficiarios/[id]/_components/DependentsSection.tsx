@@ -12,6 +12,21 @@ import { CustomDatePicker } from '@/components/ui/custom-date-picker';
 import { EditCard } from './EditCard';
 import { getAge } from '@/lib/get-age';
 import { formatDate } from '@/lib/format-date';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+const PARENTESCO_OPTIONS = [
+  { value: 'Pai/Mãe', label: 'Pai/Mãe' },
+  { value: 'Avô/Avó', label: 'Avô/Avó' },
+  { value: 'Cônjuge', label: 'Cônjuge' },
+  { value: 'Filho(a)', label: 'Filho(a)' },
+  { value: 'Outro', label: 'Outro' },
+];
 
 interface DependentFormData {
   id?: string;
@@ -196,12 +211,21 @@ export function DependentsSection({
               </div>
               <div className="space-y-2">
                 <Label htmlFor="new-dep-parentesco">Parentesco *</Label>
-                <Input
-                  id="new-dep-parentesco"
+                <Select
                   value={newDependent.parentesco}
-                  onChange={(e) => setNewDependent({ ...newDependent, parentesco: e.target.value })}
-                  required
-                />
+                  onValueChange={(value) => setNewDependent({ ...newDependent, parentesco: value })}
+                >
+                  <SelectTrigger id="new-dep-parentesco" className="cursor-pointer">
+                    <SelectValue placeholder="Selecione o parentesco" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PARENTESCO_OPTIONS.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="new-dep-data">Data de Nascimento *</Label>

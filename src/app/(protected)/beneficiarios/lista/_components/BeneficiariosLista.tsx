@@ -103,7 +103,7 @@ function BeneficiarioTable({
           >
             <TableCell>{beneficiario.nome}</TableCell>
             <TableCell>{beneficiario.status.toLowerCase()}</TableCell>
-            <TableCell>{beneficiario.tipoCesta.nome}</TableCell>
+            <TableCell>{beneficiario.tipoCesta?.nome ?? '--'}</TableCell>
             <TableCell>{formatDate(beneficiario.criadoEm)}</TableCell>
           </TableRow>
         ))}
