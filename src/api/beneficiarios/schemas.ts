@@ -46,9 +46,14 @@ export const listarBeneficiariosSchema = z.object({
   quantidade: z.number().int().positive().optional(),
 });
 
+export const alterarStatusBeneficiarioSchema = z.object({
+  beneficiarioId: z.string().min(1, 'ID do beneficiário é obrigatório'),
+});
+
 export type CriarBeneficiarioDto = z.infer<typeof criarBeneficiarioSchema>;
 export type DependenteBeneficiarioDto = z.infer<typeof dependenteBeneficiarioSchema>;
 export type AdicionarDependentesDto = z.infer<typeof adicionarDependentesSchema>;
 export type AtualizarEnderecoDto = z.infer<typeof atualizarEnderecoSchema>;
 export type AtualizarTipoCestaDto = z.infer<typeof atualizarTipoCestaSchema>;
 export type ListarBeneficiariosDto = z.infer<typeof listarBeneficiariosSchema>;
+export type AlterarStatusBeneficiarioDto = z.infer<typeof alterarStatusBeneficiarioSchema>;

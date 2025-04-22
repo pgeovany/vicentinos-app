@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { listarBeneficiarios } from '../actions';
+import { listarBeneficiarios } from '../../actions';
 import { BeneficiarioResponse } from '@/api/beneficiarios/types';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';

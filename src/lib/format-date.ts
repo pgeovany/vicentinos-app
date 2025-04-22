@@ -1,5 +1,14 @@
-import { format } from 'date-fns';
+export function formatDate(date: string | Date | null | undefined): string {
+  if (!date) return '—';
 
-export const formatDate = (date: Date) => {
-  return format(date, 'dd/MM/yyyy');
-};
+  const d = typeof date === 'string' ? new Date(date) : date;
+
+  if (isNaN(d.getTime())) return 'Data inválida';
+
+  return d.toLocaleDateString('pt-BR', {
+    timeZone: 'UTC',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+}

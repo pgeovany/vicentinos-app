@@ -7,10 +7,11 @@ interface EnderecoBeneficiario {
   complemento?: string;
 }
 
-interface DependenteBeneficiario {
+export interface DependenteBeneficiario {
   id: string;
   nome: string;
   parentesco: string;
+  dataNascimento: Date;
 }
 
 interface TipoCestaBeneficiario {
