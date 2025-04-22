@@ -192,7 +192,7 @@ export function DependentsSection({
           {/* Form to add a new dependent */}
           <div className="p-4 border rounded-md border-dashed">
             <h4 className="font-medium mb-4">Adicionar Dependente</h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="new-dep-nome">Nome *</Label>
                 <Input
@@ -220,8 +220,8 @@ export function DependentsSection({
                   </SelectContent>
                 </Select>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="new-dep-data">Data de Nascimento *</Label>
+              <div className="space-y-2 sm:col-span-2 lg:col-span-1">
+                <Label htmlFor="new-dep-data">Data de nascimento *</Label>
                 <CustomDatePicker
                   id="new-dep-data"
                   date={
@@ -237,7 +237,7 @@ export function DependentsSection({
                 />
               </div>
             </div>
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex justify-center sm:justify-end">
               <Button onClick={handleAddDependent} className="cursor-pointer">
                 <Plus className="h-4 w-4 mr-2" />
                 Adicionar Dependente
