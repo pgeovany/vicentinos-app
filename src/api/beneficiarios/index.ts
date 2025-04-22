@@ -81,4 +81,12 @@ export const beneficiarioApi = {
 
     return data;
   },
+
+  alterarStatus: async (params: { beneficiarioId: string }) => {
+    const { beneficiarioId } = params;
+
+    const { data } = await api.put<ApiResponse<void>>(`/beneficiario/${beneficiarioId}/status`);
+
+    return data;
+  },
 };

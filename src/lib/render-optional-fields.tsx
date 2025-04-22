@@ -7,9 +7,9 @@ export const renderOptionalField = (value: string | undefined | null, label: str
   </div>
 );
 
-export const renderOptionalDate = (date: Date | undefined | null, label: string) => (
+export const renderOptionalDate = (date: Date | null | undefined, label: string) => (
   <div>
     <p className="text-sm font-medium text-muted-foreground">{label}</p>
-    <p>{date ? formatDate(new Date(date)) : 'Não informado'}</p>
+    <p>{date ? formatDate(date) : 'Não informado'}</p>
   </div>
 );
