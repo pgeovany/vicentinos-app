@@ -1,7 +1,9 @@
+import { ProdutoMovimentacoes } from './_components/ProdutoMovimentacoes';
+
 export default function HistoricoMovimentacoesProdutos() {
   return (
     <div>
-      <h1>Histórico de movimentações de produtos</h1>
+      <ProdutoMovimentacoes />
     </div>
   );
 }
