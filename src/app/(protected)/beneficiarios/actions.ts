@@ -19,8 +19,7 @@ export async function criarBeneficiario(body: CriarBeneficiarioDto) {
       return { success: false, error: error.message, data: null };
     }
 
-    console.error('Login error:', error);
-    return { success: false, error: 'Erro ao realizar login', data: null };
+    return { success: false, error: 'Erro ao cadastrar assistido', data: null };
   }
 }
 
@@ -34,8 +33,7 @@ export async function listarBeneficiarios(query: ListarBeneficiariosDto) {
       return { success: false, error: error.message, data: null };
     }
 
-    console.error('Login error:', error);
-    return { success: false, error: 'Erro ao realizar login', data: null };
+    return { success: false, error: 'Erro ao buscar lista de assistidos', data: null };
   }
 }
 
@@ -48,6 +46,8 @@ export async function detalharBeneficiario(beneficiarioId: string) {
     if (error instanceof ApiError) {
       return { success: false, error: error.message, data: null };
     }
+
+    return { success: false, error: 'Erro ao buscar detalhes do assistido', data: null };
   }
 }
 
@@ -64,7 +64,6 @@ export async function adicionarDependentes(params: {
       return { success: false, error: error.message, data: null };
     }
 
-    console.error('Erro ao adicionar dependentes:', error);
     return { success: false, error: 'Erro ao adicionar dependentes', data: null };
   }
 }
@@ -78,6 +77,8 @@ export async function removerDependente(params: { beneficiarioId: string; depend
     if (error instanceof ApiError) {
       return { success: false, error: error.message, data: null };
     }
+
+    return { success: false, error: 'Erro ao remover dependente', data: null };
   }
 }
 
@@ -93,6 +94,8 @@ export async function atualizarEndereco(params: {
     if (error instanceof ApiError) {
       return { success: false, error: error.message, data: null };
     }
+
+    return { success: false, error: 'Erro ao atualizar endereço', data: null };
   }
 }
 
@@ -105,6 +108,8 @@ export async function alterarStatusBeneficiario(params: { beneficiarioId: string
     if (error instanceof ApiError) {
       return { success: false, error: error.message, data: null };
     }
+
+    return { success: false, error: 'Erro ao alterar status', data: null };
   }
 }
 
@@ -120,5 +125,7 @@ export async function atualizarTipoCesta(params: {
     if (error instanceof ApiError) {
       return { success: false, error: error.message, data: null };
     }
+
+    return { success: false, error: 'Erro ao alterar tipo de cesta', data: null };
   }
 }
