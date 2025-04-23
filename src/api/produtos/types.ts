@@ -8,6 +8,7 @@ interface EstoqueProduto {
 
 export interface ProdutoComEstoque {
   id: string;
+  status: string;
   nome: string;
   criadoEm: string;
   atualizadoEm: string;
