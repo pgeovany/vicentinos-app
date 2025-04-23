@@ -10,8 +10,8 @@ export const ListarMovimentacoesEstoqueSchema = z
         errorMap: () => ({ message: 'Tipo deve ser ENTRADA ou SAIDA' }),
       })
       .optional(),
-    pagina: z.string().regex(/^\d+$/, 'Página deve ser um número').optional().default('1'),
-    quantidade: z.string().regex(/^\d+$/, 'Quantidade deve ser um número').optional().default('15'),
+    pagina: z.number().int().min(1).optional().default(1),
+    quantidade: z.number().int().min(1).optional().default(15),
     dataInicio: z.string().datetime({ message: 'Data de início inválida' }).optional(),
     dataFim: z.string().datetime({ message: 'Data de fim inválida' }).optional(),
   })
@@ -31,8 +31,8 @@ export const ListarMovimentacoesEstoqueSchema = z
 export const ListarEntradasESaidasSchema = z
   .object({
     nome: z.string().optional(),
-    pagina: z.string().regex(/^\d+$/, 'Página deve ser um número').optional().default('1'),
-    quantidade: z.string().regex(/^\d+$/, 'Quantidade deve ser um número').optional().default('15'),
+    pagina: z.number().int().min(1).optional().default(1),
+    quantidade: z.number().int().min(1).optional().default(15),
     dataInicio: z.string().datetime({ message: 'Data de início inválida' }).optional(),
     dataFim: z.string().datetime({ message: 'Data de fim inválida' }).optional(),
   })
