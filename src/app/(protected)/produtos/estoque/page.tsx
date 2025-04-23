@@ -1,7 +1,9 @@
-export default function EstoqueProdutos() {
+import { ProdutosEstoque } from './_components/ProdutosEstoque';
+
+export default function ProdutosEstoquePage() {
   return (
     <div>
-      <h1>Estoque de produtos</h1>
+      <ProdutosEstoque />
     </div>
   );
 }
