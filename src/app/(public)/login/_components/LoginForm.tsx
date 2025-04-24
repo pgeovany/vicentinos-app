@@ -33,7 +33,7 @@ export function LoginForm() {
 
       if (result.success) {
         toast.success('Login realizado com sucesso');
-        router.push('/painel');
+        router.push('/produtos/estoque');
       } else {
         toast.error('Credenciais inválidas');
         form.setError('root', {
