@@ -22,6 +22,9 @@ export const ListarDistribuicoesPendentesSchema = z.object({
 
 export const ListarHistoricoDistribuicoesSchema = z.object({
   nome: z.string().optional(),
+  tipoCestaId: z.string().optional(),
+  mes: z.string().min(0, { message: 'Mês é obrigatório' }),
+  ano: z.string().min(4, { message: 'Ano é obrigatório' }),
   pagina: z.string().optional().default('1'),
   quantidade: z.string().optional().default('15'),
 });
