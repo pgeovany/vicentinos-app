@@ -1,7 +1,11 @@
 'use server';
 
 import { cestaApi } from '@/api/cestas';
-import { AdicionarProdutosCestaDto, CriarCestaDto } from '@/api/cestas/schemas';
+import {
+  AdicionarProdutosCestaDto,
+  CriarCestaDto,
+  ListarDistribuicoesPendentesDto,
+} from '@/api/cestas/schemas';
 import { ApiError } from '@/api/types';
 
 export async function criarCesta(body: CriarCestaDto) {
@@ -60,5 +64,33 @@ export async function removerProdutoCesta(params: { cestaId: string; produtoId: 
     }
 
     return { success: false, error: 'Erro ao remover produto da cesta', data: null };
+  }
+}
+
+export async function listarDistribuicoesCestasPendentes(query: ListarDistribuicoesPendentesDto) {
+  try {
+    const { data } = await cestaApi.listarDistribuicoesPendentes(query);
+
+    return { success: true, error: null, data };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { success: false, error: error.message, data: null };
+    }
+
+    return { success: false, error: 'Erro ao buscar distribuições pendentes', data: null };
+  }
+}
+
+export async function entregarCesta(beneficiarioId: string) {
+  try {
+    const { data } = await cestaApi.entregar(beneficiarioId);
+
+    return { success: true, error: null, data };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { success: false, error: error.message, data: null };
+    }
+
+    return { success: false, error: 'Erro ao entregar cesta', data: null };
   }
 }

@@ -4,7 +4,7 @@ import { ApiError } from './types';
 
 export const api = axios.create({
   baseURL: process.env.API_URL,
-  timeout: 10000,
+  timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
   },

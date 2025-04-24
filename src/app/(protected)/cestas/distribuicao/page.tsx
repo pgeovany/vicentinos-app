@@ -1,7 +1,5 @@
-export default function DistribuicaoCestas() {
-  return (
-    <div>
-      <h1>Distribuição de Cestas</h1>
-    </div>
-  );
+import { DistribuicaoCestas } from './_components/DistribuicaoCestas';
+
+export default function DistribuicaoCestasPage() {
+  return <DistribuicaoCestas />;
 }

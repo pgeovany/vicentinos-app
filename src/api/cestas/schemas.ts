@@ -21,10 +21,7 @@ export const ListarDistribuicoesPendentesSchema = z.object({
 });
 
 export const ListarHistoricoDistribuicoesSchema = z.object({
-  mes: z.number().int().min(1).max(12),
-  ano: z.number().int().min(2020),
   nome: z.string().optional(),
-  tipoCestaId: z.string().optional(),
   pagina: z.string().optional().default('1'),
   quantidade: z.string().optional().default('15'),
 });
