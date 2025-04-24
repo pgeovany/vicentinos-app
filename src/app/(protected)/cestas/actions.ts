@@ -5,6 +5,7 @@ import {
   AdicionarProdutosCestaDto,
   CriarCestaDto,
   ListarDistribuicoesPendentesDto,
+  ListarHistoricoDistribuicoesDto,
 } from '@/api/cestas/schemas';
 import { ApiError } from '@/api/types';
 
@@ -92,5 +93,23 @@ export async function entregarCesta(beneficiarioId: string) {
     }
 
     return { success: false, error: 'Erro ao entregar cesta', data: null };
+  }
+}
+
+export async function listarHistoricoDistribuicoesCestas(query: ListarHistoricoDistribuicoesDto) {
+  try {
+    const { data } = await cestaApi.listarHistoricoDistribuicoes(query);
+
+    return { success: true, error: null, data };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { success: false, error: error.message, data: null };
+    }
+
+    return {
+      success: false,
+      error: 'Erro ao buscar histórico de distribuições de cestas',
+      data: null,
+    };
   }
 }

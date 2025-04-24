@@ -1,7 +1,5 @@
-export default function HistoricoCestas() {
-  return (
-    <div>
-      <h1>Histórico de distribuição de cestas</h1>
-    </div>
-  );
+import { CestasHistorico } from './_components/CestasHistorico';
+
+export default function HistoricoCestasPage() {
+  return <CestasHistorico />;
 }
