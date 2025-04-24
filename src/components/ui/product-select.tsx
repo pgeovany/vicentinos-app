@@ -22,7 +22,7 @@ export type FilterBy = 'id' | 'name';
 
 type ProductSelectProps = Readonly<{
   value: string;
-  onValueChange: (value: string) => void;
+  onValueChange: (value: string, name?: string) => void;
   disabled?: boolean;
   className?: string;
   placeholder?: string;
@@ -72,7 +72,18 @@ export function ProductSelect({
   };
 
   return (
-    <Select disabled={disabled || isLoadingProdutos} value={value} onValueChange={onValueChange}>
+    <Select
+      disabled={disabled || isLoadingProdutos}
+      value={value}
+      onValueChange={(newValue) => {
+        if (newValue === allOptionValue) {
+          onValueChange(newValue);
+        } else {
+          const selectedProduct = produtos.find((p) => getItemValue(p) === newValue);
+          onValueChange(newValue, selectedProduct?.nome);
+        }
+      }}
+    >
       <SelectTrigger className={`cursor-pointer ${className}`}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
