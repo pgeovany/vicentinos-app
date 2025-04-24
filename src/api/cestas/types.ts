@@ -10,7 +10,7 @@ interface TipoCestaDistribuicao {
   produtos: ItemCesta[];
 }
 
-interface BeneficiarioDistribuicao {
+export interface BeneficiarioDistribuicao {
   id: string;
   nome: string;
   tipoCesta: TipoCestaDistribuicao;
