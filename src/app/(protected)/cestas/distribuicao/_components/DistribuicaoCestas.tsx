@@ -120,9 +120,8 @@ export function DistribuicaoCestas() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">
-          Distribuições do mês de {currentMonth} ({beneficiarios.length} beneficiarios restantes)
-        </h2>
+        <h2 className="text-xl font-semibold">Mês: {currentMonth}</h2>
+
         <Button
           onClick={handleEntregarCesta}
           disabled={!selectedBeneficiario}
@@ -131,6 +130,10 @@ export function DistribuicaoCestas() {
           <Check className="mr-2 h-4 w-4" />
           Confirmar Entrega
         </Button>
+      </div>
+
+      <div className="text-sm text-muted-foreground text-left">
+        {filteredBeneficiarios.length} beneficiário(s) pendente(s) para receber cesta
       </div>
 
       <div className="relative">
@@ -189,10 +192,6 @@ export function DistribuicaoCestas() {
             )}
           </>
         )}
-      </div>
-
-      <div className="text-sm text-muted-foreground text-right">
-        {filteredBeneficiarios.length} beneficiário(s) pendente(s) para receber cesta
       </div>
 
       <Dialog open={confirmDialogOpen} onOpenChange={setConfirmDialogOpen}>
