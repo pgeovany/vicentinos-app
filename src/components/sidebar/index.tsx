@@ -14,7 +14,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import {
-  LayoutDashboard,
+  // LayoutDashboard,
   Users,
   Package,
   ShoppingBasket,
@@ -56,12 +56,12 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path;
 
   const menuConfig: AppSideBarMenuItem[] = [
-    {
-      id: 'painel',
-      label: 'Painel',
-      Icon: LayoutDashboard,
-      subItems: [{ label: 'Este mês', Icon: BarChart3, path: '/painel/dashboard' }],
-    },
+    // {
+    //   id: 'painel',
+    //   label: 'Painel',
+    //   Icon: LayoutDashboard,
+    //   subItems: [{ label: 'Este mês', Icon: BarChart3, path: '/painel/dashboard' }],
+    // },
     {
       id: 'beneficiarios',
       label: 'Beneficiários',
