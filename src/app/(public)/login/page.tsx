@@ -2,10 +2,10 @@ import { LoginForm } from './_components/LoginForm';
 
 export default function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
+    <div className="h-full flex items-center justify-center">
+      <div className="w-full max-w-md px-4 sm:px-6 py-6 bg-white rounded-lg shadow">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Entrar</h2>
+          <h2 className="mb-6 text-center text-3xl font-extrabold text-gray-900">Entrar</h2>
         </div>
         <LoginForm />
       </div>
