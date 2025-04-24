@@ -257,8 +257,8 @@ function MovimentacoesTable({
           <TableHead className="font-bold">Produto</TableHead>
           <TableHead className="font-bold">Quantidade</TableHead>
           <TableHead className="font-bold">Tipo</TableHead>
-          <TableHead className="font-bold">Motivo</TableHead>
           <TableHead className="font-bold">Data</TableHead>
+          <TableHead className="font-bold">Motivo</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -282,8 +282,8 @@ function MovimentacoesTable({
                 {movimentacao.tipo.includes('ENTRADA') ? 'Entrada' : 'Saída'}
               </span>
             </TableCell>
-            <TableCell>{movimentacao.motivo || '--'}</TableCell>
             <TableCell>{formatDate(movimentacao.criadoEm)}</TableCell>
+            <TableCell>{movimentacao.motivo || '--'}</TableCell>
           </TableRow>
         ))}
       </TableBody>
