@@ -12,7 +12,7 @@ const TABS = {
 };
 
 export function ProdutoMovimentacoes() {
-  const [activeTab, setActiveTab] = useState(TABS.DETALHADO);
+  const [activeTab, setActiveTab] = useState(TABS.TOTAIS);
   const [filtersVisible, setFiltersVisible] = useState(false);
 
   return (
@@ -21,23 +21,23 @@ export function ProdutoMovimentacoes() {
         <nav className="-mb-px flex space-x-8">
           <button
             className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium cursor-pointer ${
-              activeTab === TABS.DETALHADO
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-            }`}
-            onClick={() => setActiveTab(TABS.DETALHADO)}
-          >
-            Movimentações Detalhadas
-          </button>
-          <button
-            className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium cursor-pointer ${
               activeTab === TABS.TOTAIS
                 ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             }`}
             onClick={() => setActiveTab(TABS.TOTAIS)}
           >
-            Totais por Produto
+            Totais por produto
+          </button>
+          <button
+            className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium cursor-pointer ${
+              activeTab === TABS.DETALHADO
+                ? 'border-primary text-primary'
+                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+            }`}
+            onClick={() => setActiveTab(TABS.DETALHADO)}
+          >
+            Movimentações detalhadas
           </button>
         </nav>
       </div>
