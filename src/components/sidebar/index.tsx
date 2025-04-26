@@ -104,7 +104,7 @@ export function AppSidebar() {
       label: 'Doações',
       Icon: HeartHandshake,
       subItems: [
-        { label: 'Lista', Icon: List, path: '/doacoes/listar' },
+        { label: 'Histórico', Icon: History, path: '/doacoes/listar' },
         {
           label: 'Estatísticas',
           Icon: BarChart3,
@@ -117,7 +117,7 @@ export function AppSidebar() {
       label: 'SOS',
       Icon: AlertTriangle,
       subItems: [
-        { label: 'Lista', Icon: List, path: '/sos/listar' },
+        { label: 'Histórico', Icon: History, path: '/sos/listar' },
         { label: 'Estatísticas', Icon: BarChart3, path: '/sos/estatisticas' },
       ],
     },
