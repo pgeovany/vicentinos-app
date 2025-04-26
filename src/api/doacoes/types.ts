@@ -38,7 +38,7 @@ export interface EstatisticasDoacoes {
   totalItensDoados: number;
   mediaItensPorDoacao: number;
   totalPorOrigem: TotalPorOrigem[];
-  produtos: ProdutoDoacaoEstatistica[];
+  quantidadePorProduto: ProdutoDoacaoEstatistica[];
 }
 
 export enum ENUM_RECEBIMENTO_DOACAO_ORIGEM {

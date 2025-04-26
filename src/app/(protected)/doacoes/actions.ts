@@ -1,7 +1,11 @@
 'use server';
 
 import { doacaoApi } from '@/api/doacoes';
-import { ListarDoacoesDto, SalvarDoacaoDto } from '@/api/doacoes/schemas';
+import {
+  ListarDoacoesDto,
+  ObterEstatisticasDoacoesDto,
+  SalvarDoacaoDto,
+} from '@/api/doacoes/schemas';
 import { ApiError } from '@/api/types';
 
 export async function salvarDoacao(body: SalvarDoacaoDto) {
@@ -32,7 +36,7 @@ export async function listarDoacoes(query: ListarDoacoesDto) {
   }
 }
 
-export async function obterEstatisticasDoacoes(query: ListarDoacoesDto) {
+export async function obterEstatisticasDoacoes(query: ObterEstatisticasDoacoesDto) {
   try {
     const { data } = await doacaoApi.obterEstatisticas(query);
 
