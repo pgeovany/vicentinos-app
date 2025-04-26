@@ -49,5 +49,12 @@ export const ListarEntradasESaidasSchema = z
     },
   );
 
+export const RemocaoDiretaEstoqueSchema = z.object({
+  produtoId: z.string().min(1),
+  quantidade: z.number().int().min(1),
+  motivo: z.string().min(1, { message: 'Motivo é obrigatório' }),
+});
+
 export type ListarMovimentacoesEstoqueDto = z.infer<typeof ListarMovimentacoesEstoqueSchema>;
 export type ListarEntradasESaidasDto = z.infer<typeof ListarEntradasESaidasSchema>;
+export type RemocaoDiretaEstoqueDto = z.infer<typeof RemocaoDiretaEstoqueSchema>;

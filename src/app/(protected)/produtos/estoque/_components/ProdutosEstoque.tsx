@@ -13,26 +13,28 @@ import { AnalisarEstoque } from '@/api/estoque/types';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Search, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { RemoverProdutoDialog } from './RemoverProdutoDialog';
 
 export function ProdutosEstoque() {
   const [estoqueData, setEstoqueData] = useState<AnalisarEstoque | null>(null);
   const [filterValue, setFilterValue] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchEstoque = async () => {
+    setIsLoading(true);
+    const response = await listarEstoque();
+
+    if (response.success) {
+      setEstoqueData(response.data);
+    } else {
+      toast.error(response.error);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const fetchEstoque = async () => {
-      setIsLoading(true);
-      const response = await listarEstoque();
-
-      if (response.success) {
-        setEstoqueData(response.data);
-      } else {
-        toast.error(response.error);
-      }
-      setIsLoading(false);
-    };
-
     fetchEstoque();
   }, []);
 
@@ -78,7 +80,7 @@ export function ProdutosEstoque() {
                 Nenhum produto encontrado no estoque
               </div>
             ) : (
-              <EstoqueTable produtos={filteredProdutos} />
+              <EstoqueTable produtos={filteredProdutos} onRefresh={fetchEstoque} />
             )}
           </>
         )}
@@ -93,6 +95,7 @@ export function ProdutosEstoque() {
 
 function EstoqueTable({
   produtos,
+  onRefresh,
 }: Readonly<{
   produtos: Array<{
     id: string;
@@ -102,40 +105,90 @@ function EstoqueTable({
     saldo: number;
     suficiente: boolean;
   }>;
+  onRefresh: () => Promise<void>;
 }>) {
+  const [selectedProduct, setSelectedProduct] = useState<{
+    id: string;
+    nome: string;
+    quantidadeDisponivel: number;
+  } | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleOpenDialog = (produto: {
+    id: string;
+    nome: string;
+    quantidadeDisponivel: number;
+  }) => {
+    if (produto.quantidadeDisponivel > 0) {
+      setSelectedProduct(produto);
+      setIsDialogOpen(true);
+    } else {
+      toast.error('Produto não pode ser removido, pois não há unidades disponíveis.');
+    }
+  };
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow className="bg-accent">
-          <TableHead className="font-bold">Nome</TableHead>
-          <TableHead className="font-bold">Qtd. Disponível</TableHead>
-          <TableHead className="font-bold">Qtd. Reservada</TableHead>
-          <TableHead className="font-bold">Saldo</TableHead>
-          <TableHead className="font-bold">Status</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {produtos.map((produto) => (
-          <TableRow
-            className={`hover:bg-accent/50 ${!produto.suficiente ? 'bg-red-50' : 'bg-green-50'}`}
-            key={produto.id}
-          >
-            <TableCell>{produto.nome}</TableCell>
-            <TableCell>{produto.quantidadeDisponivel}</TableCell>
-            <TableCell>{produto.quantidadeReservada}</TableCell>
-            <TableCell>{produto.saldo}</TableCell>
-            <TableCell>
-              <span
-                className={`px-2 py-1 text-xs rounded-full ${
-                  produto.suficiente ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                }`}
-              >
-                {produto.suficiente ? 'Suficiente' : 'Insuficiente'}
-              </span>
-            </TableCell>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow className="bg-accent">
+            <TableHead className="font-bold">Nome</TableHead>
+            <TableHead className="font-bold">Qtd. Disponível</TableHead>
+            <TableHead className="font-bold">Qtd. Reservada</TableHead>
+            <TableHead className="font-bold">Saldo</TableHead>
+            <TableHead className="font-bold">Status</TableHead>
+            <TableHead className="font-bold w-[100px]">Ações</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {produtos.map((produto) => (
+            <TableRow
+              className={`hover:bg-accent/50 ${!produto.suficiente ? 'bg-red-50' : 'bg-green-50'}`}
+              key={produto.id}
+            >
+              <TableCell>{produto.nome}</TableCell>
+              <TableCell>{produto.quantidadeDisponivel}</TableCell>
+              <TableCell>{produto.quantidadeReservada}</TableCell>
+              <TableCell>{produto.saldo}</TableCell>
+              <TableCell>
+                <span
+                  className={`px-2 py-1 text-xs rounded-full ${
+                    produto.suficiente ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                  }`}
+                >
+                  {produto.suficiente ? 'Suficiente' : 'Insuficiente'}
+                </span>
+              </TableCell>
+              <TableCell>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() =>
+                    handleOpenDialog({
+                      id: produto.id,
+                      nome: produto.nome,
+                      quantidadeDisponivel: produto.quantidadeDisponivel,
+                    })
+                  }
+                  className="h-8 w-8 text-destructive hover:bg-destructive/10"
+                  title="Remover produto do estoque (apenas para itens expirados ou danificados)"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      {selectedProduct && (
+        <RemoverProdutoDialog
+          open={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+          produto={selectedProduct}
+          onSuccess={onRefresh}
+        />
+      )}
+    </>
   );
 }

@@ -1,7 +1,11 @@
 'use server';
 
 import { estoqueApi } from '@/api/estoque';
-import { ListarEntradasESaidasDto, ListarMovimentacoesEstoqueDto } from '@/api/estoque/schemas';
+import {
+  ListarEntradasESaidasDto,
+  ListarMovimentacoesEstoqueDto,
+  RemocaoDiretaEstoqueDto,
+} from '@/api/estoque/schemas';
 import { produtoApi } from '@/api/produtos';
 import { CriarProdutoDto, ListarProdutosDto } from '@/api/produtos/schemas';
 import { ApiError } from '@/api/types';
@@ -73,5 +77,19 @@ export async function listarMovimentacoesTotais(query: ListarEntradasESaidasDto)
     }
 
     return { success: false, error: 'Erro ao buscar movimentações de estoque', data: null };
+  }
+}
+
+export async function removerEstoqueProdutoDiretamente(body: RemocaoDiretaEstoqueDto) {
+  try {
+    const { data } = await estoqueApi.remocaoDireta(body);
+
+    return { success: true, error: null, data };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { success: false, error: error.message, data: null };
+    }
+
+    return { success: false, error: 'Erro ao alterar estoque do produto', data: null };
   }
 }
