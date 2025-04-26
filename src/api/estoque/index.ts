@@ -1,6 +1,10 @@
 import { api } from '../axios-instance';
 import { ApiResponse } from '../types';
-import { ListarMovimentacoesEstoqueDto, ListarEntradasESaidasDto } from './schemas';
+import {
+  ListarMovimentacoesEstoqueDto,
+  ListarEntradasESaidasDto,
+  RemocaoDiretaEstoqueDto,
+} from './schemas';
 import { ListarMovimentacoesEstoque, ListarMovimentacaoTotais, AnalisarEstoque } from './types';
 
 export const estoqueApi = {
@@ -24,6 +28,12 @@ export const estoqueApi = {
 
   analisarEstoque: async () => {
     const { data } = await api.get<ApiResponse<AnalisarEstoque>>('/estoque/analise-estoque');
+
+    return data;
+  },
+
+  remocaoDireta: async (body: RemocaoDiretaEstoqueDto) => {
+    const { data } = await api.put<ApiResponse<void>>('/estoque/remocao-direta', body);
 
     return data;
   },
