@@ -3,10 +3,5 @@ export default function TransparenciaEstatisticasLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Estatísticas de transparência</h1>
-      {children}
-    </div>
-  );
+  return <div className="space-y-4">{children}</div>;
 }
