@@ -289,12 +289,12 @@ function DoacaoRow({ doacao }: { doacao: Readonly<RecebimentoDoacao> }) {
             <div className="mx-4 mt-2 p-4 bg-card border rounded-md shadow-sm">
               <h4 className="font-semibold mb-3 text-lg text-center">Itens da doação</h4>
               <div className="flex justify-center">
-                <div className="w-4/5 sm:w-full md:w-full lg:w-full overflow-x-auto">
+                <div className="w-full overflow-x-auto">
                   <Table className="w-full border">
                     <TableHeader>
                       <TableRow className="bg-primary/10">
-                        <TableHead className="font-medium  py-2 w-3/4">Produto</TableHead>
-                        <TableHead className="font-medium  text-center py-2 w-1/4">
+                        <TableHead className="font-medium py-2 w-3/4">Produto</TableHead>
+                        <TableHead className="font-medium text-center py-2 w-1/4">
                           Quantidade
                         </TableHead>
                       </TableRow>
