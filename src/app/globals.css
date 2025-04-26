@@ -120,3 +120,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* React Day Picker styles */
+.rdp {
+  --rdp-cell-size: 40px; /* Size of calendar days */
+  --rdp-accent-color: hsl(var(--primary)); /* Accent color */
+  --rdp-background-color: hsl(var(--primary) / 0.2); /* Background color for selected dates */
+  --rdp-accent-color-dark: hsl(var(--primary)); /* Accent color for dark mode */
+  --rdp-background-color-dark: hsl(var(--primary) / 0.2); /* Background color for dark mode */
+  --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline for focused elements */
+  --rdp-outline-selected: 2px solid hsl(var(--primary)); /* Outline for focused _and_ selected elements */
+  margin: 0;
+}
+
+.rdp-vhidden {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute !important;
+  top: 0;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  border: 0 !important;
+}

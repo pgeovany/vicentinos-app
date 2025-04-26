@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -63,6 +63,39 @@ export function CustomDatePicker({
     return new Date(date.getTime() + userTimezoneOffset);
   }, [date]);
 
+  // Generate years for dropdown
+  const years = React.useMemo(() => {
+    const yearOptions = [];
+    for (let year = toYear; year >= fromYear; year--) {
+      yearOptions.push(year);
+    }
+    return yearOptions;
+  }, [fromYear, toYear]);
+
+  // Generate months for dropdown
+  const months = React.useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => {
+      const month = new Date(0, i);
+      return {
+        value: i,
+        label: month.toLocaleString('pt-BR', { month: 'long' }),
+      };
+    });
+  }, []);
+
+  // Get current view state
+  const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
+
+  // Update calendar view when month/year changes
+  const handleMonthChange = (month: number) => {
+    setCurrentMonth(month);
+  };
+
+  const handleYearChange = (year: number) => {
+    setCurrentYear(year);
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -84,47 +117,47 @@ export function CustomDatePicker({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
+        <div className="px-3 py-2 border-b flex justify-between">
+          <div className="flex gap-2 w-full">
+            <select
+              className="flex-1 cursor-pointer rounded-md border border-input bg-background p-1.5 text-sm outline-none focus:ring-1 focus:ring-ring"
+              value={currentMonth}
+              onChange={(e) => handleMonthChange(parseInt(e.target.value))}
+              aria-label="Mês"
+            >
+              {months.map((month) => (
+                <option key={month.value} value={month.value}>
+                  {month.label.charAt(0).toUpperCase() + month.label.slice(1)}
+                </option>
+              ))}
+            </select>
+
+            <select
+              className="w-24 cursor-pointer rounded-md border border-input bg-background p-1.5 text-sm outline-none focus:ring-1 focus:ring-ring"
+              value={currentYear}
+              onChange={(e) => handleYearChange(parseInt(e.target.value))}
+              aria-label="Ano"
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <Calendar
           mode="single"
           selected={displayDate}
           onSelect={handleDateSelect}
           initialFocus
           locale={ptBR}
-          captionLayout="dropdown-buttons"
-          fromYear={fromYear}
-          toYear={toYear}
-          classNames={{
-            caption_label: 'hidden',
-            nav_button_previous: 'ml-1',
-            nav_button_next: 'mr-1',
-            caption: 'flex justify-center pt-1 pb-2 relative items-center',
-            dropdown_month: 'w-full text-center [&>span]:mx-auto [&>span]:text-sm',
-            dropdown_year: 'w-full text-center [&>span]:mx-auto [&>span]:text-sm',
+          month={new Date(currentYear, currentMonth)}
+          onMonthChange={(newMonth) => {
+            setCurrentMonth(newMonth.getMonth());
+            setCurrentYear(newMonth.getFullYear());
           }}
-          formatters={{
-            formatCaption: (date) => {
-              const month = date.toLocaleString('pt-BR', { month: 'long' });
-              const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
-              const year = date.getFullYear();
-              return `${capitalizedMonth} de ${year}`;
-            },
-          }}
-          components={{
-            Dropdown: ({ value, onChange, ...props }) => {
-              const label = props.name === 'month' ? 'Mês' : 'Ano';
-              return (
-                <select
-                  value={value}
-                  onChange={onChange}
-                  {...props}
-                  className="w-full cursor-pointer rounded-md border border-input bg-background p-1 text-sm outline-none focus:ring-1 focus:ring-ring"
-                  aria-label={label}
-                >
-                  {props.children}
-                </select>
-              );
-            },
-          }}
+          disabled={() => false}
         />
       </PopoverContent>
     </Popover>
