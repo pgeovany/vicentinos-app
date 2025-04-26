@@ -103,20 +103,22 @@ function ProdutoTable({
   produtos: ProdutoComEstoque[];
 }>) {
   return (
-    <Table>
+    <Table className="border-collapse">
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Nome</TableHead>
-          <TableHead className="font-bold">Quantidade em estoque</TableHead>
-          <TableHead className="font-bold">Status</TableHead>
+          <TableHead className="font-bold py-3 px-4">Nome</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Quantidade em estoque</TableHead>
+          {/* <TableHead className="font-bold">Status</TableHead> */}
         </TableRow>
       </TableHeader>
       <TableBody>
         {produtos.map((produto) => (
           <TableRow className="hover:bg-accent/50" key={produto.id}>
-            <TableCell>{produto.nome}</TableCell>
-            <TableCell>{produto.estoque?.quantidade || 0}</TableCell>
-            <TableCell>{produto.status.toLowerCase()}</TableCell>
+            <TableCell className="py-3 px-4">{produto.nome}</TableCell>
+            <TableCell className="py-3 px-4 text-center">
+              {produto.estoque?.quantidade || 0}
+            </TableCell>
+            {/* <TableCell>{produto.status.toLowerCase()}</TableCell> */}
           </TableRow>
         ))}
       </TableBody>

@@ -24,7 +24,7 @@ export function BeneficiarioDetalhes({
     if (response?.success && response.data) {
       setBeneficiario(response.data);
     } else {
-      toast.error(response?.error ?? 'Erro ao carregar beneficiário');
+      toast.error(response?.error ?? 'Erro ao carregar assistido');
     }
     setLoading(false);
   };
@@ -38,7 +38,7 @@ export function BeneficiarioDetalhes({
   }
 
   if (!beneficiario) {
-    return <div>Beneficiário não encontrado</div>;
+    return <div>Assistido não encontrado</div>;
   }
 
   return (

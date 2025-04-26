@@ -48,7 +48,7 @@ export const listarBeneficiariosSchema = z.object({
 });
 
 export const alterarStatusBeneficiarioSchema = z.object({
-  beneficiarioId: z.string().min(1, 'ID do beneficiário é obrigatório'),
+  beneficiarioId: z.string().min(1, 'ID do assistido é obrigatório'),
 });
 
 export type CriarBeneficiarioDto = z.infer<typeof criarBeneficiarioSchema>;

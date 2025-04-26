@@ -174,13 +174,13 @@ function TotaisTable({
   }>;
 }>) {
   return (
-    <Table>
+    <Table className="border-collapse">
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Produto</TableHead>
-          <TableHead className="font-bold">Total Entradas</TableHead>
-          <TableHead className="font-bold">Total Saídas</TableHead>
-          <TableHead className="font-bold">Saldo</TableHead>
+          <TableHead className="font-bold py-3 px-4">Produto</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Total Entradas</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Total Saídas</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Saldo</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -191,10 +191,16 @@ function TotaisTable({
               className={`hover:bg-accent/50 ${saldo >= 0 ? 'bg-green-50' : 'bg-red-50'}`}
               key={total.produtoId}
             >
-              <TableCell>{total.nome}</TableCell>
-              <TableCell className="text-green-600">{total.totalEntradas}</TableCell>
-              <TableCell className="text-red-600">{total.totalSaidas}</TableCell>
-              <TableCell className={saldo >= 0 ? 'text-green-600' : 'text-red-600'}>
+              <TableCell className="py-3 px-4">{total.nome}</TableCell>
+              <TableCell className="py-3 px-4 text-center text-green-600">
+                {total.totalEntradas}
+              </TableCell>
+              <TableCell className="py-3 px-4 text-center text-red-600">
+                {total.totalSaidas}
+              </TableCell>
+              <TableCell
+                className={`py-3 px-4 text-center ${saldo >= 0 ? 'text-green-600' : 'text-red-600'}`}
+              >
                 {saldo}
               </TableCell>
             </TableRow>

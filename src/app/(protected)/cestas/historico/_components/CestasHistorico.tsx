@@ -164,7 +164,7 @@ export function CestasHistorico() {
         <form onSubmit={handleFilterSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="nome">Nome do beneficiário</Label>
+              <Label htmlFor="nome">Nome do assistido</Label>
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -309,20 +309,22 @@ function HistoricoTable({
   }>;
 }>) {
   return (
-    <Table>
+    <Table className="border-collapse">
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Beneficiário</TableHead>
-          <TableHead className="font-bold">Tipo de Cesta</TableHead>
-          <TableHead className="font-bold">Data de Entrega</TableHead>
+          <TableHead className="font-bold py-3 px-4">Assistido</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Tipo de Cesta</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Data de Entrega</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {distribuicoes.map((distribuicao) => (
           <TableRow className="hover:bg-accent/50" key={distribuicao.id}>
-            <TableCell>{distribuicao.beneficiario.nome}</TableCell>
-            <TableCell>{distribuicao.tipoCesta.nome}</TableCell>
-            <TableCell>{formatDate(distribuicao.criadoEm)}</TableCell>
+            <TableCell className="py-3 px-4">{distribuicao.beneficiario.nome}</TableCell>
+            <TableCell className="py-3 px-4 text-center">{distribuicao.tipoCesta.nome}</TableCell>
+            <TableCell className="py-3 px-4 text-center">
+              {formatDate(distribuicao.criadoEm)}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

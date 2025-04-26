@@ -129,15 +129,15 @@ function EstoqueTable({
 
   return (
     <>
-      <Table>
+      <Table className="border-collapse">
         <TableHeader>
           <TableRow className="bg-accent">
-            <TableHead className="font-bold">Nome</TableHead>
-            <TableHead className="font-bold">Qtd. Disponível</TableHead>
-            <TableHead className="font-bold">Qtd. Reservada</TableHead>
-            <TableHead className="font-bold">Saldo</TableHead>
-            <TableHead className="font-bold">Status</TableHead>
-            <TableHead className="font-bold w-[100px]">Ações</TableHead>
+            <TableHead className="font-bold py-3 px-4">Nome</TableHead>
+            <TableHead className="font-bold py-3 px-4 text-center">Qtd. Disponível</TableHead>
+            <TableHead className="font-bold py-3 px-4 text-center">Qtd. Reservada</TableHead>
+            <TableHead className="font-bold py-3 px-4 text-center">Saldo</TableHead>
+            <TableHead className="font-bold py-3 px-4 text-center">Status</TableHead>
+            <TableHead className="font-bold py-3 px-4 text-center w-[100px]">Ações</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -146,11 +146,13 @@ function EstoqueTable({
               className={`hover:bg-accent/50 ${!produto.suficiente ? 'bg-red-50' : 'bg-green-50'}`}
               key={produto.id}
             >
-              <TableCell>{produto.nome}</TableCell>
-              <TableCell>{produto.quantidadeDisponivel}</TableCell>
-              <TableCell>{produto.quantidadeReservada}</TableCell>
-              <TableCell>{produto.saldo}</TableCell>
-              <TableCell>
+              <TableCell className="py-3 px-4">{produto.nome}</TableCell>
+              <TableCell className="py-3 px-4 text-center">
+                {produto.quantidadeDisponivel}
+              </TableCell>
+              <TableCell className="py-3 px-4 text-center">{produto.quantidadeReservada}</TableCell>
+              <TableCell className="py-3 px-4 text-center">{produto.saldo}</TableCell>
+              <TableCell className="py-3 px-4 text-center">
                 <span
                   className={`px-2 py-1 text-xs rounded-full ${
                     produto.suficiente ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
@@ -159,7 +161,7 @@ function EstoqueTable({
                   {produto.suficiente ? 'Suficiente' : 'Insuficiente'}
                 </span>
               </TableCell>
-              <TableCell>
+              <TableCell className="py-3 px-4 text-center">
                 <Button
                   variant="ghost"
                   size="icon"

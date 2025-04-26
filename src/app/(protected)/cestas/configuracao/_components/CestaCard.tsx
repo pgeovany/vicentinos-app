@@ -132,19 +132,21 @@ export function CestaCard({
             </div>
 
             {cesta.produtos && cesta.produtos.length > 0 ? (
-              <Table>
+              <Table className="border-collapse">
                 <TableHeader>
                   <TableRow className="bg-accent">
-                    <TableHead>Nome</TableHead>
-                    <TableHead className="text-right">Quantidade</TableHead>
-                    <TableHead className="w-[150px]"></TableHead>
+                    <TableHead className="font-bold py-3 px-4">Nome</TableHead>
+                    <TableHead className="font-bold py-3 px-4 text-center">Quantidade</TableHead>
+                    <TableHead className="font-bold py-3 px-4 w-[150px] text-center">
+                      Ações
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {cesta.produtos.map((produto) => (
-                    <TableRow key={produto.id}>
-                      <TableCell>{produto.nome}</TableCell>
-                      <TableCell className="text-right">
+                    <TableRow key={produto.id} className="hover:bg-accent/50">
+                      <TableCell className="py-3 px-4">{produto.nome}</TableCell>
+                      <TableCell className="py-3 px-4 text-center">
                         {editingProduct &&
                         editingProduct.cestaId === cesta.id &&
                         editingProduct.produtoId === produto.id ? (
@@ -152,7 +154,7 @@ export function CestaCard({
                             value={editQuantity.toString()}
                             onValueChange={(value) => setEditQuantity(parseInt(value))}
                           >
-                            <SelectTrigger className="w-20 ml-auto cursor-pointer">
+                            <SelectTrigger className="w-20 mx-auto cursor-pointer">
                               <SelectValue placeholder="Qtd" />
                             </SelectTrigger>
                             <SelectContent>
@@ -167,7 +169,7 @@ export function CestaCard({
                           produto.quantidade
                         )}
                       </TableCell>
-                      <TableCell className="space-x-1 text-right">
+                      <TableCell className="py-3 px-4 text-center">
                         {editingProduct &&
                         editingProduct.cestaId === cesta.id &&
                         editingProduct.produtoId === produto.id ? (

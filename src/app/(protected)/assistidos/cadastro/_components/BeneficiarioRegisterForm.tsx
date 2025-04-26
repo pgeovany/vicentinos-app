@@ -37,7 +37,7 @@ const steps = [
     id: 'personal-info',
     title: 'Informações Pessoais',
     icon: UserRound,
-    description: 'Dados pessoais do beneficiário',
+    description: 'Dados pessoais do assistido',
   },
   {
     id: 'address',
@@ -122,8 +122,8 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
       markStepAsCompleted(0);
       return true;
     } catch (error) {
-      console.error('Erro ao salvar beneficiário:', error);
-      toast.error('Ocorreu um erro ao salvar o beneficiário');
+      console.error('Erro ao salvar assistido:', error);
+      toast.error('Ocorreu um erro ao salvar o assistido');
       return false;
     } finally {
       setIsSubmitting(false);
@@ -159,7 +159,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
 
   const handleAddressSubmit = async () => {
     if (!beneficiarioId) {
-      toast.error('Erro: Beneficiário não criado');
+      toast.error('Erro: Assistido não criado');
       return false;
     }
 
@@ -207,7 +207,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
 
   const handleDependentsSubmit = async () => {
     if (!beneficiarioId) {
-      toast.error('Erro: Beneficiário não criado');
+      toast.error('Erro: Assistido não criado');
       return false;
     }
 
@@ -248,7 +248,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
 
   const handleCestaTypeSubmit = async () => {
     if (!beneficiarioId) {
-      toast.error('Erro: Beneficiário não criado');
+      toast.error('Erro: Assistido não criado');
       return false;
     }
 
@@ -273,7 +273,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
 
       markStepAsCompleted(3);
       toast.success('Tipo de cesta definido com sucesso!');
-      toast.success('Beneficiário cadastrado com sucesso!');
+      toast.success('Assistido cadastrado com sucesso!');
       onComplete();
       return true;
     } catch (error) {
@@ -381,7 +381,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
         <div className="flex gap-2 items-center text-amber-600 bg-amber-50 p-2 rounded-md w-full mb-2">
           <AlertTriangle className="h-4 w-4" />
           <p className="text-sm">
-            Você está editando as informações do beneficiário. Alterações feitas aqui atualizarão os
+            Você está editando as informações do assistido. Alterações feitas aqui atualizarão os
             dados existentes.
           </p>
         </div>

@@ -167,7 +167,7 @@ export function NewSosModal({ open, onOpenChange, onSuccess }: NewSosModalProps)
               id="beneficiario"
               value={beneficiario}
               onChange={(e) => setBeneficiario(e.target.value)}
-              placeholder="Nome do beneficiário"
+              placeholder="Nome do assistido"
               className="w-full"
             />
           </div>
