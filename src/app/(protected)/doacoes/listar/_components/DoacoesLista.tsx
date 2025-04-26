@@ -16,7 +16,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CustomDatePicker } from '@/components/ui/custom-date-picker';
 import { formatDate } from '@/lib/format-date';
-import { listarDoacoes } from '../actions';
+import { listarDoacoes } from '../../actions';
 import { ListarDoacoesDto } from '@/api/doacoes/schemas';
 import {
   ENUM_RECEBIMENTO_DOACAO_ORIGEM,
@@ -25,7 +25,7 @@ import {
 } from '@/api/doacoes/types';
 import { Badge } from '@/components/ui/badge';
 import { ChevronDown, ChevronUp, Filter, Plus } from 'lucide-react';
-import { getOrigemDoacaoLabel } from '../helpers';
+import { getOrigemDoacaoLabel } from '../../helpers';
 import { NewDonationModal } from './NewDonationModal';
 
 export function DoacoesLista() {

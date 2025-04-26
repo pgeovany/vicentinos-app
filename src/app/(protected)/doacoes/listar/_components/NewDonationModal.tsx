@@ -22,9 +22,9 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'sonner';
 import { ENUM_RECEBIMENTO_DOACAO_ORIGEM } from '@/api/doacoes/types';
-import { getOrigemDoacaoLabel } from '../helpers';
+import { getOrigemDoacaoLabel } from '../../helpers';
 import { generateQuantityOptions } from '@/lib/generate-select-quantity';
-import { salvarDoacao } from '../actions';
+import { salvarDoacao } from '../../actions';
 
 interface NewDonationModalProps {
   open: boolean;
