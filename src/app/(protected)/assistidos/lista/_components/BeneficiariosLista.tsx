@@ -85,13 +85,13 @@ function BeneficiarioTable({
   const router = useRouter();
 
   return (
-    <Table>
+    <Table className="border-collapse">
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Nome</TableHead>
-          <TableHead className="font-bold">Status</TableHead>
-          <TableHead className="font-bold">Tipo de cesta</TableHead>
-          <TableHead className="font-bold">Data de cadastro</TableHead>
+          <TableHead className="font-bold py-3 px-4">Nome</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Cesta</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Status</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Data de cadastro</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -99,12 +99,18 @@ function BeneficiarioTable({
           <TableRow
             className="hover:bg-accent/50 cursor-pointer"
             key={beneficiario.id}
-            onClick={() => router.push(`/beneficiarios/${beneficiario.id}`)}
+            onClick={() => router.push(`/assistidos/${beneficiario.id}`)}
           >
-            <TableCell>{beneficiario.nome}</TableCell>
-            <TableCell>{beneficiario.status.toLowerCase()}</TableCell>
-            <TableCell>{beneficiario.tipoCesta?.nome ?? '--'}</TableCell>
-            <TableCell>{formatDate(beneficiario.criadoEm)}</TableCell>
+            <TableCell className="py-3 px-4">{beneficiario.nome}</TableCell>
+            <TableCell className="py-3 px-4 text-center">
+              {beneficiario.tipoCesta?.nome ?? '--'}
+            </TableCell>
+            <TableCell className="py-3 px-4 text-center">
+              {beneficiario.status.toLowerCase()}
+            </TableCell>
+            <TableCell className="py-3 px-4 text-center">
+              {formatDate(beneficiario.criadoEm)}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

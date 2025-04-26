@@ -156,12 +156,12 @@ export function DistribuicaoCestas() {
                 Nenhum assistido pendente para receber cesta neste mês!
               </div>
             ) : (
-              <Table>
+              <Table className="border-collapse">
                 <TableHeader>
                   <TableRow className="bg-accent">
-                    <TableHead className="w-[50px]"></TableHead>
-                    <TableHead className="font-bold">Nome</TableHead>
-                    <TableHead className="font-bold">Tipo de Cesta</TableHead>
+                    <TableHead className="w-[50px] font-bold py-3 px-4"></TableHead>
+                    <TableHead className="font-bold py-3 px-4">Nome</TableHead>
+                    <TableHead className="font-bold py-3 px-4 text-center">Tipo de Cesta</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -173,7 +173,7 @@ export function DistribuicaoCestas() {
                       key={beneficiario.id}
                       onClick={() => handleSelectBeneficiario(beneficiario.id)}
                     >
-                      <TableCell>
+                      <TableCell className="py-3 px-4">
                         <div className="flex items-center justify-center h-5">
                           <input
                             type="radio"
@@ -183,8 +183,10 @@ export function DistribuicaoCestas() {
                           />
                         </div>
                       </TableCell>
-                      <TableCell>{beneficiario.nome}</TableCell>
-                      <TableCell>{beneficiario.tipoCesta.nome}</TableCell>
+                      <TableCell className="py-3 px-4">{beneficiario.nome}</TableCell>
+                      <TableCell className="py-3 px-4 text-center">
+                        {beneficiario.tipoCesta.nome}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

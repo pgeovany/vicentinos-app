@@ -251,14 +251,14 @@ function MovimentacoesTable({
   }>;
 }>) {
   return (
-    <Table>
+    <Table className="border-collapse">
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Produto</TableHead>
-          <TableHead className="font-bold">Quantidade</TableHead>
-          <TableHead className="font-bold">Tipo</TableHead>
-          <TableHead className="font-bold">Data</TableHead>
-          <TableHead className="font-bold">Motivo</TableHead>
+          <TableHead className="font-bold py-3 px-4">Produto</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Quantidade</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Tipo</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Data</TableHead>
+          <TableHead className="font-bold py-3 px-4">Motivo</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -269,9 +269,9 @@ function MovimentacoesTable({
             }`}
             key={movimentacao.id}
           >
-            <TableCell>{movimentacao.produto}</TableCell>
-            <TableCell>{movimentacao.quantidade}</TableCell>
-            <TableCell>
+            <TableCell className="py-3 px-4">{movimentacao.produto}</TableCell>
+            <TableCell className="py-3 px-4 text-center">{movimentacao.quantidade}</TableCell>
+            <TableCell className="py-3 px-4 text-center">
               <span
                 className={`px-2 py-1 text-xs rounded-full ${
                   movimentacao.tipo.includes('ENTRADA')
@@ -282,8 +282,10 @@ function MovimentacoesTable({
                 {movimentacao.tipo.includes('ENTRADA') ? 'Entrada' : 'Saída'}
               </span>
             </TableCell>
-            <TableCell>{formatDate(movimentacao.criadoEm)}</TableCell>
-            <TableCell>{movimentacao.motivo || '--'}</TableCell>
+            <TableCell className="py-3 px-4 text-center">
+              {formatDate(movimentacao.criadoEm)}
+            </TableCell>
+            <TableCell className="py-3 px-4">{movimentacao.motivo || '--'}</TableCell>
           </TableRow>
         ))}
       </TableBody>

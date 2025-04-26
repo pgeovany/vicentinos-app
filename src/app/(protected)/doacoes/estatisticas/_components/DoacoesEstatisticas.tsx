@@ -235,11 +235,11 @@ export function DoacoesEstatisticas() {
 
 function ProdutosDoadosTable({ produtos }: { produtos: { nome: string; quantidade: number }[] }) {
   return (
-    <Table>
+    <Table className="border-collapse">
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Produto</TableHead>
-          <TableHead className="font-bold text-right">Quantidade recebida</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Produto</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Quantidade recebida</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -248,8 +248,8 @@ function ProdutosDoadosTable({ produtos }: { produtos: { nome: string; quantidad
             key={`${produto.nome}-${index}`}
             className={index % 2 === 0 ? 'bg-muted/30' : 'bg-white'}
           >
-            <TableCell>{produto.nome}</TableCell>
-            <TableCell className="text-right">{produto.quantidade}</TableCell>
+            <TableCell className="py-3 px-4 text-center">{produto.nome}</TableCell>
+            <TableCell className="py-3 px-4 text-center">{produto.quantidade}</TableCell>
           </TableRow>
         ))}
       </TableBody>

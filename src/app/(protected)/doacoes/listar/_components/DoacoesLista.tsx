@@ -290,11 +290,11 @@ function DoacaoRow({ doacao }: { doacao: Readonly<RecebimentoDoacao> }) {
               <h4 className="font-semibold mb-3 text-lg text-center">Itens da doação</h4>
               <div className="flex justify-center">
                 <div className="w-full overflow-x-auto">
-                  <Table className="w-full border">
+                  <Table className="w-full border-collapse">
                     <TableHeader>
                       <TableRow className="bg-primary/10">
-                        <TableHead className="font-medium py-2 w-3/4">Produto</TableHead>
-                        <TableHead className="font-medium text-center py-2 w-1/4">
+                        <TableHead className="font-bold py-3 px-4 w-3/4">Produto</TableHead>
+                        <TableHead className="font-bold py-3 px-4 text-center w-1/4">
                           Quantidade
                         </TableHead>
                       </TableRow>
@@ -302,8 +302,8 @@ function DoacaoRow({ doacao }: { doacao: Readonly<RecebimentoDoacao> }) {
                     <TableBody className="bg-accent/20">
                       {doacao.itens.map((item) => (
                         <TableRow key={item.id} className="hover:bg-accent/40">
-                          <TableCell className="py-2">{item.nome}</TableCell>
-                          <TableCell className="text-center py-2">{item.quantidade}</TableCell>
+                          <TableCell className="py-3 px-4">{item.nome}</TableCell>
+                          <TableCell className="py-3 px-4 text-center">{item.quantidade}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
