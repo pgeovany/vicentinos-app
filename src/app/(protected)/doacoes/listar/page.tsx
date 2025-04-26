@@ -1,5 +1,5 @@
-import { DoacoesListaContainer } from '../_components/DoacoesListaContainer';
+import { DoacoesLista } from '../_components/DoacoesLista';
 
 export default function ListaDoacoes() {
-  return <DoacoesListaContainer />;
+  return <DoacoesLista />;
 }

@@ -24,13 +24,16 @@ import {
   RecebimentoDoacao,
 } from '@/api/doacoes/types';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Filter, Plus } from 'lucide-react';
 import { getOrigemDoacaoLabel } from '../helpers';
+import { NewDonationModal } from './NewDonationModal';
 
-export function DoacoesLista({ filtersVisible }: { filtersVisible: boolean }) {
+export function DoacoesLista() {
   const [doacoes, setDoacoes] = useState<ListarDoacoes | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [newDonationModalOpen, setNewDonationModalOpen] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(false);
 
   const [origemDoacao, setOrigemDoacao] = useState('todos');
   const [dataInicio, setDataInicio] = useState<Date | undefined>(undefined);
@@ -106,6 +109,21 @@ export function DoacoesLista({ filtersVisible }: { filtersVisible: boolean }) {
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <Button
+          variant="outline"
+          onClick={() => setFiltersVisible(!filtersVisible)}
+          className="flex items-center"
+        >
+          <Filter className="h-4 w-4 mr-2" />
+          {filtersVisible ? 'Ocultar filtros' : 'Mostrar filtros'}
+        </Button>
+        <Button onClick={() => setNewDonationModalOpen(true)}>
+          <Plus className="mr-2 h-4 w-4" />
+          Nova doação
+        </Button>
+      </div>
+
       {filtersVisible && (
         <Card className="p-4">
           <form onSubmit={handleFilterSubmit} className="space-y-4">
@@ -209,6 +227,12 @@ export function DoacoesLista({ filtersVisible }: { filtersVisible: boolean }) {
           {doacoes.resultado.length} doação(ões) encontrada(s)
         </div>
       )}
+
+      <NewDonationModal
+        open={newDonationModalOpen}
+        onOpenChange={setNewDonationModalOpen}
+        onSuccess={fetchDoacoes}
+      />
     </div>
   );
 }
