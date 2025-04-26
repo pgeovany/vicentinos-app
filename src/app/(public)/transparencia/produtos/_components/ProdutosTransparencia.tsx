@@ -4,6 +4,7 @@ import { listaProdutosTransparencia } from '../../actions';
 import { Card } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 export function ProdutosTransparencia() {
   const [produtos, setProdutos] = useState<string[]>([]);
@@ -156,7 +157,7 @@ export function ProdutosTransparencia() {
 
       <Card className="p-6 bg-gradient-to-br from-orange-100 to-amber-50 border-orange-200 shadow-md mb-8">
         <div className="flex flex-col md:flex-row items-center">
-          <div className="md:mr-6 mb-4 md:mb-0">
+          {/* <div className="md:mr-6 mb-4 md:mb-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-16 w-16 text-orange-500"
@@ -171,6 +172,9 @@ export function ProdutosTransparencia() {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
+          </div> */}
+          <div className="md:mr-6 mb-4 md:mb-0">
+            <Image src="/favicon.ico" alt="Favicon" width={64} height={64} />
           </div>
           <div>
             <p className="text-center md:text-left text-lg font-medium text-blue-900">
@@ -246,7 +250,7 @@ export function ProdutosTransparencia() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z" />
+                <path d="M12 3v16M7 8h10" />
               </svg>
               <p className="text-sm mb-1">Paróquia Nossa Senhora da Conceição</p>
               <p className="text-sm mb-1">Banco Bradesco</p>
