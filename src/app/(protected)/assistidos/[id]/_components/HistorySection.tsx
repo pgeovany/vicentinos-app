@@ -29,7 +29,7 @@ export function HistorySection({ beneficiario }: HistorySectionProps) {
             ))}
           </div>
         ) : (
-          <p className="text-muted-foreground">Este beneficiário ainda não recebeu nenhuma cesta</p>
+          <p className="text-muted-foreground">Este assistido ainda não recebeu nenhuma cesta</p>
         )}
       </CardContent>
     </Card>

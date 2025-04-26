@@ -10,7 +10,7 @@ export default function CadastroBeneficiario() {
   return (
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Cadastro de Beneficiário</h1>
+        <h1 className="text-2xl font-semibold">Cadastro de assistidos</h1>
       </div>
 
       <Card className="p-6">

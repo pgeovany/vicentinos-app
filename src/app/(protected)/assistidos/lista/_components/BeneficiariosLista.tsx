@@ -56,12 +56,12 @@ export function BeneficiariosLista() {
 
       <div className="border rounded-md p-2">
         {isLoading ? (
-          <div className="py-8 text-center text-muted-foreground">Carregando beneficiários...</div>
+          <div className="py-8 text-center text-muted-foreground">Carregando assistidos...</div>
         ) : (
           <>
             {filteredBeneficiarios.length === 0 ? (
               <div className="py-8 text-center text-muted-foreground">
-                Nenhum beneficiário encontrado
+                Nenhum assistido encontrado
               </div>
             ) : (
               <BeneficiarioTable beneficiarios={filteredBeneficiarios} />
@@ -71,7 +71,7 @@ export function BeneficiariosLista() {
       </div>
 
       <div className="text-sm text-muted-foreground text-right">
-        {filteredBeneficiarios.length} beneficiário(s) encontrado(s)
+        {filteredBeneficiarios.length} assistido(s) encontrado(s)
       </div>
     </div>
   );

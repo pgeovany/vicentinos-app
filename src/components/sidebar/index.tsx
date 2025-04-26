@@ -63,12 +63,12 @@ export function AppSidebar() {
     //   subItems: [{ label: 'Este mês', Icon: BarChart3, path: '/painel/dashboard' }],
     // },
     {
-      id: 'beneficiarios',
-      label: 'Beneficiários',
+      id: 'assistidos',
+      label: 'Assistidos',
       Icon: Users,
       subItems: [
-        { label: 'Lista', Icon: List, path: '/beneficiarios/lista' },
-        { label: 'Cadastro', Icon: UserPlus, path: '/beneficiarios/cadastro' },
+        { label: 'Lista', Icon: List, path: '/assistidos/lista' },
+        { label: 'Cadastro', Icon: UserPlus, path: '/assistidos/cadastro' },
       ],
     },
     {

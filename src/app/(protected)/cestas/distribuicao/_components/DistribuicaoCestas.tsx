@@ -85,7 +85,7 @@ export function DistribuicaoCestas() {
 
   const handleEntregarCesta = async () => {
     if (!selectedBeneficiario) {
-      toast.error('Selecione um beneficiário');
+      toast.error('Selecione um assistido');
       return;
     }
 
@@ -133,7 +133,7 @@ export function DistribuicaoCestas() {
       </div>
 
       <div className="text-sm text-muted-foreground text-left">
-        {filteredBeneficiarios.length} beneficiário(s) pendente(s) para receber cesta
+        {filteredBeneficiarios.length} assistido(s) pendente(s) para receber cesta
       </div>
 
       <div className="relative">
@@ -148,12 +148,12 @@ export function DistribuicaoCestas() {
 
       <div className="border rounded-md p-2">
         {isLoading ? (
-          <div className="py-8 text-center text-muted-foreground">Carregando beneficiários...</div>
+          <div className="py-8 text-center text-muted-foreground">Carregando assistidos...</div>
         ) : (
           <>
             {filteredBeneficiarios.length === 0 ? (
               <div className="py-8 text-center text-muted-foreground">
-                Nenhum beneficiário pendente para receber cesta neste mês!
+                Nenhum assistido pendente para receber cesta neste mês!
               </div>
             ) : (
               <Table>

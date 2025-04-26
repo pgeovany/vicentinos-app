@@ -80,7 +80,7 @@ export function PersonalInfoSection({
     });
 
     if (response?.success) {
-      toast.success(`Beneficiário ${newStatus.toLowerCase()}`);
+      toast.success(`Assistido ${newStatus.toLowerCase()}`);
       onRefresh();
     } else {
       toast.error(response?.error ?? 'Erro ao atualizar status');

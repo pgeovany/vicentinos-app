@@ -164,7 +164,7 @@ export function CestasHistorico() {
         <form onSubmit={handleFilterSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="nome">Nome do beneficiário</Label>
+              <Label htmlFor="nome">Nome do assistido</Label>
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -312,7 +312,7 @@ function HistoricoTable({
     <Table>
       <TableHeader>
         <TableRow className="bg-accent">
-          <TableHead className="font-bold">Beneficiário</TableHead>
+          <TableHead className="font-bold">Assistido</TableHead>
           <TableHead className="font-bold">Tipo de Cesta</TableHead>
           <TableHead className="font-bold">Data de Entrega</TableHead>
         </TableRow>

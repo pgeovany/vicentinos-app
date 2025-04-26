@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Cadastro de Beneficiário',
+  title: 'Cadastro de assistidos',
 };
 
 export default function CadastroBeneficiarioLayout({
