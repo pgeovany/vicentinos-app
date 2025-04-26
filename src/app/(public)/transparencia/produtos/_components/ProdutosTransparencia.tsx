@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import Image from 'next/image';
+import { ShoppingBag, Copy } from 'lucide-react';
 
 export function ProdutosTransparencia() {
   const [produtos, setProdutos] = useState<string[]>([]);
@@ -157,22 +158,6 @@ export function ProdutosTransparencia() {
 
       <Card className="p-6 bg-gradient-to-br from-orange-100 to-amber-50 border-orange-200 shadow-md mb-8">
         <div className="flex flex-col md:flex-row items-center">
-          {/* <div className="md:mr-6 mb-4 md:mb-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-16 w-16 text-orange-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-          </div> */}
           <div className="md:mr-6 mb-4 md:mb-0">
             <Image src="/favicon.ico" alt="Favicon" width={64} height={64} />
           </div>
@@ -192,20 +177,7 @@ export function ProdutosTransparencia() {
       <Card className="overflow-hidden shadow-lg border-t-4 border-blue-600">
         <div className="p-5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-xl text-center">
           <div className="flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
-            </svg>
+            <ShoppingBag className="h-6 w-6 mr-2" />
             Produtos mais necessários
           </div>
         </div>
@@ -215,7 +187,6 @@ export function ProdutosTransparencia() {
       <div className="mt-8 p-6 bg-gradient-to-br from-blue-600 to-blue-500 rounded-lg text-white text-center shadow-lg">
         <h2 className="text-xl font-bold mb-3">Como posso doar?</h2>
 
-        {/* Presencial section */}
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-2">Presencialmente</h3>
           <p className="mb-2">
@@ -259,19 +230,7 @@ export function ProdutosTransparencia() {
                 onClick={handleCopyPixKey}
                 className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-6 rounded-full shadow-md transition-colors duration-300 flex items-center cursor-pointer"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
+                <Copy className="h-5 w-5 mr-2" />
                 Copiar chave PIX
               </button>
             </div>
@@ -281,21 +240,16 @@ export function ProdutosTransparencia() {
 
       <div className="mt-8 text-center">
         <p className="text-blue-600 font-medium">
-          Obrigado por ajudar! Cada doação, por menor que seja, faz uma grande diferença na vida das
-          pessoas que assistimos.
+          Obrigado por sua ajuda! Cada doação, por menor que seja, transforma vidas e faz crescer em
+          você a maior das virtudes: a caridade.
         </p>
-        <div className="flex justify-center mt-2 space-x-1">
-          {[1, 2, 3, 4, 5].map((starId) => (
-            <svg
-              key={`star-${starId}`}
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-orange-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          ))}
+
+        <div className="mt-6">
+          <a href="/transparencia/estatisticas">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition-colors duration-300 cursor-pointer">
+              Veja quantas famílias conseguimos ajudar no último mês
+            </button>
+          </a>
         </div>
       </div>
     </div>
