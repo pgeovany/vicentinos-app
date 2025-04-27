@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-const AUTH_TOKEN_KEY = 'auth_token';
+const AUTH_TOKEN_KEY = '__Host-auth_token';
 
 export const auth = {
   async setToken(token: string, expiresIn?: number) {
@@ -9,6 +9,8 @@ export const auth = {
       maxAge: (expiresIn ?? 7) * 24 * 60 * 60,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
+      path: '/',
+      httpOnly: true,
     });
   },
 

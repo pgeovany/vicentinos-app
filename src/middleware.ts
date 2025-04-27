@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     (path) => pathname === path || pathname.startsWith(path),
   );
 
-  const token = request.cookies.get('auth_token')?.value;
+  const token = request.cookies.get('__Host-auth_token')?.value;
 
   if (!isPublicPath) {
     if (!token) {
@@ -19,10 +19,10 @@ export async function middleware(request: NextRequest) {
 
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-      await jwtVerify(token, secret);
+      await jwtVerify(token, secret, { algorithms: ['HS256'] });
     } catch {
       const response = NextResponse.redirect(new URL('/login', request.url));
-      response.cookies.delete('auth_token');
+      response.cookies.delete('__Host-auth_token');
       return response;
     }
   }
@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
   if (pathname === '/login' && token) {
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-      await jwtVerify(token, secret);
+      await jwtVerify(token, secret, { algorithms: ['HS256'] });
       return NextResponse.redirect(new URL(authConfig.defaultProtectedPath, request.url));
     } catch {}
   }
