@@ -203,7 +203,7 @@ export function NewDonationModal({ open, onOpenChange, onSuccess }: NewDonationM
                 <SelectValue placeholder="Selecione a quantidade" />
               </SelectTrigger>
               <SelectContent>
-                {generateQuantityOptions().map((qty) => (
+                {generateQuantityOptions(50).map((qty) => (
                   <SelectItem key={qty} value={qty.toString()}>
                     {qty}
                   </SelectItem>
