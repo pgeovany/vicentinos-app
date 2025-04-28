@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { PARENTESCO_OPTIONS } from '@/lib/parentesco-options';
+import { formatDate } from '@/lib/format-date';
 
 interface DependentsStepProps {
   dependentes: DependentFormData[];
@@ -78,9 +79,7 @@ export function DependentsStep({ dependentes, updateDependentes }: DependentsSte
                 <p className="font-medium">{dependente.nome}</p>
                 <div className="flex gap-4 text-sm text-muted-foreground mt-1">
                   <p>Parentesco: {dependente.parentesco}</p>
-                  <p>
-                    Data de Nascimento: {new Date(dependente.dataNascimento).toLocaleDateString()}
-                  </p>
+                  <p>Data de Nascimento: {formatDate(dependente.dataNascimento)}</p>
                 </div>
               </div>
               <Button
