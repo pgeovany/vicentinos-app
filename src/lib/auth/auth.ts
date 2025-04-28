@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-const AUTH_TOKEN_KEY = '__Host-auth_token';
+const AUTH_TOKEN_KEY = process.env.NODE_ENV === 'production' ? '__Host-auth_token' : 'auth_token';
 
 export const auth = {
   async setToken(token: string, expiresIn?: number) {

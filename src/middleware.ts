@@ -6,11 +6,13 @@ import { jwtVerify } from 'jose';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  const AUTH_TOKEN_KEY = process.env.NODE_ENV === 'production' ? '__Host-auth_token' : 'auth_token';
+
   const isPublicPath = authConfig.publicPaths.some(
     (path) => pathname === path || pathname.startsWith(path),
   );
 
-  const token = request.cookies.get('__Host-auth_token')?.value;
+  const token = request.cookies.get(AUTH_TOKEN_KEY)?.value;
 
   if (!isPublicPath) {
     if (!token) {
@@ -22,7 +24,7 @@ export async function middleware(request: NextRequest) {
       await jwtVerify(token, secret, { algorithms: ['HS256'] });
     } catch {
       const response = NextResponse.redirect(new URL('/login', request.url));
-      response.cookies.delete('__Host-auth_token');
+      response.cookies.delete(AUTH_TOKEN_KEY);
       return response;
     }
   }
