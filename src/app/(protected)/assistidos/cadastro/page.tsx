@@ -16,7 +16,7 @@ export default function CadastroBeneficiario() {
       <Card className="p-6">
         <BeneficiarioRegisterForm
           onComplete={() => {
-            router.push('/beneficiarios/lista');
+            router.push('/assistidos/lista');
           }}
         />
       </Card>
