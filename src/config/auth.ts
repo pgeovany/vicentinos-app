@@ -1,7 +1,7 @@
 export const authConfig = {
   publicPaths: ['/login', '/transparencia'],
-  protectedPaths: ['/assistidos', '/produtos', '/doacoes', '/cestas', '/sos', '/painel'],
-  defaultProtectedPath: '/produtos/estoque',
+  protectedPaths: ['/app/'],
+  defaultProtectedPath: '/app/produtos/estoque',
   get matcher() {
     return [...this.protectedPaths.map((path) => `${path}/:path*`), '/login'];
   },
