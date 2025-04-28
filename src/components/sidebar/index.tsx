@@ -60,15 +60,15 @@ export function AppSidebar() {
     //   id: 'painel',
     //   label: 'Painel',
     //   Icon: LayoutDashboard,
-    //   subItems: [{ label: 'Este mês', Icon: BarChart3, path: '/painel/dashboard' }],
+    //   subItems: [{ label: 'Este mês', Icon: BarChart3, path: '/app/painel/dashboard' }],
     // },
     {
       id: 'assistidos',
       label: 'Assistidos',
       Icon: Users,
       subItems: [
-        { label: 'Lista', Icon: List, path: '/assistidos/lista' },
-        { label: 'Cadastro', Icon: UserPlus, path: '/assistidos/cadastro' },
+        { label: 'Lista', Icon: List, path: '/app/assistidos/lista' },
+        { label: 'Cadastro', Icon: UserPlus, path: '/app/assistidos/cadastro' },
       ],
     },
     {
@@ -76,12 +76,12 @@ export function AppSidebar() {
       label: 'Produtos',
       Icon: Package,
       subItems: [
-        { label: 'Lista', Icon: List, path: '/produtos/lista' },
-        { label: 'Estoque', Icon: Box, path: '/produtos/estoque' },
+        { label: 'Lista', Icon: List, path: '/app/produtos/lista' },
+        { label: 'Estoque', Icon: Box, path: '/app/produtos/estoque' },
         {
           label: 'Movimentações',
           Icon: PackageCheck,
-          path: '/produtos/movimentacoes',
+          path: '/app/produtos/movimentacoes',
         },
       ],
     },
@@ -93,10 +93,10 @@ export function AppSidebar() {
         {
           label: 'Distribuição',
           Icon: PackagePlus,
-          path: '/cestas/distribuicao',
+          path: '/app/cestas/distribuicao',
         },
-        { label: 'Histórico', Icon: History, path: '/cestas/historico' },
-        { label: 'Configuração', Icon: Settings, path: '/cestas/configuracao' },
+        { label: 'Histórico', Icon: History, path: '/app/cestas/historico' },
+        { label: 'Configuração', Icon: Settings, path: '/app/cestas/configuracao' },
       ],
     },
     {
@@ -104,11 +104,11 @@ export function AppSidebar() {
       label: 'Doações',
       Icon: HeartHandshake,
       subItems: [
-        { label: 'Histórico', Icon: History, path: '/doacoes/listar' },
+        { label: 'Histórico', Icon: History, path: '/app/doacoes/listar' },
         {
           label: 'Estatísticas',
           Icon: BarChart3,
-          path: '/doacoes/estatisticas',
+          path: '/app/doacoes/estatisticas',
         },
       ],
     },
@@ -117,8 +117,8 @@ export function AppSidebar() {
       label: 'SOS',
       Icon: AlertTriangle,
       subItems: [
-        { label: 'Histórico', Icon: History, path: '/sos/listar' },
-        { label: 'Estatísticas', Icon: BarChart3, path: '/sos/estatisticas' },
+        { label: 'Histórico', Icon: History, path: '/app/sos/listar' },
+        { label: 'Estatísticas', Icon: BarChart3, path: '/app/sos/estatisticas' },
       ],
     },
   ];

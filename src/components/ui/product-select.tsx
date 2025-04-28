@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { listarProdutos } from '@/app/(protected)/produtos/actions';
+import { listarProdutos } from '@/app/(protected)/app/produtos/actions';
 
 type Produto = {
   id: string;

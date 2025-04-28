@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { Package2 } from 'lucide-react';
-import { listarTiposCestas } from '@/app/(protected)/cestas/actions';
+import { listarTiposCestas } from '@/app/(protected)/app/cestas/actions';
 
 interface CestaTypeStepProps {
   tipoCestaId: string;

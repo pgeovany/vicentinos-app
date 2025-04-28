@@ -99,7 +99,7 @@ function BeneficiarioTable({
           <TableRow
             className="hover:bg-accent/50 cursor-pointer"
             key={beneficiario.id}
-            onClick={() => router.push(`/assistidos/${beneficiario.id}`)}
+            onClick={() => router.push(`/app/assistidos/${beneficiario.id}`)}
           >
             <TableCell className="py-3 px-4">{beneficiario.nome}</TableCell>
             <TableCell className="py-3 px-4 text-center">
