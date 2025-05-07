@@ -115,7 +115,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
     }
   };
 
-  const renderSwitchField = (value: boolean, label: string) => {
+  const renderSwitchField = (value: boolean) => {
     return (
       <div className="flex items-center space-x-2">
         <Switch className="cursor-pointer" checked={value} disabled />
@@ -161,19 +161,19 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Própria:</span>
-                  {renderSwitchField(beneficiario.endereco?.proprio || false, 'Própria')}
+                  {renderSwitchField(beneficiario.endereco?.proprio || false)}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Financiada:</span>
-                  {renderSwitchField(beneficiario.endereco?.financiado || false, 'Financiada')}
+                  {renderSwitchField(beneficiario.endereco?.financiado || false)}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Alugada:</span>
-                  {renderSwitchField(beneficiario.endereco?.alugado || false, 'Alugada')}
+                  {renderSwitchField(beneficiario.endereco?.alugado || false)}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Cedida:</span>
-                  {renderSwitchField(beneficiario.endereco?.cedido || false, 'Cedida')}
+                  {renderSwitchField(beneficiario.endereco?.cedido || false)}
                 </div>
               </div>
             </div>
@@ -182,18 +182,15 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Herança:</span>
-                  {renderSwitchField(beneficiario.endereco?.heranca || false, 'Herança')}
+                  {renderSwitchField(beneficiario.endereco?.heranca || false)}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Programa Social:</span>
-                  {renderSwitchField(
-                    beneficiario.endereco?.programaSocial || false,
-                    'Programa Social',
-                  )}
+                  {renderSwitchField(beneficiario.endereco?.programaSocial || false)}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Ocupação:</span>
-                  {renderSwitchField(beneficiario.endereco?.ocupacao || false, 'Ocupação')}
+                  {renderSwitchField(beneficiario.endereco?.ocupacao || false)}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Número de Cômodos:</span>
@@ -208,22 +205,19 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Banheiro:</span>
-                {renderSwitchField(beneficiario.endereco?.banheiro || false, 'Banheiro')}
+                {renderSwitchField(beneficiario.endereco?.banheiro || false)}
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Água Encanada:</span>
-                {renderSwitchField(beneficiario.endereco?.aguaEncanada || false, 'Água Encanada')}
+                {renderSwitchField(beneficiario.endereco?.aguaEncanada || false)}
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Energia Elétrica:</span>
-                {renderSwitchField(
-                  beneficiario.endereco?.energiaEletrica || false,
-                  'Energia Elétrica',
-                )}
+                {renderSwitchField(beneficiario.endereco?.energiaEletrica || false)}
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Esgoto:</span>
-                {renderSwitchField(beneficiario.endereco?.esgoto || false, 'Esgoto')}
+                {renderSwitchField(beneficiario.endereco?.esgoto || false)}
               </div>
             </div>
           </div>

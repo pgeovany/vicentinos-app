@@ -272,15 +272,25 @@ export function DependentsStep({ dependentes, updateDependentes }: DependentsSte
             <h5 className="font-medium">Informações Adicionais</h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="new-dep-renda">Renda Mensal</Label>
-                <Input
-                  id="new-dep-renda"
-                  value={newDependent.rendaMensal || ''}
-                  onChange={(e) =>
-                    setNewDependent((prev) => ({ ...prev, rendaMensal: e.target.value }))
+                <Label htmlFor="rendaMensal">
+                  Renda Mensal <span className="text-destructive">*</span>
+                </Label>
+                <Select
+                  value={newDependent.rendaMensal}
+                  onValueChange={(value) =>
+                    setNewDependent((prev) => ({ ...prev, rendaMensal: value }))
                   }
-                  placeholder="Ex: R$ 1.000,00"
-                />
+                >
+                  <SelectTrigger id="rendaMensal">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'Sem renda'}>Sem renda</SelectItem>
+                    <SelectItem value={'Até 1 salário mínimo'}>Até 1 salário mínimo</SelectItem>
+                    <SelectItem value={'Até 2 salários mínimos'}>Até 2 salários mínimos</SelectItem>
+                    <SelectItem value={'Até 3 salários mínimos'}>Até 3 salários mínimos</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">

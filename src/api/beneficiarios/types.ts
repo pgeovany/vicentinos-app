@@ -92,9 +92,7 @@ export interface DependenteBeneficiario {
   parentesco: string;
   escolaridade?: string | null;
   sexo: string;
-  dataNascimento?: Date | null;
-  telefone?: string | null;
-  email?: string | null;
+  dataNascimento: Date | null;
   rendaMensal?: string | null;
   trabalho?: string | null;
   observacao?: string | null;
