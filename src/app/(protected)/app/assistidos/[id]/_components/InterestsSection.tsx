@@ -7,6 +7,7 @@ import { atualizarInteresses } from '../../actions';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { EditCard } from './EditCard';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface InterestsSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -19,6 +20,7 @@ export function InterestsSection({
   beneficiarioId,
   onRefresh,
 }: InterestsSectionProps) {
+  const isMobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [interestsData, setInterestsData] = useState({
     // Palestras
@@ -107,6 +109,8 @@ export function InterestsSection({
     return interestsData && Object.values(interestsData).some((value) => value === true);
   };
 
+  const gridCols = isMobile ? 'grid-cols-1' : 'grid-cols-2';
+
   return (
     <EditCard
       title="Interesses"
@@ -120,7 +124,7 @@ export function InterestsSection({
           <div className="space-y-6">
             <div className="space-y-4">
               <h3 className="font-medium">Interesse em Palestras</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className={`grid ${gridCols} gap-4`}>
                 {beneficiario.interesses?.programasSociais && (
                   <div className="space-y-1">
                     <span className="text-sm">Programas Sociais</span>
@@ -174,7 +178,7 @@ export function InterestsSection({
 
             <div className="space-y-4">
               <h3 className="font-medium">Interesse em Cursos</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className={`grid ${gridCols} gap-4`}>
                 {beneficiario.interesses?.pinturaEmTecido && (
                   <div className="space-y-1">
                     <span className="text-sm">Pintura em Tecido</span>
@@ -257,7 +261,7 @@ export function InterestsSection({
         <div className="space-y-6">
           <div className="space-y-4">
             <h3 className="font-medium">Interesse em Palestras</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid ${gridCols} gap-4`}>
               <div className="flex items-center space-x-2">
                 <Switch
                   id="programasSociais"
@@ -351,7 +355,7 @@ export function InterestsSection({
 
           <div className="space-y-4">
             <h3 className="font-medium">Interesse em Cursos</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid ${gridCols} gap-4`}>
               <div className="flex items-center space-x-2">
                 <Switch
                   id="pinturaEmTecido"

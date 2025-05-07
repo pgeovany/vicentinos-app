@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { EditCard } from './EditCard';
 import { Textarea } from '@/components/ui/textarea';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HealthInfoSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -21,6 +22,7 @@ export function HealthInfoSection({
   beneficiarioId,
   onRefresh,
 }: HealthInfoSectionProps) {
+  const isMobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [healthData, setHealthData] = useState({
     cartaoSUS: beneficiario.saude?.cartaoSUS || false,
@@ -79,6 +81,8 @@ export function HealthInfoSection({
     );
   };
 
+  const gridCols = isMobile ? 'grid-cols-1' : 'grid-cols-2';
+
   return (
     <EditCard
       title="Informações de Saúde"
@@ -89,7 +93,7 @@ export function HealthInfoSection({
     >
       {!editing ? (
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className={`grid ${gridCols} gap-4`}>
             <div className="space-y-1">
               <span className="text-sm font-medium">Cartão SUS:</span>
               {renderSwitchField(beneficiario.saude?.cartaoSUS || false)}
@@ -144,7 +148,7 @@ export function HealthInfoSection({
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className={`grid ${gridCols} gap-4`}>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Switch

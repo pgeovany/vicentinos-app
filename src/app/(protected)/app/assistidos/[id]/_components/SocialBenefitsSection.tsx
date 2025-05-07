@@ -8,6 +8,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { EditCard } from './EditCard';
 import { Textarea } from '@/components/ui/textarea';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SocialBenefitsSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -20,6 +21,7 @@ export function SocialBenefitsSection({
   beneficiarioId,
   onRefresh,
 }: SocialBenefitsSectionProps) {
+  const isMobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [benefitsData, setBenefitsData] = useState({
     bolsaFamilia: beneficiario.beneficiosSociais?.bolsaFamilia || false,
@@ -90,6 +92,8 @@ export function SocialBenefitsSection({
     );
   };
 
+  const gridCols = isMobile ? 'grid-cols-1' : 'grid-cols-2';
+
   return (
     <EditCard
       title="Benefícios Sociais"
@@ -100,7 +104,7 @@ export function SocialBenefitsSection({
     >
       {!editing ? (
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className={`grid ${gridCols} gap-4`}>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Bolsa Família:</span>
@@ -193,7 +197,7 @@ export function SocialBenefitsSection({
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className={`grid ${gridCols} gap-4`}>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Switch

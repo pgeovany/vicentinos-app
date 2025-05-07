@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { generateQuantityOptions } from '@/lib/generate-select-quantity';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface AddressSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -26,6 +27,7 @@ interface AddressSectionProps {
 }
 
 export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: AddressSectionProps) {
+  const isMobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [addressData, setAddressData] = useState({
     rua: beneficiario.endereco?.rua || '',
@@ -124,6 +126,8 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
     );
   };
 
+  const gridCols = isMobile ? 'grid-cols-1' : 'grid-cols-2';
+
   return (
     <EditCard
       title="Endereço e Moradia"
@@ -154,8 +158,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
               <p>Ponto de referência: {beneficiario.endereco.pontoReferencia}</p>
             )}
           </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className={`grid ${gridCols} gap-4 mb-4`}>
             <div className="space-y-2">
               <h3 className="font-medium">Tipo de Moradia</h3>
               <div className="space-y-1">
@@ -176,9 +179,6 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
                   {renderSwitchField(beneficiario.endereco?.cedido || false)}
                 </div>
               </div>
-            </div>
-
-            <div className="space-y-2">
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Herança:</span>
@@ -202,7 +202,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
 
           <div className="space-y-2">
             <h3 className="font-medium">Infraestrutura</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid ${gridCols} gap-4`}>
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Banheiro:</span>
                 {renderSwitchField(beneficiario.endereco?.banheiro || false)}
@@ -226,7 +226,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
         <div className="space-y-6">
           <div>
             <h3 className="font-medium mb-4">Informações do endereço</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid grid-cols-2 gap-4`}>
               <div className="space-y-2">
                 <Label htmlFor="rua">Rua</Label>
                 <Input
@@ -291,7 +291,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
 
           <div>
             <h3 className="font-medium mb-4">Tipo de Moradia</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid grid-cols-2 gap-4`}>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
                   <Switch
@@ -348,7 +348,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
           </div>
 
           <div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid grid-cols-2 gap-4`}>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
                   <Switch
@@ -413,7 +413,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
 
           <div>
             <h3 className="font-medium mb-4">Infraestrutura</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid grid-cols-2 gap-4`}>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
                   <Switch

@@ -13,7 +13,7 @@ export function DisengagementHistorySection({ beneficiario }: DisengagementHisto
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Histórico de Desligamentos</CardTitle>
+        <CardTitle>Histórico de desligamentos</CardTitle>
       </CardHeader>
       <CardContent>
         {beneficiario.historicoDesligamentos && beneficiario.historicoDesligamentos.length > 0 ? (

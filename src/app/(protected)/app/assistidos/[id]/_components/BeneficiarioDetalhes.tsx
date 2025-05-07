@@ -67,17 +67,17 @@ export function BeneficiarioDetalhes({
         beneficiarioId={beneficiarioId}
         onRefresh={fetchBeneficiario}
       />
-      <InterestsSection
-        beneficiario={beneficiario}
-        beneficiarioId={beneficiarioId}
-        onRefresh={fetchBeneficiario}
-      />
       <DependentsSection
         beneficiario={beneficiario}
         beneficiarioId={beneficiarioId}
         onRefresh={fetchBeneficiario}
       />
       <HistorySection beneficiario={beneficiario} />
+      <InterestsSection
+        beneficiario={beneficiario}
+        beneficiarioId={beneficiarioId}
+        onRefresh={fetchBeneficiario}
+      />
       <DisengagementHistorySection beneficiario={beneficiario} />
     </div>
   );
