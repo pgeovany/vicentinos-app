@@ -23,6 +23,7 @@ import {
   ENUM_ESTADO_CIVIL_BENEFICIARIO,
   ENUM_SEXO_BENEFICIARIO,
 } from '@/api/beneficiarios/schemas';
+import { ESTADO_CIVIL_MAP } from '@/lib/estado-civil.map';
 
 interface PersonalInfoSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -110,7 +111,10 @@ export function PersonalInfoSection({
           {renderOptionalField(maskRG(beneficiario.rg ?? ''), 'RG')}
           {renderOptionalDate(beneficiario.dataNascimento, 'Data de Nascimento')}
           {renderOptionalField(beneficiario.sexo, 'Sexo')}
-          {renderOptionalField(beneficiario.estadoCivil, 'Estado Civil')}
+          {renderOptionalField(
+            ESTADO_CIVIL_MAP[beneficiario.estadoCivil as ENUM_ESTADO_CIVIL_BENEFICIARIO] ?? '',
+            'Estado Civil',
+          )}
           {renderOptionalField(beneficiario.profissao, 'Profissão')}
           {renderOptionalField(beneficiario.rendaMensal, 'Renda Mensal')}
           <div className="flex flex-col space-y-1">
@@ -187,9 +191,8 @@ export function PersonalInfoSection({
                   <SelectValue placeholder="Selecione o sexo" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="MASCULINO">Masculino</SelectItem>
-                  <SelectItem value="FEMININO">Feminino</SelectItem>
-                  <SelectItem value="OUTRO">Outro</SelectItem>
+                  <SelectItem value="M">Masculino</SelectItem>
+                  <SelectItem value="F">Feminino</SelectItem>
                 </SelectContent>
               </Select>
             </div>
