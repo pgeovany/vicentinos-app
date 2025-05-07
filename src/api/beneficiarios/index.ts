@@ -148,4 +148,10 @@ export const beneficiarioApi = {
 
     return data;
   },
+
+  reativarBeneficiario: async (beneficiarioId: string) => {
+    const { data } = await api.put<ApiResponse<void>>(`/beneficiario/${beneficiarioId}/ativar`);
+
+    return data;
+  },
 };

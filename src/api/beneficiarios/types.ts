@@ -130,6 +130,7 @@ export interface BeneficiarioResponse {
   rendaMensal: string | null;
   pessoaComDeficiencia: boolean;
   tipoCestaId: string | null;
+  efetivadoEm: Date;
   criadoEm: Date;
   atualizadoEm: Date | null;
   endereco?: EnderecoBeneficiario | null;
@@ -155,6 +156,7 @@ export interface CriarBeneficiarioResponse {
   rendaMensal: string | null;
   pessoaComDeficiencia: boolean;
   tipoCestaId: string | null;
+  efetivadoEm: Date;
   criadoEm: Date;
   atualizadoEm: Date | null;
 }

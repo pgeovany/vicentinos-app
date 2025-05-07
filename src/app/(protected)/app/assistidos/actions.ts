@@ -204,3 +204,17 @@ export async function desligarBeneficiario(params: {
     return { success: false, error: 'Erro ao desligar assistido', data: null };
   }
 }
+
+export async function reativarBeneficiario(beneficiarioId: string) {
+  try {
+    const { data } = await beneficiarioApi.reativarBeneficiario(beneficiarioId);
+
+    return { success: true, error: null, data };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { success: false, error: error.message, data: null };
+    }
+
+    return { success: false, error: 'Erro ao reativar assistido', data: null };
+  }
+}
