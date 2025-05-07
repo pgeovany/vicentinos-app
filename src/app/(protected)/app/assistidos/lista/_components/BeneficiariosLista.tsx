@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { listarBeneficiarios } from '../../actions';
-import { BeneficiarioResponse } from '@/api/beneficiarios/types';
+import { BeneficiarioNaListaResponse } from '@/api/beneficiarios/types';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { formatDate } from '@/lib/format-date';
@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
 export function BeneficiariosLista() {
-  const [beneficiarios, setBeneficiarios] = useState<BeneficiarioResponse[]>([]);
+  const [beneficiarios, setBeneficiarios] = useState<BeneficiarioNaListaResponse[]>([]);
   const [filterValue, setFilterValue] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -80,7 +80,7 @@ export function BeneficiariosLista() {
 function BeneficiarioTable({
   beneficiarios,
 }: Readonly<{
-  beneficiarios: BeneficiarioResponse[];
+  beneficiarios: BeneficiarioNaListaResponse[];
 }>) {
   const router = useRouter();
 
@@ -91,7 +91,7 @@ function BeneficiarioTable({
           <TableHead className="font-bold py-3 px-4">Nome</TableHead>
           <TableHead className="font-bold py-3 px-4 text-center">Cesta</TableHead>
           <TableHead className="font-bold py-3 px-4 text-center">Status</TableHead>
-          <TableHead className="font-bold py-3 px-4 text-center">Data de cadastro</TableHead>
+          <TableHead className="font-bold py-3 px-4 text-center">Data de efetivação</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -109,7 +109,7 @@ function BeneficiarioTable({
               {beneficiario.status.toLowerCase()}
             </TableCell>
             <TableCell className="py-3 px-4 text-center">
-              {formatDate(beneficiario.criadoEm)}
+              {formatDate(beneficiario.efetivadoEm)}
             </TableCell>
           </TableRow>
         ))}

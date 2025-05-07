@@ -169,7 +169,7 @@ export interface BeneficiarioNaListaResponse {
   id: string;
   nome: string;
   status: string;
-  criadoEm: Date;
+  efetivadoEm: Date;
   tipoCesta?: TipoCestaBeneficiario | null;
 }
 
