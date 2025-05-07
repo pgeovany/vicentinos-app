@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { BeneficiarioComHistoricoResponse } from '@/api/beneficiarios/types';
-import { criarBeneficiario, alterarStatusBeneficiario } from '../../actions';
+import { criarBeneficiario } from '../../actions';
 import { renderOptionalField, renderOptionalDate } from '@/lib/render-optional-fields';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
@@ -12,6 +12,17 @@ import { CustomDatePicker } from '@/components/ui/custom-date-picker';
 import { ensureCorrectDate, toLocalIsoMidnight } from '@/lib/fix-date';
 import { maskCPF, maskPhone, maskRG, stripMask } from '@/lib/masks';
 import { EditCard } from './EditCard';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  ENUM_ESTADO_CIVIL_BENEFICIARIO,
+  ENUM_SEXO_BENEFICIARIO,
+} from '@/api/beneficiarios/schemas';
 
 interface PersonalInfoSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -30,8 +41,12 @@ export function PersonalInfoSection({
     cpf: beneficiario.cpf || '',
     rg: beneficiario.rg || '',
     telefone: beneficiario.telefone || '',
-    email: beneficiario.email || '',
-    dataNascimento: ensureCorrectDate(beneficiario.dataNascimento),
+    sexo: beneficiario.sexo || '',
+    estadoCivil: beneficiario.estadoCivil || '',
+    profissao: beneficiario.profissao || '',
+    rendaMensal: beneficiario.rendaMensal || '',
+    pessoaComDeficiencia: beneficiario.pessoaComDeficiencia || false,
+    dataNascimento: ensureCorrectDate(beneficiario.dataNascimento ?? ''),
   });
 
   const handleEdit = () => {
@@ -45,8 +60,12 @@ export function PersonalInfoSection({
       cpf: beneficiario.cpf || '',
       rg: beneficiario.rg || '',
       telefone: beneficiario.telefone || '',
-      email: beneficiario.email || '',
-      dataNascimento: ensureCorrectDate(beneficiario.dataNascimento),
+      sexo: beneficiario.sexo || '',
+      estadoCivil: beneficiario.estadoCivil || '',
+      profissao: beneficiario.profissao || '',
+      rendaMensal: beneficiario.rendaMensal || '',
+      pessoaComDeficiencia: beneficiario.pessoaComDeficiencia || false,
+      dataNascimento: ensureCorrectDate(beneficiario.dataNascimento ?? ''),
     });
   };
 
@@ -56,11 +75,15 @@ export function PersonalInfoSection({
       nome: formData.nome,
       cpf: stripMask(formData.cpf) || undefined,
       rg: stripMask(formData.rg) || undefined,
+      sexo: (formData.sexo as ENUM_SEXO_BENEFICIARIO) || undefined,
+      estadoCivil: (formData.estadoCivil as ENUM_ESTADO_CIVIL_BENEFICIARIO) || undefined,
+      profissao: formData.profissao || undefined,
+      rendaMensal: formData.rendaMensal || undefined,
+      pessoaComDeficiencia: formData.pessoaComDeficiencia,
       dataNascimento: formData.dataNascimento
         ? toLocalIsoMidnight(formData.dataNascimento)
         : undefined,
       telefone: stripMask(formData.telefone) || undefined,
-      email: formData.email || undefined,
     });
 
     if (response?.success) {
@@ -69,21 +92,6 @@ export function PersonalInfoSection({
       setEditing(false);
     } else {
       toast.error(response?.error ?? 'Erro ao atualizar dados pessoais');
-    }
-  };
-
-  const toggleStatus = async () => {
-    const newStatus = beneficiario.status.toLowerCase() === 'ativo' ? 'INATIVO' : 'ATIVO';
-
-    const response = await alterarStatusBeneficiario({
-      beneficiarioId,
-    });
-
-    if (response?.success) {
-      toast.success(`Assistido ${newStatus.toLowerCase()}`);
-      onRefresh();
-    } else {
-      toast.error(response?.error ?? 'Erro ao atualizar status');
     }
   };
 
@@ -101,20 +109,31 @@ export function PersonalInfoSection({
           {renderOptionalField(maskCPF(beneficiario.cpf ?? ''), 'CPF')}
           {renderOptionalField(maskRG(beneficiario.rg ?? ''), 'RG')}
           {renderOptionalDate(beneficiario.dataNascimento, 'Data de Nascimento')}
+          {renderOptionalField(beneficiario.sexo, 'Sexo')}
+          {renderOptionalField(beneficiario.estadoCivil, 'Estado Civil')}
+          {renderOptionalField(beneficiario.profissao, 'Profissão')}
+          {renderOptionalField(beneficiario.rendaMensal, 'Renda Mensal')}
           <div className="flex flex-col space-y-1">
-            <span className="text-sm font-medium">Status</span>
+            <span className="text-sm font-medium">Pessoa com Deficiência</span>
             <div className="flex items-center space-x-2">
               <Switch
                 className="cursor-pointer"
-                checked={beneficiario.status?.toLowerCase() === 'ativo'}
-                onCheckedChange={toggleStatus}
+                checked={beneficiario.pessoaComDeficiencia}
+                disabled
               />
+              <Label>{beneficiario.pessoaComDeficiencia ? 'Sim' : 'Não'}</Label>
+            </div>
+          </div>
+          <div className="flex flex-col space-y-1">
+            <span className="text-sm font-medium">Status</span>
+            <div className="flex items-center space-x-2">
               <Label>{beneficiario.status?.toLowerCase()}</Label>
             </div>
           </div>
           {renderOptionalField(maskPhone(beneficiario.telefone ?? ''), 'Telefone')}
-          {renderOptionalField(beneficiario.email, 'Email')}
+          {renderOptionalField(beneficiario.tipoCesta?.nome, 'Tipo de Cesta')}
           {renderOptionalDate(beneficiario.criadoEm, 'Cadastrado em')}
+          {renderOptionalDate(beneficiario.atualizadoEm, 'Última atualização')}
         </div>
       ) : (
         <div className="space-y-4">
@@ -159,21 +178,79 @@ export function PersonalInfoSection({
               />
             </div>
             <div className="space-y-2">
+              <Label htmlFor="sexo">Sexo</Label>
+              <Select
+                value={formData.sexo}
+                onValueChange={(value) => setFormData({ ...formData, sexo: value })}
+              >
+                <SelectTrigger id="sexo" className="cursor-pointer">
+                  <SelectValue placeholder="Selecione o sexo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="MASCULINO">Masculino</SelectItem>
+                  <SelectItem value="FEMININO">Feminino</SelectItem>
+                  <SelectItem value="OUTRO">Outro</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="estadoCivil">Estado Civil</Label>
+              <Select
+                value={formData.estadoCivil}
+                onValueChange={(value) => setFormData({ ...formData, estadoCivil: value })}
+              >
+                <SelectTrigger id="estadoCivil" className="cursor-pointer">
+                  <SelectValue placeholder="Selecione o estado civil" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="SOLTEIRO">Solteiro(a)</SelectItem>
+                  <SelectItem value="CASADO">Casado(a)</SelectItem>
+                  <SelectItem value="DIVORCIADO">Divorciado(a)</SelectItem>
+                  <SelectItem value="VIUVO">Viúvo(a)</SelectItem>
+                  <SelectItem value="SEPARADO">Separado(a)</SelectItem>
+                  <SelectItem value="UNIAO_ESTAVEL">União Estável</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="profissao">Profissão</Label>
+              <Input
+                id="profissao"
+                value={formData.profissao}
+                onChange={(e) => setFormData({ ...formData, profissao: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="rendaMensal">Renda Mensal</Label>
+              <Input
+                id="rendaMensal"
+                value={formData.rendaMensal}
+                onChange={(e) => setFormData({ ...formData, rendaMensal: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="pessoaComDeficiencia">Pessoa com Deficiência</Label>
+              <div className="flex items-center space-x-2 pt-2">
+                <Switch
+                  id="pessoaComDeficiencia"
+                  checked={formData.pessoaComDeficiencia}
+                  onCheckedChange={(checked) =>
+                    setFormData({ ...formData, pessoaComDeficiencia: checked })
+                  }
+                  className="cursor-pointer"
+                />
+                <Label htmlFor="pessoaComDeficiencia">
+                  {formData.pessoaComDeficiencia ? 'Sim' : 'Não'}
+                </Label>
+              </div>
+            </div>
+            <div className="space-y-2">
               <Label htmlFor="telefone">Telefone</Label>
               <Input
                 id="telefone"
                 value={formData.telefone}
                 onChange={(e) => setFormData({ ...formData, telefone: maskPhone(e.target.value) })}
                 maxLength={15}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
             </div>
           </div>
