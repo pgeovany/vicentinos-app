@@ -288,6 +288,7 @@ export function PersonalInfoSection({
           </div>
           {renderOptionalDate(beneficiario.criadoEm, 'Cadastrado em')}
           {renderOptionalDate(beneficiario.atualizadoEm, 'Última atualização')}
+          {renderOptionalDate(beneficiario.efetivadoEm, 'Efetivado em')}
         </div>
       ) : (
         <div className="space-y-4">
