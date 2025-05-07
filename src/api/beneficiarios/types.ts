@@ -143,6 +143,24 @@ export interface BeneficiarioResponse {
   historicoDesligamentos: DesligamentoBeneficiario[];
 }
 
+export interface CriarBeneficiarioResponse {
+  id: string;
+  nome: string;
+  cpf: string | null;
+  rg: string | null;
+  sexo: string;
+  status: string;
+  dataNascimento: Date | null;
+  telefone: string | null;
+  estadoCivil: string | null;
+  profissao: string | null;
+  rendaMensal: string | null;
+  pessoaComDeficiencia: boolean;
+  tipoCestaId: string | null;
+  criadoEm: Date;
+  atualizadoEm: Date | null;
+}
+
 export interface BeneficiarioComHistoricoResponse extends BeneficiarioResponse {
   historicoRecebimentos: HistoricoRecebimentosBeneficiario[];
 }

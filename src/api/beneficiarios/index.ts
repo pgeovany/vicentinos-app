@@ -12,11 +12,15 @@ import {
   EditarDependenteDto,
   ListarBeneficiariosDto,
 } from './schemas';
-import { BeneficiarioComHistoricoResponse, ListarBeneficiariosResponse } from './types';
+import {
+  BeneficiarioComHistoricoResponse,
+  CriarBeneficiarioResponse,
+  ListarBeneficiariosResponse,
+} from './types';
 
 export const beneficiarioApi = {
   criar: async (body: CriarBeneficiarioDto) => {
-    const { data } = await api.post<ApiResponse<void>>('/beneficiario', body);
+    const { data } = await api.post<ApiResponse<CriarBeneficiarioResponse>>('/beneficiario', body);
 
     return data;
   },
