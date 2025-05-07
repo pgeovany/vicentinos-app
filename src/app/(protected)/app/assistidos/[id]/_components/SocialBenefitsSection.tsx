@@ -81,7 +81,7 @@ export function SocialBenefitsSection({
     }
   };
 
-  const renderSwitchField = (value: boolean, label: string) => {
+  const renderSwitchField = (value: boolean) => {
     return (
       <div className="flex items-center space-x-2">
         <Switch className="cursor-pointer" checked={value} disabled />
@@ -104,76 +104,67 @@ export function SocialBenefitsSection({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Bolsa Família:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.bolsaFamilia || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.bolsaFamilia || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Cadastro Único:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.cadUnico || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.cadUnico || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">LOAS:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.loas || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.loas || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Carteira do Idoso:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.carteiraIdoso || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.carteiraIdoso || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Cartão Família Carioca:</span>
-                {renderSwitchField(
-                  beneficiario.beneficiosSociais?.cartaoFamiliaCarioca || false,
-                  '',
-                )}
+                {renderSwitchField(beneficiario.beneficiosSociais?.cartaoFamiliaCarioca || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Minha Casa Minha Vida:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.minhaCasaMinhaVida || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.minhaCasaMinhaVida || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">PAIF:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.paif || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.paif || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Pronatec:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.pronatec || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.pronatec || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Aposentadoria:</span>
-                {renderSwitchField(beneficiario.beneficiosSociais?.aposentadoria || false, '')}
+                {renderSwitchField(beneficiario.beneficiosSociais?.aposentadoria || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Isenção Concurso Público:</span>
-                {renderSwitchField(
-                  beneficiario.beneficiosSociais?.isencaoConcursoPublico || false,
-                  '',
-                )}
+                {renderSwitchField(beneficiario.beneficiosSociais?.isencaoConcursoPublico || false)}
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Cadastro para Emprego:</span>
-                {renderSwitchField(
-                  beneficiario.beneficiosSociais?.cadastroParaEmprego || false,
-                  '',
-                )}
+                {renderSwitchField(beneficiario.beneficiosSociais?.cadastroParaEmprego || false)}
               </div>
             </div>
             <div className="space-y-2">
@@ -181,7 +172,6 @@ export function SocialBenefitsSection({
                 <span className="text-sm">Tarifa Social de Energia Elétrica:</span>
                 {renderSwitchField(
                   beneficiario.beneficiosSociais?.tarifaSocialEnergiaEletrica || false,
-                  '',
                 )}
               </div>
             </div>

@@ -70,7 +70,7 @@ export function HealthInfoSection({
     }
   };
 
-  const renderSwitchField = (value: boolean, label: string) => {
+  const renderSwitchField = (value: boolean) => {
     return (
       <div className="flex items-center space-x-2">
         <Switch className="cursor-pointer" checked={value} disabled />
@@ -92,7 +92,7 @@ export function HealthInfoSection({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <span className="text-sm font-medium">Cartão SUS:</span>
-              {renderSwitchField(beneficiario.saude?.cartaoSUS || false, '')}
+              {renderSwitchField(beneficiario.saude?.cartaoSUS || false)}
             </div>
 
             {beneficiario.saude?.cartaoSUS && (
@@ -114,7 +114,7 @@ export function HealthInfoSection({
 
             <div className="space-y-1">
               <span className="text-sm font-medium">Tratamento Hospitalar:</span>
-              {renderSwitchField(beneficiario.saude?.tratamentoHospitalar || false, '')}
+              {renderSwitchField(beneficiario.saude?.tratamentoHospitalar || false)}
             </div>
 
             {beneficiario.saude?.tratamentoHospitalar && (

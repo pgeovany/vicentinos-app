@@ -94,7 +94,7 @@ export function InterestsSection({
     }
   };
 
-  const renderSwitchField = (value: boolean, label: string) => {
+  const renderSwitchField = (value: boolean) => {
     return (
       <div className="flex items-center space-x-2">
         <Switch className="cursor-pointer" checked={value} disabled />
@@ -124,49 +124,49 @@ export function InterestsSection({
                 {beneficiario.interesses?.programasSociais && (
                   <div className="space-y-1">
                     <span className="text-sm">Programas Sociais</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.violenciaDomestica && (
                   <div className="space-y-1">
                     <span className="text-sm">Violência Doméstica</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.dependenciaQuimica && (
                   <div className="space-y-1">
                     <span className="text-sm">Dependência Química</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.meioAmbiente && (
                   <div className="space-y-1">
                     <span className="text-sm">Meio Ambiente</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.documentacaoPessoal && (
                   <div className="space-y-1">
                     <span className="text-sm">Documentação Pessoal</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.saudeGeral && (
                   <div className="space-y-1">
                     <span className="text-sm">Saúde Geral</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.empreendedorismo && (
                   <div className="space-y-1">
                     <span className="text-sm">Empreendedorismo</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.sustentabilidade && (
                   <div className="space-y-1">
                     <span className="text-sm">Sustentabilidade</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
               </div>
@@ -178,73 +178,73 @@ export function InterestsSection({
                 {beneficiario.interesses?.pinturaEmTecido && (
                   <div className="space-y-1">
                     <span className="text-sm">Pintura em Tecido</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.bijuteria && (
                   <div className="space-y-1">
                     <span className="text-sm">Bijuteria</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.cestaria && (
                   <div className="space-y-1">
                     <span className="text-sm">Cestaria</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.costura && (
                   <div className="space-y-1">
                     <span className="text-sm">Costura</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.bordado && (
                   <div className="space-y-1">
                     <span className="text-sm">Bordado</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.croche && (
                   <div className="space-y-1">
                     <span className="text-sm">Crochê</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.trico && (
                   <div className="space-y-1">
                     <span className="text-sm">Tricô</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.teatro && (
                   <div className="space-y-1">
                     <span className="text-sm">Teatro</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.reciclagem && (
                   <div className="space-y-1">
                     <span className="text-sm">Reciclagem</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.informatica && (
                   <div className="space-y-1">
                     <span className="text-sm">Informática</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.cursos && (
                   <div className="space-y-1">
                     <span className="text-sm">Outros Cursos</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
                 {beneficiario.interesses?.alfabetizacao && (
                   <div className="space-y-1">
                     <span className="text-sm">Alfabetização</span>
-                    {renderSwitchField(true, '')}
+                    {renderSwitchField(true)}
                   </div>
                 )}
               </div>
