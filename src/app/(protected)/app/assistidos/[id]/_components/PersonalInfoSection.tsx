@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { BeneficiarioComHistoricoResponse } from '@/api/beneficiarios/types';
-import { criarBeneficiario } from '../../actions';
+import { criarBeneficiario, atualizarTipoCesta } from '../../actions';
 import { renderOptionalField, renderOptionalDate } from '@/lib/render-optional-fields';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
@@ -12,6 +12,17 @@ import { CustomDatePicker } from '@/components/ui/custom-date-picker';
 import { ensureCorrectDate, toLocalIsoMidnight } from '@/lib/fix-date';
 import { maskCPF, maskPhone, maskRG, stripMask } from '@/lib/masks';
 import { EditCard } from './EditCard';
+import { Button } from '@/components/ui/button';
+import { PencilIcon } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
@@ -24,11 +35,140 @@ import {
   ENUM_SEXO_BENEFICIARIO,
 } from '@/api/beneficiarios/schemas';
 import { ESTADO_CIVIL_MAP } from '@/lib/estado-civil.map';
+import { listarTiposCestas } from '../../../cestas/actions';
 
 interface PersonalInfoSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
   beneficiarioId: string;
   onRefresh: () => void;
+}
+
+interface CestaTypeDialogProps {
+  beneficiarioId: string;
+  currentTipoCestaId?: string;
+  onSuccess: () => void;
+}
+
+function CestaTypeDialog({ beneficiarioId, currentTipoCestaId, onSuccess }: CestaTypeDialogProps) {
+  const [tipos, setTipos] = useState<Array<{ id: string; nome: string }>>([]);
+  const [selectedTipoCestaId, setSelectedTipoCestaId] = useState<string>(currentTipoCestaId || '');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingTipos, setIsLoadingTipos] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchTiposCesta = async () => {
+      try {
+        setIsLoadingTipos(true);
+        const response = await listarTiposCestas();
+        if (response.success && response.data) {
+          setTipos(response.data.cestas);
+        } else {
+          toast.error('Erro ao carregar tipos de cestas');
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error('Erro ao carregar tipos de cestas');
+      } finally {
+        setIsLoadingTipos(false);
+      }
+    };
+
+    if (isDialogOpen) {
+      fetchTiposCesta();
+    }
+  }, [isDialogOpen]);
+
+  const handleSaveTipoCesta = async () => {
+    if (!selectedTipoCestaId) {
+      toast.error('Selecione um tipo de cesta');
+      return;
+    }
+
+    setIsLoading(true);
+    const response = await atualizarTipoCesta({
+      beneficiarioId,
+      body: { tipoCestaId: selectedTipoCestaId },
+    });
+
+    if (response?.success) {
+      toast.success('Tipo de cesta atualizado com sucesso');
+      setIsDialogOpen(false);
+      onSuccess();
+    } else {
+      toast.error(response?.error ?? 'Erro ao atualizar tipo de cesta');
+    }
+    setIsLoading(false);
+  };
+
+  return (
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-7 px-2 ml-2"
+          aria-label="Alterar tipo de cesta"
+        >
+          <PencilIcon className="h-3.5 w-3.5" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Alterar Tipo de Cesta</DialogTitle>
+          <DialogDescription>
+            Escolha o tipo de cesta que este assistido deve receber.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <div className="space-y-2">
+            <Label htmlFor="tipoCesta">Tipo de Cesta</Label>
+            <Select
+              value={selectedTipoCestaId}
+              onValueChange={setSelectedTipoCestaId}
+              disabled={isLoadingTipos}
+            >
+              <SelectTrigger id="tipoCesta" className="w-full cursor-pointer">
+                <SelectValue
+                  placeholder={isLoadingTipos ? 'Carregando...' : 'Selecione o tipo de cesta'}
+                />
+              </SelectTrigger>
+              <SelectContent>
+                {isLoadingTipos ? (
+                  <SelectItem value="loading" disabled>
+                    Carregando tipos de cestas...
+                  </SelectItem>
+                ) : (
+                  tipos.map((tipo) => (
+                    <SelectItem key={tipo.id} value={tipo.id}>
+                      {tipo.nome}
+                    </SelectItem>
+                  ))
+                )}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setIsDialogOpen(false)}
+            disabled={isLoading}
+          >
+            Cancelar
+          </Button>
+          <Button
+            type="button"
+            onClick={handleSaveTipoCesta}
+            disabled={isLoading || isLoadingTipos}
+          >
+            {isLoading ? 'Salvando...' : 'Salvar'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
 }
 
 export function PersonalInfoSection({
@@ -135,7 +275,17 @@ export function PersonalInfoSection({
             </div>
           </div>
           {renderOptionalField(maskPhone(beneficiario.telefone ?? ''), 'Telefone')}
-          {renderOptionalField(beneficiario.tipoCesta?.nome, 'Tipo de Cesta')}
+          <div className="flex flex-col space-y-1">
+            <span className="text-sm font-medium">Tipo de Cesta</span>
+            <div className="flex items-center">
+              <span className="text-sm">{beneficiario.tipoCesta?.nome || 'Não definido'}</span>
+              <CestaTypeDialog
+                beneficiarioId={beneficiarioId}
+                currentTipoCestaId={beneficiario.tipoCesta?.id}
+                onSuccess={onRefresh}
+              />
+            </div>
+          </div>
           {renderOptionalDate(beneficiario.criadoEm, 'Cadastrado em')}
           {renderOptionalDate(beneficiario.atualizadoEm, 'Última atualização')}
         </div>
