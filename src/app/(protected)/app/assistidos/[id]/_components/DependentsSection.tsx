@@ -57,6 +57,7 @@ export function DependentsSection({
 }: DependentsSectionProps) {
   const [editing, setEditing] = useState(false);
   const [editingDependentId, setEditingDependentId] = useState<string | null>(null);
+  const [showAddForm, setShowAddForm] = useState(false);
   const [newDependent, setNewDependent] = useState<DependentFormData>({
     nome: '',
     dataNascimento: '',
@@ -73,11 +74,13 @@ export function DependentsSection({
 
   const handleEdit = () => {
     setEditing(true);
+    setShowAddForm(beneficiario.dependentes.length === 0);
   };
 
   const handleCancel = () => {
     setEditing(false);
     setEditingDependentId(null);
+    setShowAddForm(false);
     resetForm();
   };
 
@@ -99,6 +102,7 @@ export function DependentsSection({
 
   const startEditingDependent = (dependent: DependenteBeneficiario) => {
     setEditingDependentId(dependent.id);
+    setShowAddForm(false);
     setNewDependent({
       id: dependent.id,
       nome: dependent.nome,
@@ -117,6 +121,18 @@ export function DependentsSection({
 
   const cancelEditingDependent = () => {
     setEditingDependentId(null);
+    setShowAddForm(false);
+    resetForm();
+  };
+
+  const handleShowAddForm = () => {
+    resetForm();
+    setEditingDependentId(null);
+    setShowAddForm(true);
+  };
+
+  const handleCancelAddForm = () => {
+    setShowAddForm(false);
     resetForm();
   };
 
@@ -180,6 +196,7 @@ export function DependentsSection({
 
     if (response?.success) {
       toast.success('Dependente adicionado com sucesso');
+      setShowAddForm(false);
       resetForm();
       onRefresh();
     } else {
@@ -243,16 +260,14 @@ export function DependentsSection({
           <h4 className="font-medium">
             {isEditing ? 'Editar Dependente' : 'Adicionar Dependente'}
           </h4>
-          {isEditing && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={cancelEditingDependent}
-              className="cursor-pointer"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={isEditing ? cancelEditingDependent : handleCancelAddForm}
+            className="cursor-pointer"
+          >
+            <X className="h-4 w-4" />
+          </Button>
         </div>
 
         <div className="space-y-6">
@@ -484,6 +499,9 @@ export function DependentsSection({
                       {dependente.rg && <p>RG: {maskRG(dependente.rg)}</p>}
                       {dependente.escolaridade && <p>Escolaridade: {dependente.escolaridade}</p>}
                       {dependente.rendaMensal && <p>Renda: {dependente.rendaMensal}</p>}
+                      {dependente.certidaoNascimento && (
+                        <p>Certidão nascimento: {dependente.certidaoNascimento}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -496,7 +514,7 @@ export function DependentsSection({
       ) : (
         <div className="space-y-6">
           {/* List of existing dependents with edit and delete buttons */}
-          {beneficiario.dependentes.length > 0 && !editingDependentId ? (
+          {beneficiario.dependentes.length > 0 && !editingDependentId && !showAddForm ? (
             <div className="space-y-4">
               {beneficiario.dependentes.map((dependente) => (
                 <div
@@ -540,13 +558,11 @@ export function DependentsSection({
             </div>
           ) : null}
 
-          {/* Show form if editing an existing dependent or if we're adding a new one */}
-          {editingDependentId || beneficiario.dependentes.length === 0 ? (
+          {editingDependentId || showAddForm || beneficiario.dependentes.length === 0 ? (
             renderDependentForm()
           ) : (
-            // Show add new dependent button when in list view
             <div className="mt-4 flex justify-end">
-              <Button onClick={resetForm} className="cursor-pointer">
+              <Button onClick={handleShowAddForm} className="cursor-pointer">
                 <Plus className="h-4 w-4 mr-2" />
                 Adicionar Novo Dependente
               </Button>
