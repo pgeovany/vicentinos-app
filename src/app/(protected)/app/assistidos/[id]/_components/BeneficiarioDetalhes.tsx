@@ -12,6 +12,7 @@ import { SocialBenefitsSection } from './SocialBenefitsSection';
 import { HealthInfoSection } from './HealthInfoSection';
 import { InterestsSection } from './InterestsSection';
 import { DisengagementHistorySection } from './DisengagementHistorySection';
+import { StatusActions } from './StatusActions';
 
 export function BeneficiarioDetalhes({
   beneficiarioId,
@@ -52,6 +53,7 @@ export function BeneficiarioDetalhes({
         beneficiarioId={beneficiarioId}
         onRefresh={fetchBeneficiario}
       />
+
       <AddressSection
         beneficiario={beneficiario}
         beneficiarioId={beneficiarioId}
@@ -79,6 +81,12 @@ export function BeneficiarioDetalhes({
         onRefresh={fetchBeneficiario}
       />
       <DisengagementHistorySection beneficiario={beneficiario} />
+
+      <StatusActions
+        beneficiario={beneficiario}
+        beneficiarioId={beneficiarioId}
+        onRefresh={fetchBeneficiario}
+      />
     </div>
   );
 }
