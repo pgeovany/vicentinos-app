@@ -37,9 +37,13 @@ export async function middleware(request: NextRequest) {
     } catch {}
   }
 
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL(authConfig.defaultPublicPath, request.url));
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/app/:path*', '/login'],
+  matcher: ['/', '/app/:path*', '/login'],
 };
