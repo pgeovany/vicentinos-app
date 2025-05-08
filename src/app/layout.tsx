@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Vicentinos - Sua doação transforma vidas',
     description:
-      'Ajude-nos a ajudar quem mais precisa. Conheça os produtos que mais necessitamos no momento.',
+      'Ajude-nos a ajudar quem mais precisa. Veja os produtos que mais necessitamos no momento.',
     type: 'website',
     locale: 'pt_BR',
     url: 'https://vicentinos-app.vercel.app',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Vicentinos - Sua doação transforma vidas',
     description:
-      'Ajude-nos a ajudar quem mais precisa. Conheça os produtos que mais necessitamos no momento.',
+      'Ajude-nos a ajudar quem mais precisa. Veja os produtos que mais necessitamos no momento.',
     images: ['/api/og'],
   },
   icons: {
