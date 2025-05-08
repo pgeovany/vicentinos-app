@@ -14,6 +14,10 @@ export async function middleware(request: NextRequest) {
 
   const token = request.cookies.get(AUTH_TOKEN_KEY)?.value;
 
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL(authConfig.defaultPublicPath, request.url));
+  }
+
   if (!isPublicPath) {
     if (!token) {
       return NextResponse.redirect(new URL('/login', request.url));
@@ -35,10 +39,6 @@ export async function middleware(request: NextRequest) {
       await jwtVerify(token, secret, { algorithms: ['HS256'] });
       return NextResponse.redirect(new URL(authConfig.defaultProtectedPath, request.url));
     } catch {}
-  }
-
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL(authConfig.defaultPublicPath, request.url));
   }
 
   return NextResponse.next();
