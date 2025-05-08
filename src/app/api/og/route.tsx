@@ -119,8 +119,8 @@ export async function GET(request: Request) {
         </div>
       ),
       {
-        width: 1200,
-        height: 630,
+        width: 800,
+        height: 550,
       },
     );
   } catch (error) {

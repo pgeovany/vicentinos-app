@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     'Ajude-nos a ajudar quem mais precisa. Cada doação transforma vidas e leva esperança para famílias em necessidade.',
   openGraph: {
-    title: 'Vicentinos - Sua doação transforma vidas',
+    title: 'Sua doação transforma vidas',
     description:
       'Ajude-nos a ajudar quem mais precisa. Veja os produtos que mais necessitamos no momento.',
     type: 'website',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vicentinos - Sua doação transforma vidas',
+    title: 'Sua doação transforma vidas',
     description:
       'Ajude-nos a ajudar quem mais precisa. Veja os produtos que mais necessitamos no momento.',
     images: ['/api/og'],
