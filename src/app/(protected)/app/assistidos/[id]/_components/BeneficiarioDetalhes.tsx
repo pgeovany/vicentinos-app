@@ -8,6 +8,11 @@ import { PersonalInfoSection } from './PersonalInfoSection';
 import { AddressSection } from './AddressSection';
 import { DependentsSection } from './DependentsSection';
 import { HistorySection } from './HistorySection';
+import { SocialBenefitsSection } from './SocialBenefitsSection';
+import { HealthInfoSection } from './HealthInfoSection';
+import { InterestsSection } from './InterestsSection';
+import { DisengagementHistorySection } from './DisengagementHistorySection';
+import { StatusActions } from './StatusActions';
 
 export function BeneficiarioDetalhes({
   beneficiarioId,
@@ -48,7 +53,18 @@ export function BeneficiarioDetalhes({
         beneficiarioId={beneficiarioId}
         onRefresh={fetchBeneficiario}
       />
+
       <AddressSection
+        beneficiario={beneficiario}
+        beneficiarioId={beneficiarioId}
+        onRefresh={fetchBeneficiario}
+      />
+      <SocialBenefitsSection
+        beneficiario={beneficiario}
+        beneficiarioId={beneficiarioId}
+        onRefresh={fetchBeneficiario}
+      />
+      <HealthInfoSection
         beneficiario={beneficiario}
         beneficiarioId={beneficiarioId}
         onRefresh={fetchBeneficiario}
@@ -59,6 +75,18 @@ export function BeneficiarioDetalhes({
         onRefresh={fetchBeneficiario}
       />
       <HistorySection beneficiario={beneficiario} />
+      <InterestsSection
+        beneficiario={beneficiario}
+        beneficiarioId={beneficiarioId}
+        onRefresh={fetchBeneficiario}
+      />
+      <DisengagementHistorySection beneficiario={beneficiario} />
+
+      <StatusActions
+        beneficiario={beneficiario}
+        beneficiarioId={beneficiarioId}
+        onRefresh={fetchBeneficiario}
+      />
     </div>
   );
 }

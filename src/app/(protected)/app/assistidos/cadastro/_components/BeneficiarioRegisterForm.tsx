@@ -10,16 +10,25 @@ import {
   Users,
   Package,
   AlertTriangle,
+  Heart,
+  CircleDollarSign,
+  Lightbulb,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PersonalInfoStep } from './PersonalInfoStep';
 import { AddressStep } from './AddressStep';
+import { BenefitsStep } from './BenefitsStep';
+import { HealthStep } from './HealthStep';
+import { InterestsStep } from './InterestsStep';
 import { DependentsStep } from './DependentsStep';
 import { CestaTypeStep } from './CestaTypeStep';
 import { toast } from 'sonner';
 import {
   criarBeneficiario,
   atualizarEndereco,
+  atualizarBeneficiosSociais,
+  atualizarSaude,
+  atualizarInteresses,
   adicionarDependentes,
   atualizarTipoCesta,
 } from '../../actions';
@@ -27,6 +36,10 @@ import { toLocalIsoMidnight } from '@/lib/fix-date';
 import { stripMask } from '@/lib/masks';
 import { Separator } from '@/components/ui/separator';
 import { BeneficiarioFormData } from '../types';
+import {
+  ENUM_ESTADO_CIVIL_BENEFICIARIO,
+  ENUM_SEXO_BENEFICIARIO,
+} from '@/api/beneficiarios/schemas';
 
 interface BeneficiarioRegisterFormProps {
   onComplete: () => void;
@@ -44,6 +57,24 @@ const steps = [
     title: 'Endereço',
     icon: MapPin,
     description: 'Endereço de residência',
+  },
+  {
+    id: 'benefits',
+    title: 'Benefícios Sociais',
+    icon: CircleDollarSign,
+    description: 'Benefícios sociais recebidos',
+  },
+  {
+    id: 'health',
+    title: 'Saúde',
+    icon: Heart,
+    description: 'Informações de saúde',
+  },
+  {
+    id: 'interests',
+    title: 'Interesses',
+    icon: Lightbulb,
+    description: 'Interesses em cursos e palestras',
   },
   {
     id: 'dependents',
@@ -65,22 +96,94 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [beneficiarioId, setBeneficiarioId] = useState<string | null>(null);
   const [formData, setFormData] = useState<BeneficiarioFormData>({
+    // Personal info
     nome: '',
     cpf: '',
     rg: '',
+    sexo: '',
     dataNascimento: '',
     telefone: '',
-    email: '',
+    estadoCivil: '',
+    profissao: '',
+    rendaMensal: '',
+    pessoaComDeficiencia: false,
 
+    // Address
     rua: '',
     numero: '',
     bairro: '',
     cidade: '',
     cep: '',
     complemento: '',
+    pontoReferencia: '',
+    numeroComodos: 1,
+    proprio: false,
+    financiado: false,
+    alugado: false,
+    cedido: false,
+    heranca: false,
+    programaSocial: false,
+    ocupacao: false,
+    banheiro: true,
+    aguaEncanada: true,
+    energiaEletrica: true,
+    esgoto: true,
 
+    // Benefits
+    bolsaFamilia: false,
+    cadUnico: false,
+    loas: false,
+    carteiraIdoso: false,
+    cartaoFamiliaCarioca: false,
+    minhaCasaMinhaVida: false,
+    paif: false,
+    pronatec: false,
+    aposentadoria: false,
+    isencaoConcursoPublico: false,
+    cadastroParaEmprego: false,
+    tarifaSocialEnergiaEletrica: false,
+    outrosBeneficios: '',
+    beneficiosObservacao: '',
+
+    // Health
+    cartaoSUS: false,
+    numeroCartaoSUS: '',
+    clinicaFamilia: '',
+    postoSaude: '',
+    tratamentoHospitalar: false,
+    hospital: '',
+    tratamentoSaude: '',
+    medicamentos: '',
+    saudeObservacao: '',
+
+    // Interests
+    // Palestras
+    programasSociais: false,
+    violenciaDomestica: false,
+    dependenciaQuimica: false,
+    meioAmbiente: false,
+    documentacaoPessoal: false,
+    saudeGeral: false,
+    empreendedorismo: false,
+    sustentabilidade: false,
+    // Cursos
+    pinturaEmTecido: false,
+    bijuteria: false,
+    cestaria: false,
+    costura: false,
+    bordado: false,
+    croche: false,
+    trico: false,
+    teatro: false,
+    reciclagem: false,
+    informatica: false,
+    cursos: false,
+    alfabetizacao: false,
+
+    // Dependents
     dependentes: [],
 
+    // Cesta Type
     tipoCestaId: '',
   });
 
@@ -97,6 +200,16 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
   const handlePersonalInfoSubmit = async () => {
     if (!formData.nome) {
       toast.error('Nome é obrigatório');
+      return false;
+    }
+
+    if (!formData.sexo) {
+      toast.error('Sexo é obrigatório');
+      return false;
+    }
+
+    if (!formData.estadoCivil) {
+      toast.error('Estado civil é obrigatório');
       return false;
     }
 
@@ -136,11 +249,15 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
       nome: formData.nome,
       cpf: formData.cpf ? stripMask(formData.cpf) : undefined,
       rg: formData.rg || undefined,
+      sexo: formData.sexo as ENUM_SEXO_BENEFICIARIO,
       dataNascimento: formData.dataNascimento
         ? toLocalIsoMidnight(formData.dataNascimento)
         : undefined,
       telefone: formData.telefone ? stripMask(formData.telefone) : undefined,
-      email: formData.email || undefined,
+      estadoCivil: formData.estadoCivil as ENUM_ESTADO_CIVIL_BENEFICIARIO,
+      profissao: formData.profissao || undefined,
+      rendaMensal: formData.rendaMensal || undefined,
+      pessoaComDeficiencia: formData.pessoaComDeficiencia,
     });
   };
 
@@ -149,11 +266,15 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
       nome: formData.nome,
       cpf: formData.cpf ? stripMask(formData.cpf) : undefined,
       rg: formData.rg || undefined,
+      sexo: formData.sexo as ENUM_SEXO_BENEFICIARIO,
       dataNascimento: formData.dataNascimento
         ? toLocalIsoMidnight(formData.dataNascimento)
         : undefined,
       telefone: formData.telefone ? stripMask(formData.telefone) : undefined,
-      email: formData.email || undefined,
+      estadoCivil: formData.estadoCivil as ENUM_ESTADO_CIVIL_BENEFICIARIO,
+      profissao: formData.profissao || undefined,
+      rendaMensal: formData.rendaMensal || undefined,
+      pessoaComDeficiencia: formData.pessoaComDeficiencia,
     });
   };
 
@@ -161,17 +282,6 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
     if (!beneficiarioId) {
       toast.error('Erro: Assistido não criado');
       return false;
-    }
-
-    if (
-      !formData.rua &&
-      !formData.numero &&
-      !formData.bairro &&
-      !formData.cidade &&
-      !formData.cep
-    ) {
-      markStepAsCompleted(1);
-      return true;
     }
 
     setIsSubmitting(true);
@@ -185,6 +295,19 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
           cidade: formData.cidade || undefined,
           cep: formData.cep ? stripMask(formData.cep) : undefined,
           complemento: formData.complemento || undefined,
+          pontoReferencia: formData.pontoReferencia || undefined,
+          numeroComodos: formData.numeroComodos,
+          proprio: formData.proprio,
+          financiado: formData.financiado,
+          alugado: formData.alugado,
+          cedido: formData.cedido,
+          heranca: formData.heranca,
+          programaSocial: formData.programaSocial,
+          ocupacao: formData.ocupacao,
+          banheiro: formData.banheiro,
+          aguaEncanada: formData.aguaEncanada,
+          energiaEletrica: formData.energiaEletrica,
+          esgoto: formData.esgoto,
         },
       });
 
@@ -205,6 +328,144 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
     }
   };
 
+  const handleBenefitsSubmit = async () => {
+    if (!beneficiarioId) {
+      toast.error('Erro: Assistido não criado');
+      return false;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await atualizarBeneficiosSociais({
+        beneficiarioId,
+        body: {
+          bolsaFamilia: formData.bolsaFamilia,
+          cadUnico: formData.cadUnico,
+          loas: formData.loas,
+          carteiraIdoso: formData.carteiraIdoso,
+          cartaoFamiliaCarioca: formData.cartaoFamiliaCarioca,
+          minhaCasaMinhaVida: formData.minhaCasaMinhaVida,
+          paif: formData.paif,
+          pronatec: formData.pronatec,
+          aposentadoria: formData.aposentadoria,
+          isencaoConcursoPublico: formData.isencaoConcursoPublico,
+          cadastroParaEmprego: formData.cadastroParaEmprego,
+          tarifaSocialEnergiaEletrica: formData.tarifaSocialEnergiaEletrica,
+          outrosBeneficios: formData.outrosBeneficios || undefined,
+          observacao: formData.beneficiosObservacao || undefined,
+        },
+      });
+
+      if (!response?.success) {
+        toast.error(response?.error ?? 'Erro ao cadastrar benefícios sociais');
+        return false;
+      }
+
+      markStepAsCompleted(2);
+      toast.success('Benefícios sociais salvos com sucesso!');
+      return true;
+    } catch (error) {
+      console.error('Erro ao cadastrar benefícios sociais:', error);
+      toast.error('Ocorreu um erro ao cadastrar os benefícios sociais');
+      return false;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleHealthSubmit = async () => {
+    if (!beneficiarioId) {
+      toast.error('Erro: Assistido não criado');
+      return false;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await atualizarSaude({
+        beneficiarioId,
+        body: {
+          cartaoSUS: formData.cartaoSUS,
+          numeroCartaoSUS: formData.numeroCartaoSUS || undefined,
+          clinicaFamilia: formData.clinicaFamilia || undefined,
+          postoSaude: formData.postoSaude || undefined,
+          tratamentoHospitalar: formData.tratamentoHospitalar,
+          hospital: formData.hospital || undefined,
+          tratamentoSaude: formData.tratamentoSaude || undefined,
+          medicamentos: formData.medicamentos || undefined,
+          observacao: formData.saudeObservacao || undefined,
+        },
+      });
+
+      if (!response?.success) {
+        toast.error(response?.error ?? 'Erro ao cadastrar informações de saúde');
+        return false;
+      }
+
+      markStepAsCompleted(3);
+      toast.success('Informações de saúde salvas com sucesso!');
+      return true;
+    } catch (error) {
+      console.error('Erro ao cadastrar informações de saúde:', error);
+      toast.error('Ocorreu um erro ao cadastrar as informações de saúde');
+      return false;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInterestsSubmit = async () => {
+    if (!beneficiarioId) {
+      toast.error('Erro: Assistido não criado');
+      return false;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await atualizarInteresses({
+        beneficiarioId,
+        body: {
+          // Palestras
+          programasSociais: formData.programasSociais,
+          violenciaDomestica: formData.violenciaDomestica,
+          dependenciaQuimica: formData.dependenciaQuimica,
+          meioAmbiente: formData.meioAmbiente,
+          documentacaoPessoal: formData.documentacaoPessoal,
+          saudeGeral: formData.saudeGeral,
+          empreendedorismo: formData.empreendedorismo,
+          sustentabilidade: formData.sustentabilidade,
+          // Cursos
+          pinturaEmTecido: formData.pinturaEmTecido,
+          bijuteria: formData.bijuteria,
+          cestaria: formData.cestaria,
+          costura: formData.costura,
+          bordado: formData.bordado,
+          croche: formData.croche,
+          trico: formData.trico,
+          teatro: formData.teatro,
+          reciclagem: formData.reciclagem,
+          informatica: formData.informatica,
+          cursos: formData.cursos,
+          alfabetizacao: formData.alfabetizacao,
+        },
+      });
+
+      if (!response?.success) {
+        toast.error(response?.error ?? 'Erro ao cadastrar interesses');
+        return false;
+      }
+
+      markStepAsCompleted(4);
+      toast.success('Interesses salvos com sucesso!');
+      return true;
+    } catch (error) {
+      console.error('Erro ao cadastrar interesses:', error);
+      toast.error('Ocorreu um erro ao cadastrar os interesses');
+      return false;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleDependentsSubmit = async () => {
     if (!beneficiarioId) {
       toast.error('Erro: Assistido não criado');
@@ -212,7 +473,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
     }
 
     if (formData.dependentes.length === 0) {
-      markStepAsCompleted(2);
+      markStepAsCompleted(5);
       return true;
     }
 
@@ -224,7 +485,17 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
           dependentes: formData.dependentes.map((dep) => ({
             nome: dep.nome,
             parentesco: dep.parentesco,
+            sexo: dep.sexo as ENUM_SEXO_BENEFICIARIO,
             dataNascimento: toLocalIsoMidnight(dep.dataNascimento),
+            cpf: dep.cpf || undefined,
+            rg: dep.rg || undefined,
+            certidaoNascimento: dep.certidaoNascimento || undefined,
+            escolaridade: dep.escolaridade || undefined,
+            telefone: dep.telefone || undefined,
+            email: dep.email || undefined,
+            rendaMensal: dep.rendaMensal || undefined,
+            trabalho: dep.trabalho || undefined,
+            observacao: dep.observacao || undefined,
           })),
         },
       });
@@ -234,7 +505,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
         return false;
       }
 
-      markStepAsCompleted(2);
+      markStepAsCompleted(5);
       toast.success('Dependentes salvos com sucesso!');
       return true;
     } catch (error) {
@@ -271,7 +542,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
         return false;
       }
 
-      markStepAsCompleted(3);
+      markStepAsCompleted(6);
       toast.success('Tipo de cesta definido com sucesso!');
       toast.success('Assistido cadastrado com sucesso!');
       onComplete();
@@ -296,9 +567,18 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
         success = await handleAddressSubmit();
         break;
       case 2:
-        success = await handleDependentsSubmit();
+        success = await handleBenefitsSubmit();
         break;
       case 3:
+        success = await handleHealthSubmit();
+        break;
+      case 4:
+        success = await handleInterestsSubmit();
+        break;
+      case 5:
+        success = await handleDependentsSubmit();
+        break;
+      case 6:
         success = await handleCestaTypeSubmit();
         return;
       default:
@@ -323,13 +603,19 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
       case 1:
         return <AddressStep formData={formData} updateFormData={updateFormData} />;
       case 2:
+        return <BenefitsStep formData={formData} updateFormData={updateFormData} />;
+      case 3:
+        return <HealthStep formData={formData} updateFormData={updateFormData} />;
+      case 4:
+        return <InterestsStep formData={formData} updateFormData={updateFormData} />;
+      case 5:
         return (
           <DependentsStep
             dependentes={formData.dependentes}
             updateDependentes={(dependentes) => updateFormData({ dependentes })}
           />
         );
-      case 3:
+      case 6:
         return (
           <CestaTypeStep
             tipoCestaId={formData.tipoCestaId}
