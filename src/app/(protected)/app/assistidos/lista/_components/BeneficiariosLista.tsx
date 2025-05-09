@@ -54,7 +54,7 @@ export function BeneficiariosLista() {
       pagina: 1,
     };
 
-    if (selectedStatus && selectedStatus !== 'TODOS') {
+    if (selectedStatus !== 'TODOS') {
       params.status = selectedStatus;
     }
 
@@ -92,8 +92,11 @@ export function BeneficiariosLista() {
     };
 
     fetchTiposCesta();
+  }, []);
+
+  useEffect(() => {
     fetchBeneficiarios();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedStatus, selectedTipoCesta]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleFilterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,9 +107,24 @@ export function BeneficiariosLista() {
     setSelectedStatus(ENUM_STATUS_BENEFICIARIO.ATIVO);
     setSelectedTipoCesta('');
 
-    setTimeout(() => {
-      fetchBeneficiarios();
-    }, 0);
+    const params: Partial<ListarBeneficiariosDto> = {
+      quantidade: 1000,
+      pagina: 1,
+      status: ENUM_STATUS_BENEFICIARIO.ATIVO,
+    };
+
+    setIsLoading(true);
+    listarBeneficiarios(params)
+      .then((response) => {
+        if (response.success) {
+          setAllBeneficiarios(response.data?.resultado ?? []);
+        } else {
+          toast.error(response.error);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   // Client-side filtering for search
