@@ -107,7 +107,7 @@ export function ProdutosTransparencia() {
         {produtos.map((produto, index) => (
           <Card
             key={produto}
-            className="overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 border-l-orange-500"
+            className="overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 border-l-orange-500 py-0"
           >
             <div className="p-4 flex items-center bg-gradient-to-r from-blue-50 to-white">
               <div className="flex-shrink-0 flex items-center justify-center bg-orange-500 text-white rounded-full w-10 h-10 mr-4 shadow-md">
@@ -244,13 +244,13 @@ export function ProdutosTransparencia() {
           você a maior das virtudes: a caridade.
         </p>
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <a href="/transparencia/estatisticas">
             <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition-colors duration-300 cursor-pointer">
               Veja quantas famílias conseguimos ajudar no último mês
             </button>
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
