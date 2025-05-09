@@ -9,13 +9,7 @@ interface EnderecoBeneficiario {
   complemento?: string | null;
   pontoReferencia?: string | null;
   numeroComodos: number;
-  proprio: boolean;
-  financiado: boolean;
-  alugado: boolean;
-  cedido: boolean;
-  heranca: boolean;
-  programaSocial: boolean;
-  ocupacao: boolean;
+  tipoMoradia: string;
   banheiro: boolean;
   aguaEncanada: boolean;
   energiaEletrica: boolean;

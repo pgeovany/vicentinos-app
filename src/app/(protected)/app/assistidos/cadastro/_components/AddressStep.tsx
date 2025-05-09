@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { generateQuantityOptions } from '@/lib/generate-select-quantity';
+import { ENUM_TIPO_MORADIA_BENEFICIARIO } from '@/api/beneficiarios/schemas';
 
 interface AddressStepProps {
   formData: BeneficiarioFormData;
@@ -71,7 +72,7 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
               />
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="cidade">Cidade</Label>
               <Input
                 id="cidade"
@@ -79,7 +80,7 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
                 onChange={(e) => updateFormData({ cidade: e.target.value })}
                 placeholder="Cidade"
               />
-            </div>
+            </div> */}
 
             <div className="space-y-2">
               <Label htmlFor="cep">CEP</Label>
@@ -101,25 +102,6 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
                 placeholder="Próximo a..."
               />
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="numeroComodos">Número de Cômodos</Label>
-              <Select
-                value={formData.numeroComodos.toString()}
-                onValueChange={(value) => updateFormData({ numeroComodos: parseInt(value) })}
-              >
-                <SelectTrigger id="numeroComodos" className="w-full">
-                  <SelectValue placeholder="Selecione a quantidade" />
-                </SelectTrigger>
-                <SelectContent>
-                  {generateQuantityOptions(10).map((num) => (
-                    <SelectItem key={num} value={num.toString()}>
-                      {num}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
           </div>
         </div>
 
@@ -127,69 +109,46 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
 
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Tipo de Residência</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="proprio">Próprio</Label>
-              <Switch
-                id="proprio"
-                checked={formData.proprio}
-                onCheckedChange={(checked) => updateFormData({ proprio: checked })}
-              />
+          <div className="grid grid-cols-1 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="tipoMoradia">
+                Tipo de Moradia <span className="text-destructive">*</span>
+              </Label>
+              <Select
+                value={formData.tipoMoradia || ''}
+                onValueChange={(value) => updateFormData({ tipoMoradia: value })}
+                required
+              >
+                <SelectTrigger id="tipoMoradia" className="w-auto">
+                  <SelectValue placeholder="Selecione o tipo de moradia" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(ENUM_TIPO_MORADIA_BENEFICIARIO).map(([key, value]) => (
+                    <SelectItem key={key} value={value}>
+                      {value}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-
-            <div className="flex items-center justify-between">
-              <Label htmlFor="financiado">Financiado</Label>
-              <Switch
-                id="financiado"
-                checked={formData.financiado}
-                onCheckedChange={(checked) => updateFormData({ financiado: checked })}
-              />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <Label htmlFor="alugado">Alugado</Label>
-              <Switch
-                id="alugado"
-                checked={formData.alugado}
-                onCheckedChange={(checked) => updateFormData({ alugado: checked })}
-              />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <Label htmlFor="cedido">Cedido</Label>
-              <Switch
-                id="cedido"
-                checked={formData.cedido}
-                onCheckedChange={(checked) => updateFormData({ cedido: checked })}
-              />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <Label htmlFor="heranca">Herança</Label>
-              <Switch
-                id="heranca"
-                checked={formData.heranca}
-                onCheckedChange={(checked) => updateFormData({ heranca: checked })}
-              />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <Label htmlFor="programaSocial">Programa Social</Label>
-              <Switch
-                id="programaSocial"
-                checked={formData.programaSocial}
-                onCheckedChange={(checked) => updateFormData({ programaSocial: checked })}
-              />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <Label htmlFor="ocupacao">Ocupação</Label>
-              <Switch
-                id="ocupacao"
-                checked={formData.ocupacao}
-                onCheckedChange={(checked) => updateFormData({ ocupacao: checked })}
-              />
-            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="numeroComodos">Número de Cômodos</Label>
+            <Select
+              value={formData.numeroComodos.toString()}
+              onValueChange={(value) => updateFormData({ numeroComodos: parseInt(value) })}
+            >
+              <SelectTrigger id="numeroComodos" className="w-auto">
+                <SelectValue placeholder="Selecione a quantidade" />
+              </SelectTrigger>
+              <SelectContent>
+                {generateQuantityOptions(10).map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
