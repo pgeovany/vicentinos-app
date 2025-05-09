@@ -17,6 +17,11 @@ export enum ENUM_SEXO_BENEFICIARIO {
   FEMININO = 'F',
 }
 
+export enum ENUM_STATUS_BENEFICIARIO {
+  ATIVO = 'ATIVO',
+  INATIVO = 'INATIVO',
+}
+
 export const dependenteBeneficiarioSchema = z.object({
   nome: z.string().min(1, 'Nome é obrigatório'),
   cpf: z.string().regex(cpfRegex, 'CPF inválido').optional().nullable(),
@@ -140,12 +145,9 @@ export const criarDesligamentoSchema = z.object({
 export const listarBeneficiariosSchema = z.object({
   nome: z.string().optional(),
   tipoCestaId: z.string().optional(),
+  status: z.nativeEnum(ENUM_STATUS_BENEFICIARIO).optional(),
   pagina: z.number().int().positive().optional(),
   quantidade: z.number().int().positive().optional(),
-});
-
-export const alterarStatusBeneficiarioSchema = z.object({
-  beneficiarioId: z.string().min(1, 'ID do assistido é obrigatório'),
 });
 
 export type DependenteBeneficiarioDto = z.infer<typeof dependenteBeneficiarioSchema>;
@@ -159,4 +161,3 @@ export type AtualizarInteressesDto = z.infer<typeof atualizarInteressesSchema>;
 export type AtualizarTipoCestaDto = z.infer<typeof atualizarTipoCestaSchema>;
 export type CriarDesligamentoDto = z.infer<typeof criarDesligamentoSchema>;
 export type ListarBeneficiariosDto = z.infer<typeof listarBeneficiariosSchema>;
-export type AlterarStatusBeneficiarioDto = z.infer<typeof alterarStatusBeneficiarioSchema>;
