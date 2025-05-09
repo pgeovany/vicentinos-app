@@ -19,13 +19,14 @@ export const metadata: Metadata = {
   title: 'Vicentinos - Paróquia Nossa Senhora da Conceição',
   description:
     'Ajude-nos a ajudar quem mais precisa. Cada doação transforma vidas e leva esperança para famílias em necessidade.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://vicentinos.vercel.app'),
   openGraph: {
     title: 'Sua doação transforma vidas',
     description:
       'Ajude-nos a ajudar quem mais precisa. Veja os produtos que mais necessitamos no momento.',
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://vicentinos-app.vercel.app',
+    url: process.env.NEXT_PUBLIC_APP_URL ?? 'https://vicentinos.vercel.app',
     siteName: 'Vicentinos - Paróquia Nossa Senhora da Conceição',
     images: [
       {
