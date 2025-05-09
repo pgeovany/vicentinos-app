@@ -72,7 +72,7 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
               />
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="cidade">Cidade</Label>
               <Input
                 id="cidade"
@@ -80,7 +80,7 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
                 onChange={(e) => updateFormData({ cidade: e.target.value })}
                 placeholder="Cidade"
               />
-            </div>
+            </div> */}
 
             <div className="space-y-2">
               <Label htmlFor="cep">CEP</Label>
