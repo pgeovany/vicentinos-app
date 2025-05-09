@@ -26,5 +26,5 @@ export function LayoutContent({
     );
   }
 
-  return <main className="flex flex-1 flex-col overflow-y-auto p-4">{children}</main>;
+  return <main className="flex flex-1 flex-col overflow-y-auto">{children}</main>;
 }
