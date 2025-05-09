@@ -22,6 +22,16 @@ export enum ENUM_STATUS_BENEFICIARIO {
   INATIVO = 'INATIVO',
 }
 
+export enum ENUM_TIPO_MORADIA_BENEFICIARIO {
+  PROPRIO = 'Próprio',
+  FINANCIADO = 'Financiado',
+  ALUGADO = 'Alugado',
+  CEDIDO = 'Cedido',
+  HERANCA = 'Herança',
+  PROGRAMA_SOCIAL = 'Programa Social',
+  OCUPACAO = 'Ocupação',
+}
+
 export const dependenteBeneficiarioSchema = z.object({
   nome: z.string().min(1, 'Nome é obrigatório'),
   cpf: z.string().regex(cpfRegex, 'CPF inválido').optional().nullable(),
@@ -67,13 +77,7 @@ export const atualizarEnderecoSchema = z.object({
   complemento: z.string().optional().nullable(),
   pontoReferencia: z.string().optional().nullable(),
   numeroComodos: z.number().int().min(1, 'Número de cômodos é obrigatório'),
-  proprio: z.boolean().optional().default(false),
-  financiado: z.boolean().optional().default(false),
-  alugado: z.boolean().optional().default(false),
-  cedido: z.boolean().optional().default(false),
-  heranca: z.boolean().optional().default(false),
-  programaSocial: z.boolean().optional().default(false),
-  ocupacao: z.boolean().optional().default(false),
+  tipoMoradia: z.nativeEnum(ENUM_TIPO_MORADIA_BENEFICIARIO),
   banheiro: z.boolean().optional().default(true),
   aguaEncanada: z.boolean().optional().default(true),
   energiaEletrica: z.boolean().optional().default(true),

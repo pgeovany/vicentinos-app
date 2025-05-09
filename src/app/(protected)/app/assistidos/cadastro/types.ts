@@ -36,13 +36,7 @@ export type BeneficiarioFormData = {
   complemento: string;
   pontoReferencia: string;
   numeroComodos: number;
-  proprio: boolean;
-  financiado: boolean;
-  alugado: boolean;
-  cedido: boolean;
-  heranca: boolean;
-  programaSocial: boolean;
-  ocupacao: boolean;
+  tipoMoradia: string;
   banheiro: boolean;
   aguaEncanada: boolean;
   energiaEletrica: boolean;

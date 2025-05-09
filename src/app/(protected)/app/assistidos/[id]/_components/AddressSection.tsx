@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/select';
 import { generateQuantityOptions } from '@/lib/generate-select-quantity';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ENUM_TIPO_MORADIA_BENEFICIARIO } from '@/api/beneficiarios/schemas';
 
 interface AddressSectionProps {
   beneficiario: BeneficiarioComHistoricoResponse;
@@ -38,13 +39,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
     complemento: beneficiario.endereco?.complemento || '',
     pontoReferencia: beneficiario.endereco?.pontoReferencia || '',
     numeroComodos: beneficiario.endereco?.numeroComodos || 0,
-    proprio: beneficiario.endereco?.proprio || false,
-    financiado: beneficiario.endereco?.financiado || false,
-    alugado: beneficiario.endereco?.alugado || false,
-    cedido: beneficiario.endereco?.cedido || false,
-    heranca: beneficiario.endereco?.heranca || false,
-    programaSocial: beneficiario.endereco?.programaSocial || false,
-    ocupacao: beneficiario.endereco?.ocupacao || false,
+    tipoMoradia: beneficiario.endereco?.tipoMoradia || '',
     banheiro: beneficiario.endereco?.banheiro || false,
     aguaEncanada: beneficiario.endereco?.aguaEncanada || false,
     energiaEletrica: beneficiario.endereco?.energiaEletrica || false,
@@ -66,13 +61,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
       complemento: beneficiario.endereco?.complemento || '',
       pontoReferencia: beneficiario.endereco?.pontoReferencia || '',
       numeroComodos: beneficiario.endereco?.numeroComodos || 0,
-      proprio: beneficiario.endereco?.proprio || false,
-      financiado: beneficiario.endereco?.financiado || false,
-      alugado: beneficiario.endereco?.alugado || false,
-      cedido: beneficiario.endereco?.cedido || false,
-      heranca: beneficiario.endereco?.heranca || false,
-      programaSocial: beneficiario.endereco?.programaSocial || false,
-      ocupacao: beneficiario.endereco?.ocupacao || false,
+      tipoMoradia: beneficiario.endereco?.tipoMoradia || '',
       banheiro: beneficiario.endereco?.banheiro || false,
       aguaEncanada: beneficiario.endereco?.aguaEncanada || false,
       energiaEletrica: beneficiario.endereco?.energiaEletrica || false,
@@ -90,13 +79,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
       complemento: addressData.complemento || undefined,
       pontoReferencia: addressData.pontoReferencia || undefined,
       numeroComodos: addressData.numeroComodos,
-      proprio: addressData.proprio,
-      financiado: addressData.financiado,
-      alugado: addressData.alugado,
-      cedido: addressData.cedido,
-      heranca: addressData.heranca,
-      programaSocial: addressData.programaSocial,
-      ocupacao: addressData.ocupacao,
+      tipoMoradia: addressData.tipoMoradia as ENUM_TIPO_MORADIA_BENEFICIARIO,
       banheiro: addressData.banheiro,
       aguaEncanada: addressData.aguaEncanada,
       energiaEletrica: addressData.energiaEletrica,
@@ -139,7 +122,7 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
       {!editing ? (
         <div>
           <div className="space-y-2 mb-4">
-            <h3 className="font-medium">Informações do endereço</h3>
+            <h3 className="font-medium ">Informações do endereço:</h3>
             {beneficiario.endereco?.rua && beneficiario.endereco?.numero ? (
               <p>
                 {beneficiario.endereco.rua}, {beneficiario.endereco.numero}
@@ -160,42 +143,11 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
           </div>
           <div className={`grid ${gridCols} gap-4 mb-4`}>
             <div className="space-y-2">
-              <h3 className="font-medium">Tipo de Moradia</h3>
-              <div className="space-y-1">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Própria:</span>
-                  {renderSwitchField(beneficiario.endereco?.proprio || false)}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Financiada:</span>
-                  {renderSwitchField(beneficiario.endereco?.financiado || false)}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Alugada:</span>
-                  {renderSwitchField(beneficiario.endereco?.alugado || false)}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Cedida:</span>
-                  {renderSwitchField(beneficiario.endereco?.cedido || false)}
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Herança:</span>
-                  {renderSwitchField(beneficiario.endereco?.heranca || false)}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Programa Social:</span>
-                  {renderSwitchField(beneficiario.endereco?.programaSocial || false)}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Ocupação:</span>
-                  {renderSwitchField(beneficiario.endereco?.ocupacao || false)}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm">Número de Cômodos:</span>
-                  <span>{beneficiario.endereco?.numeroComodos || 0}</span>
-                </div>
+              <h3 className="font-medium">Tipo de Moradia:</h3>
+              <p>{beneficiario.endereco?.tipoMoradia || 'Não informado'}</p>
+              <div className="flex items-center space-x-2">
+                <span className="text-sm">Número de Cômodos:</span>
+                <span>{beneficiario.endereco?.numeroComodos || 0}</span>
               </div>
             </div>
           </div>
@@ -291,107 +243,32 @@ export function AddressSection({ beneficiario, beneficiarioId, onRefresh }: Addr
 
           <div>
             <h3 className="font-medium mb-4">Tipo de Moradia</h3>
-            <div className={`grid grid-cols-2 gap-4`}>
+            <div className={`grid ${gridCols} gap-4 mb-4`}>
               <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="proprio"
-                    checked={addressData.proprio}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, proprio: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="proprio">Própria</Label>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="financiado"
-                    checked={addressData.financiado}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, financiado: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="financiado">Financiada</Label>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="alugado"
-                    checked={addressData.alugado}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, alugado: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="alugado">Alugada</Label>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="cedido"
-                    checked={addressData.cedido}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, cedido: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="cedido">Cedida</Label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className={`grid grid-cols-2 gap-4`}>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="heranca"
-                    checked={addressData.heranca}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, heranca: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="heranca">Herança</Label>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="programaSocial"
-                    checked={addressData.programaSocial}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, programaSocial: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="programaSocial">Programa Social</Label>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="ocupacao"
-                    checked={addressData.ocupacao}
-                    onCheckedChange={(checked) =>
-                      setAddressData({ ...addressData, ocupacao: checked })
-                    }
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="ocupacao">Ocupação</Label>
-                </div>
+                <Label htmlFor="tipoMoradia">
+                  Tipo de Moradia <span className="text-destructive">*</span>
+                </Label>
+                <Select
+                  value={addressData.tipoMoradia || ''}
+                  onValueChange={(value) => setAddressData({ ...addressData, tipoMoradia: value })}
+                  required
+                >
+                  <SelectTrigger id="tipoMoradia" className="cursor-pointer">
+                    <SelectValue placeholder="Selecione o tipo de moradia" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(ENUM_TIPO_MORADIA_BENEFICIARIO).map(([key, value]) => (
+                      <SelectItem key={key} value={value}>
+                        {value}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="numeroComodos">Número de Cômodos</Label>
                 <Select
-                  value={String(addressData.numeroComodos)}
+                  value={`${addressData.numeroComodos}`}
                   onValueChange={(value) =>
                     setAddressData({ ...addressData, numeroComodos: Number(value) })
                   }
