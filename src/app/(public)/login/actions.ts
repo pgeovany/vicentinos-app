@@ -32,3 +32,19 @@ export async function handleLogin(credentials: LoginDto) {
     return { success: false, error: 'Erro ao realizar login' };
   }
 }
+
+export async function isAuthenticated() {
+  const token = await auth.getToken();
+
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    await jwtVerify(token, secret, { algorithms: ['HS256'] });
+    return true;
+  } catch {
+    return false;
+  }
+}

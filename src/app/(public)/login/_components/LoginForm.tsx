@@ -4,7 +4,7 @@ import { LoginDto, LoginSchema } from '@/api/login/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { handleLogin } from '../actions';
+import { handleLogin, isAuthenticated } from '../actions';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { useEffect } from 'react';
+import { authConfig } from '@/config/auth';
 
 export function LoginForm() {
   const router = useRouter();
@@ -27,13 +29,21 @@ export function LoginForm() {
     },
   });
 
+  useEffect(() => {
+    isAuthenticated().then((isAuthenticated) => {
+      if (isAuthenticated) {
+        router.push(authConfig.defaultProtectedPath);
+      }
+    });
+  }, [router]);
+
   async function onSubmit(data: LoginDto) {
     try {
       const result = await handleLogin(data);
 
       if (result.success) {
         toast.success('Login realizado com sucesso');
-        router.push('/app/produtos/estoque');
+        router.push(authConfig.defaultProtectedPath);
       } else {
         toast.error('Credenciais inválidas');
         form.setError('root', {
