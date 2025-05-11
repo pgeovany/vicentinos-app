@@ -111,13 +111,10 @@ export function AddressStep({ formData, updateFormData }: AddressStepProps) {
           <h3 className="text-lg font-medium">Tipo de Residência</h3>
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="tipoMoradia">
-                Tipo de Moradia <span className="text-destructive">*</span>
-              </Label>
+              <Label htmlFor="tipoMoradia">Tipo de Moradia</Label>
               <Select
                 value={formData.tipoMoradia || ''}
                 onValueChange={(value) => updateFormData({ tipoMoradia: value })}
-                required
               >
                 <SelectTrigger id="tipoMoradia" className="w-auto">
                   <SelectValue placeholder="Selecione o tipo de moradia" />

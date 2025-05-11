@@ -104,9 +104,9 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
     sexo: '',
     dataNascimento: '',
     telefone: '',
-    estadoCivil: '',
+    estadoCivil: undefined,
     profissao: '',
-    rendaMensal: '',
+    rendaMensal: undefined,
     pessoaComDeficiencia: false,
 
     // Address
@@ -118,7 +118,7 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
     complemento: '',
     pontoReferencia: '',
     numeroComodos: 1,
-    tipoMoradia: '',
+    tipoMoradia: undefined,
     banheiro: true,
     aguaEncanada: true,
     energiaEletrica: true,
@@ -200,11 +200,6 @@ export function BeneficiarioRegisterForm({ onComplete }: BeneficiarioRegisterFor
 
     if (!formData.sexo) {
       toast.error('Sexo é obrigatório');
-      return false;
-    }
-
-    if (!formData.estadoCivil) {
-      toast.error('Estado civil é obrigatório');
       return false;
     }
 

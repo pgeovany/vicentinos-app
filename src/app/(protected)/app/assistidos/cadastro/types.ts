@@ -22,9 +22,9 @@ export type BeneficiarioFormData = {
   sexo: string;
   dataNascimento: string;
   telefone: string;
-  estadoCivil: string;
+  estadoCivil: string | undefined;
   profissao: string;
-  rendaMensal: string;
+  rendaMensal: string | undefined;
   pessoaComDeficiencia: boolean;
 
   // Address
@@ -36,7 +36,7 @@ export type BeneficiarioFormData = {
   complemento: string;
   pontoReferencia: string;
   numeroComodos: number;
-  tipoMoradia: string;
+  tipoMoradia: string | undefined;
   banheiro: boolean;
   aguaEncanada: boolean;
   energiaEletrica: boolean;

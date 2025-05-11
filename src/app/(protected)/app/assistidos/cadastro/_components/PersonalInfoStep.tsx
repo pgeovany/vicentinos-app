@@ -109,9 +109,7 @@ export function PersonalInfoStep({ formData, updateFormData }: PersonalInfoStepP
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="estadoCivil">
-            Estado Civil <span className="text-destructive">*</span>
-          </Label>
+          <Label htmlFor="estadoCivil">Estado Civil</Label>
           <Select
             value={formData.estadoCivil}
             onValueChange={(value) => updateFormData({ estadoCivil: value })}
@@ -144,9 +142,7 @@ export function PersonalInfoStep({ formData, updateFormData }: PersonalInfoStepP
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="rendaMensal">
-            Renda Mensal <span className="text-destructive">*</span>
-          </Label>
+          <Label htmlFor="rendaMensal">Renda Mensal</Label>
           <Select
             value={formData.rendaMensal}
             onValueChange={(value) => updateFormData({ rendaMensal: value })}

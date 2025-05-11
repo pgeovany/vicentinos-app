@@ -9,7 +9,7 @@ interface EnderecoBeneficiario {
   complemento?: string | null;
   pontoReferencia?: string | null;
   numeroComodos: number;
-  tipoMoradia: string;
+  tipoMoradia: string | null;
   banheiro: boolean;
   aguaEncanada: boolean;
   energiaEletrica: boolean;
