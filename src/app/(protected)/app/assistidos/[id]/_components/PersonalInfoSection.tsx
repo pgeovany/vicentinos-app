@@ -354,7 +354,7 @@ export function PersonalInfoSection({
                 onValueChange={(value) => setFormData({ ...formData, estadoCivil: value })}
               >
                 <SelectTrigger id="estadoCivil" className="cursor-pointer">
-                  <SelectValue placeholder="Selecione o estado civil" />
+                  <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="SOLTEIRO">Solteiro(a)</SelectItem>
@@ -376,11 +376,20 @@ export function PersonalInfoSection({
             </div>
             <div className="space-y-2">
               <Label htmlFor="rendaMensal">Renda Mensal</Label>
-              <Input
-                id="rendaMensal"
+              <Select
                 value={formData.rendaMensal}
-                onChange={(e) => setFormData({ ...formData, rendaMensal: e.target.value })}
-              />
+                onValueChange={(value) => setFormData({ ...formData, rendaMensal: value })}
+              >
+                <SelectTrigger id="rendaMensal">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={'Sem renda'}>Sem renda</SelectItem>
+                  <SelectItem value={'Até 1 salário mínimo'}>Até 1 salário mínimo</SelectItem>
+                  <SelectItem value={'Até 2 salários mínimos'}>Até 2 salários mínimos</SelectItem>
+                  <SelectItem value={'Até 3 salários mínimos'}>Até 3 salários mínimos</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="pessoaComDeficiencia">Pessoa com Deficiência</Label>
