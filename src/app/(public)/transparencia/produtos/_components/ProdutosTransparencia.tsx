@@ -244,13 +244,13 @@ export function ProdutosTransparencia() {
           você a maior das virtudes: a caridade.
         </p>
 
-        {/* <div className="mt-6">
+        <div className="mt-6">
           <a href="/transparencia/estatisticas">
             <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition-colors duration-300 cursor-pointer">
               Veja quantas famílias conseguimos ajudar no último mês
             </button>
           </a>
-        </div> */}
+        </div>
       </div>
     </div>
   );

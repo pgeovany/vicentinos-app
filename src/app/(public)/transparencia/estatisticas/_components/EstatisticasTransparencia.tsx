@@ -61,7 +61,7 @@ export function EstatisticasTransparencia() {
   const generateImpactText = () => {
     if (!dados) return '';
 
-    return `Em ${dados.mes} de ${dados.ano}, recebemos ${dados.totalAlimentosRecebidos} quilos de alimentos e fomos capazes de ajudar ${dados.familiasBeneficiadas} famílias. Além disso, realizamos ${dados.atendimentosEmergenciais} atendimentos emergenciais para pessoas em situação de vulnerabilidade imediata.`;
+    return `Em ${dados.mes} de ${dados.ano}, recebemos ${dados.totalAlimentosRecebidos} quilos de alimentos e fomos capazes de ajudar ${dados.familiasBeneficiadas} famílias. Além disso, realizamos ${dados.atendimentosEmergenciais} atendimentos emergenciais para pessoas em situação de necessidade urgente.`;
   };
 
   if (isLoading) {
