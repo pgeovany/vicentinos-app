@@ -29,6 +29,7 @@ import {
   PackagePlus,
   PackageCheck,
   BarChart3,
+  Plus,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
@@ -104,6 +105,7 @@ export function AppSidebar() {
       label: 'Doações',
       Icon: HeartHandshake,
       subItems: [
+        { label: 'Nova doação', Icon: Plus, path: '/app/doacoes/novo' },
         { label: 'Histórico', Icon: History, path: '/app/doacoes/listar' },
         {
           label: 'Estatísticas',
@@ -117,6 +119,7 @@ export function AppSidebar() {
       label: 'SOS',
       Icon: AlertTriangle,
       subItems: [
+        { label: 'Novo SOS', Icon: Plus, path: '/app/sos/novo' },
         { label: 'Histórico', Icon: History, path: '/app/sos/listar' },
         { label: 'Estatísticas', Icon: BarChart3, path: '/app/sos/estatisticas' },
       ],
