@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vicentinos App
 
-## Getting Started
+Web application for managing and visualizing food assistance operations for a **Vicentinos (Sociedade de São Vicente de Paulo)** group.
 
-First, run the development server:
+The app is used both by **internal volunteers** and by the **general public**, with a strong focus on **usability, clarity, and transparency**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Purpose
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This application exists to:
+- Support volunteers during real operational work
+- Reduce errors in food distribution
+- Provide **public transparency** about donations and assistance
+- Replace manual processes with a reliable system
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+It is **actively running and used monthly**.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧩 Core Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🔐 Admin / Volunteer Area
+- Assisted people registration and management
+- Food stock visualization and updates
+- Basket creation and distribution tracking
+- Full history of monthly operations
+- Advanced filtering and search
+- Clear feedback for operational actions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🌍 Public Transparency Pages
 
-## Deploy on Vercel
+Anyone can access:
+- 📦 Product transparency  
+  https://vicentinos.vercel.app/transparencia/produtos
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 📊 Statistics and historical data  
+  https://vicentinos.vercel.app/transparencia/estatisticas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+These pages exist to ensure **trust, accountability, and openness** with the community.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js**
+- **React**
+- **TypeScript**
+- **shadcn**
+- **REST API integration**
+- **Charting & data visualization**
+- **JWT-based authentication flow**
+
+---
+
+## 🎨 UX & Design
+
+- Built from real operational needs
+- Screens designed to be usable by non-technical volunteers
+- Clear data visualization for transparency
+- Consistent feedback and validation to prevent mistakes
+
+---
+
+## 🔌 API Integration
+
+- Consumes the Vicentinos API
+- Handles authenticated and public routes
+- Real-time updates where applicable
+- Defensive UI against partial or missing data
+
+---
+
+## 🚀 Deployment
+
+- Hosted on **Vercel**
+- Connected to a production backend
+- Publicly accessible transparency routes
+
+---
+
+## 📌 Status
+
+✅ In production  
+👥 Used by volunteers  
+🌍 Public transparency enabled  
+
+---
+
+## 🤍 Why this project matters
+
+This is not a demo app.
+
+It’s a system built to **help people**, ensure **fair distribution**, and provide **clear accountability** for charitable work — using software as a force multiplier for good.
