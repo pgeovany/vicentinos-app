@@ -2,42 +2,96 @@
 
 Web application for managing and visualizing food assistance operations for a **Vicentinos (Sociedade de São Vicente de Paulo)** group.
 
-The app is used both by **internal volunteers** and by the **general public**, with a strong focus on **usability, clarity, and transparency**.
+The app is used by both **internal volunteers** and the **general public**, with a strong focus on **usability, security, and clarity**, rather than visual complexity.
+
+It is designed to support real operational work by users who are **not necessarily familiar with technology**, while enforcing strict access control and data integrity.
 
 ---
 
 ## 🎯 Purpose
 
 This application exists to:
-- Support volunteers during real operational work
-- Reduce errors in food distribution
-- Provide **public transparency** about donations and assistance
-- Replace manual processes with a reliable system
+- Support volunteers during real operational workflows
+- Reduce errors in donation intake and food distribution
+- Provide **public transparency** to the community and donors
+- Offer a simple and reliable interface over a complex backend system
 
-It is **actively running and used monthly**.
+It is **actively running in production** and used monthly during operations.
 
 ---
 
 ## 🧩 Core Features
 
-### 🔐 Admin / Volunteer Area
-- Assisted people registration and management
+### 🔐 Admin / Volunteer Area (Authenticated)
+- Secure login and session handling
+- Assisted people registration and lifecycle management
+- Donations intake with source and date tracking
 - Food stock visualization and updates
-- Basket creation and distribution tracking
-- Full history of monthly operations
+- Basket configuration and monthly distribution tracking
+- Emergency assistance (SOS) registration
+- Full historical records of operations
 - Advanced filtering and search
-- Clear feedback for operational actions
+- Clear feedback and validation for critical actions
 
-### 🌍 Public Transparency Pages
+Access to these pages is **strictly protected**, and unauthenticated users are prevented from accessing internal routes.
+
+---
+
+### 🌍 Public Transparency Pages (Unauthenticated)
 
 Anyone can access:
 - 📦 Product transparency  
-  https://vicentinos.vercel.app/transparencia/produtos
+  - https://vicentinos.vercel.app/transparencia/produtos
 
 - 📊 Statistics and historical data  
-  https://vicentinos.vercel.app/transparencia/estatisticas
+  - https://vicentinos.vercel.app/transparencia/estatisticas
 
-These pages exist to ensure **trust, accountability, and openness** with the community.
+These pages exist to ensure **trust, accountability, and openness**, while exposing only aggregated and non-sensitive data.
+
+---
+
+## 🔐 Authentication & Routing
+
+- JWT-based authentication flow
+- Clear separation between public and protected routes
+- Route guards to prevent unauthorized access
+- Graceful handling of expired or invalid sessions
+- Defensive UI behavior for missing or partial data
+
+Routing and access control are designed to mirror real backend authorization rules.
+
+---
+
+## 🧠 Frontend Engineering Approach
+
+- Backend-driven UI design
+- Focus on correctness, security, and clarity over visual polish
+- Simple, predictable navigation
+- Explicit loading and error states
+- Interfaces built to prevent invalid operations
+- Close alignment with backend contracts (REST API)
+
+The frontend acts as a **reliable operational layer**, not a source of business logic.
+
+---
+
+## 🎨 UX & Usability
+
+- Screens designed for non-technical volunteers
+- Clear labels, flows, and confirmations
+- Minimal cognitive load during operations
+- Data visualization focused on comprehension, not decoration
+- Consistent patterns across the application
+
+---
+
+## 🔌 API Integration
+
+- Consumes the Vicentinos REST API
+- Handles authenticated and public endpoints
+- Explicit handling of authorization failures
+- Defensive UI against partial or inconsistent data
+- Designed to reflect backend validations and constraints
 
 ---
 
@@ -46,28 +100,10 @@ These pages exist to ensure **trust, accountability, and openness** with the com
 - **Next.js**
 - **React**
 - **TypeScript**
-- **shadcn**
+- **shadcn/ui**
 - **REST API integration**
 - **Charting & data visualization**
-- **JWT-based authentication flow**
-
----
-
-## 🎨 UX & Design
-
-- Built from real operational needs
-- Screens designed to be usable by non-technical volunteers
-- Clear data visualization for transparency
-- Consistent feedback and validation to prevent mistakes
-
----
-
-## 🔌 API Integration
-
-- Consumes the Vicentinos API
-- Handles authenticated and public routes
-- Real-time updates where applicable
-- Defensive UI against partial or missing data
+- **JWT-based authentication**
 
 ---
 
@@ -76,6 +112,7 @@ These pages exist to ensure **trust, accountability, and openness** with the com
 - Hosted on **Vercel**
 - Connected to a production backend
 - Publicly accessible transparency routes
+- Mobile-friendly layout for real-world usage
 
 ---
 
@@ -89,6 +126,6 @@ These pages exist to ensure **trust, accountability, and openness** with the com
 
 ## 🤍 Why this project matters
 
-This is not a demo app.
+This is not a demo application.
 
-It’s a system built to **help people**, ensure **fair distribution**, and provide **clear accountability** for charitable work — using software as a force multiplier for good.
+It is a **production system** built to support real people, real responsibilities, and real accountability — balancing usability for non-technical users with strong security and backend-driven design.
